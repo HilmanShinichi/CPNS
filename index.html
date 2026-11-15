@@ -1298,17 +1298,9 @@
             <div class="card sim" id="sim-timeline"></div>
             <div class="card sim" id="sim-alur-lembaga"></div>
             <div class="card sim" id="sim-lembaga"></div>
-            <div class="card sim" id="sim-mobil"></div>
-            <div class="card sim" id="sim-ctabel"></div>
             <div class="card sim" id="sim-tkp"></div>
             <div class="card sim" id="sim-kisah"></div>
             <div class="card sim" id="sim-butir"></div>
-            <div class="card sim" id="sim-fig-analogi"></div>
-            <div class="card sim" id="sim-fig-beda"></div>
-            <div class="card sim" id="sim-fig-serial"></div>
-            <div class="card sim" id="sim-fig-lab"></div>
-            <div class="card sim" id="sim-fig-lab2"></div>
-            <div class="card sim" id="sim-fig-flip"></div>
             <div class="card sim" id="sim-alur-pancasila"></div>
             <div class="card sim" id="sim-integritas"></div>
             <div class="card sim" id="sim-beda-anim"></div>
@@ -1321,27 +1313,10 @@
             <div class="card sim" id="sim-tkp-anti"></div>
             <div class="card sim" id="sim-alur-amandemen"></div>
             <div class="card sim" id="sim-alur-hierarki"></div>
-            <div class="card sim" id="sim-alur-cerita"></div>
-            <div class="card sim" id="sim-alur-deret"></div>
             <div class="card sim" id="sim-nkri"></div>
             <div class="card sim" id="sim-bti"></div>
             <div class="card sim" id="sim-sila"></div>
             <div class="card sim" id="sim-uud-isi"></div>
-            <div class="card sim" id="sim-tiu-analogi"></div>
-            <div class="card sim" id="sim-tiu-silo"></div>
-            <div class="card sim" id="sim-tiu-silo-lab"></div>
-            <div class="card sim" id="sim-tiu-analitis"></div>
-            <div class="card sim" id="sim-tiu-argumen"></div>
-            <div class="card sim" id="sim-tiu-hitung"></div>
-            <div class="card sim" id="sim-tiu-deret"></div>
-            <div class="card sim" id="sim-tiu-poltab"></div>
-            <div class="card sim" id="sim-tiu-banding"></div>
-            <div class="card sim" id="sim-tiu-cerita"></div>
-            <div class="card sim" id="sim-tiu-ctabel"></div>
-            <div class="card sim" id="sim-tiu-kecdata"></div>
-            <div class="card sim" id="sim-tiu-figanalogi"></div>
-            <div class="card sim" id="sim-tiu-figbeda"></div>
-            <div class="card sim" id="sim-tiu-figserial"></div>
 
           </div>
 
@@ -1980,6 +1955,7 @@
     // 4c. Dua mobil berpapasan
     (function () {
       const box = $('#sim-mobil');
+      if (!box) return;
       box.innerHTML = `<h4>Dua kendaraan berpapasan</h4><p class="hint">Ubah angkanya, lalu jalankan. Rumus: waktu = jarak ÷ (vA + vB).</p>
         <div class="simrow">
           <label>Jarak (km)<input id="mS" type="number" min="1" value="300"></label>
@@ -2122,22 +2098,22 @@
 
       // ===== TIU (3 kemampuan menurut Kepmen) =====
       Pl('verbal', 'tiu', 'Kemampuan Verbal', 'Bernalar dan menarik kesimpulan lewat kata: analogi, silogisme, analitis, serta penguatan dan pelemahan argumen.', ['analogi', 'silo', 'analitis', 'argumen']),
-      Ls('analogi', 'tiu', 'Analogi', 'Bernalar lewat hubungan dua kata, lalu memakai hubungan itu pada situasi lain.', ['Verbal · Analogi kata'], ['sim-tiu-analogi'], true),
-      Ls('silo', 'tiu', 'Silogisme', 'Menarik kesimpulan dari dua pernyataan.', ['Verbal · Silogisme'], ['sim-tiu-silo', 'sim-tiu-silo-lab'], true),
-      Ls('analitis', 'tiu', 'Analitis', 'Menganalisis informasi lalu menarik kesimpulan.', ['Verbal · Analitis'], ['sim-tiu-analitis'], true),
-      Ls('argumen', 'tiu', 'Penguatan dan Pelemahan Argumen', 'Menilai apakah pernyataan tambahan memperkuat atau memperlemah kesimpulan sebuah paragraf.', ['Verbal · Argumen'], ['sim-tiu-argumen'], true),
+      Ls('analogi', 'tiu', 'Analogi', 'Bernalar lewat hubungan dua kata, lalu memakai hubungan itu pada situasi lain.', ['Verbal · Analogi kata'], [], true),
+      Ls('silo', 'tiu', 'Silogisme', 'Menarik kesimpulan dari dua pernyataan.', ['Verbal · Silogisme'], [], true),
+      Ls('analitis', 'tiu', 'Analitis', 'Menganalisis informasi lalu menarik kesimpulan.', ['Verbal · Analitis'], [], true),
+      Ls('argumen', 'tiu', 'Penguatan dan Pelemahan Argumen', 'Menilai apakah pernyataan tambahan memperkuat atau memperlemah kesimpulan sebuah paragraf.', ['Verbal · Argumen'], [], true),
       Pl('numerik', 'tiu', 'Kemampuan Numerik', 'Berhitung, melihat pola angka, membandingkan data kuantitatif, menyelesaikan soal cerita, pola bilangan dalam tabel, dan menilai kecukupan data.', ['hitung', 'deret', 'poltab', 'banding', 'cerita', 'ctabel', 'kecdata']),
-      Ls('hitung', 'tiu', 'Berhitung', 'Kemampuan hitung sederhana dengan cepat dan tepat.', ['Numerik · Berhitung'], ['sim-tiu-hitung'], true),
-      Ls('deret', 'tiu', 'Deret Angka', 'Melihat pola hubungan antarangka.', ['Numerik · Deret angka'], ['sim-tiu-deret', 'sim-alur-deret'], true),
-      Ls('poltab', 'tiu', 'Pola Bilangan dalam Tabel', 'Menemukan rumus pola dari tabel urutan ke dan nilai, lalu menghitung suku yang jauh dengan cepat.', ['Numerik · Pola tabel'], ['sim-tiu-poltab'], true),
-      Ls('banding', 'tiu', 'Perbandingan Kuantitatif', 'Menarik kesimpulan dari dua data kuantitatif.', ['Numerik · Perbandingan kuantitatif'], ['sim-tiu-banding'], true),
-      Ls('cerita', 'tiu', 'Soal Cerita', 'Analisis kuantitatif dari informasi yang diberikan.', ['Numerik · Soal cerita'], ['sim-tiu-cerita', 'sim-alur-cerita', 'sim-mobil'], true),
-      Ls('ctabel', 'tiu', 'Soal Cerita Tabel', 'Memilih kombinasi paling hemat dari tabel harga dan beberapa ketentuan, dengan cara menyaring opsi lebih dulu.', ['Numerik · Cerita tabel'], ['sim-tiu-ctabel', 'sim-ctabel'], true),
-      Ls('kecdata', 'tiu', 'Kecukupan Data', 'Menilai apakah data pada dua pernyataan sudah cukup untuk menjawab pertanyaan, tanpa harus menghitung sampai akhir.', ['Numerik · Kecukupan data'], ['sim-tiu-kecdata'], true),
+      Ls('hitung', 'tiu', 'Berhitung', 'Kemampuan hitung sederhana dengan cepat dan tepat.', ['Numerik · Berhitung'], [], true),
+      Ls('deret', 'tiu', 'Deret Angka', 'Melihat pola hubungan antarangka.', ['Numerik · Deret angka'], [], true),
+      Ls('poltab', 'tiu', 'Pola Bilangan dalam Tabel', 'Menemukan rumus pola dari tabel urutan ke dan nilai, lalu menghitung suku yang jauh dengan cepat.', ['Numerik · Pola tabel'], [], true),
+      Ls('banding', 'tiu', 'Perbandingan Kuantitatif', 'Menarik kesimpulan dari dua data kuantitatif.', ['Numerik · Perbandingan kuantitatif'], [], true),
+      Ls('cerita', 'tiu', 'Soal Cerita', 'Analisis kuantitatif dari informasi yang diberikan.', ['Numerik · Soal cerita'], [], true),
+      Ls('ctabel', 'tiu', 'Soal Cerita Tabel', 'Memilih kombinasi paling hemat dari tabel harga dan beberapa ketentuan, dengan cara menyaring opsi lebih dulu.', ['Numerik · Cerita tabel'], [], true),
+      Ls('kecdata', 'tiu', 'Kecukupan Data', 'Menilai apakah data pada dua pernyataan sudah cukup untuk menjawab pertanyaan, tanpa harus menghitung sampai akhir.', ['Numerik · Kecukupan data'], [], true),
       Pl('figural', 'tiu', 'Kemampuan Figural', 'Bernalar lewat gambar: analogi, ketidaksamaan, dan serial.', ['figanalogi', 'figbeda', 'figserial']),
-      Ls('figanalogi', 'tiu', 'Analogi', 'Bernalar lewat hubungan dua gambar, lalu memakainya pada gambar lain.', ['Figural · Analogi'], ['sim-tiu-figanalogi', 'sim-fig-lab', 'sim-fig-analogi'], true),
-      Ls('figbeda', 'tiu', 'Ketidaksamaan', 'Melihat perbedaan di antara beberapa gambar.', ['Figural · Ketidaksamaan'], ['sim-tiu-figbeda', 'sim-fig-lab2', 'sim-fig-beda'], true),
-      Ls('figserial', 'tiu', 'Serial', 'Melihat pola hubungan dalam bentuk gambar.', ['Figural · Serial'], ['sim-tiu-figserial', 'sim-fig-flip', 'sim-fig-serial'], true),
+      Ls('figanalogi', 'tiu', 'Analogi', 'Bernalar lewat hubungan dua gambar, lalu memakainya pada gambar lain.', ['Figural · Analogi'], [], true),
+      Ls('figbeda', 'tiu', 'Ketidaksamaan', 'Melihat perbedaan di antara beberapa gambar.', ['Figural · Ketidaksamaan'], [], true),
+      Ls('figserial', 'tiu', 'Serial', 'Melihat pola hubungan dalam bentuk gambar.', ['Figural · Serial'], [], true),
 
       // ===== TKP (6 aspek menurut Kepmen) =====
       Ls('pel', 'tkp', 'Pelayanan Publik', 'Ramah dan efektif memenuhi kebutuhan serta kepuasan orang lain sesuai tugas dan wewenang.', ['Memilih jawaban 5', 'Warga komplain', 'Tawaran uang pelicin'], ['sim-tkp-pel', 'sim-tkp']),
@@ -2383,6 +2359,53 @@
       bhs: `<h4>Pendalaman: pasangan kata baku tambahan</h4><ul><li><b>Baku:</b> antre, andal, azan, cabai, ijazah, imbau, kuitansi, lembap, napas, saksama, sekadar, teladan, terampil, utang, asas, ekstrem, hipotesis.</li><li><b>Tidak baku:</b> antri, handal, adzan, cabe, ijasah, himbau, kwitansi, lembab, nafas, seksama, sekedar, tauladan, trampil, hutang, azas, ekstrim, hipotesa.</li></ul>`
     }).forEach(([k, v]) => { MATERI[k] += v; });
 
+    QZ.silo.push(
+      Q("Auditor eksternal wajib menyerahkan laporan analisis kepatuhan keuangan triwulan. Tidak ada orang yang menyerahkan laporan analisis kepatuhan keuangan triwulan yang dibebaskan dari kewajiban memaparkan hasil temuan di depan dewan pengawas. Sebagian pegawai baru di Biro Keuangan ditugaskan menjadi auditor eksternal. Kesimpulan yang tepat adalah...", ["Pegawai baru di Biro Keuangan wajib memaparkan hasil temuan di depan dewan pengawas.", "Sebagian pegawai baru di Biro Keuangan wajib memaparkan hasil temuan di depan dewan pengawas.", "Sebagian yang memaparkan hasil temuan di depan dewan pengawas adalah pegawai baru di Biro Keuangan.", "Tidak ada auditor eksternal yang merupakan pegawai baru di Biro Keuangan.", "Orang yang wajib memaparkan hasil temuan adalah pegawai baru di Biro Keuangan."], 1, "<div class=\"coret\"><div class=\"ln\">P1: auditor eksternal → wajib menyerahkan laporan</div><div class=\"ln\">P2: <b>tidak ada</b> penyerah laporan yang <b>dibebaskan</b> memaparkan</div><div class=\"nt\">negatif ketemu negatif jadi positif: semua penyerah laporan wajib memaparkan</div><div class=\"ln\">P3: <b>sebagian</b> pegawai baru = auditor eksternal</div><div class=\"ln\">Rantai: pegawai baru (sebagian) → auditor → penyerah laporan → wajib memaparkan</div><div class=\"ln\">A. <span class=\"x\">Pegawai baru wajib memaparkan</span></div><div class=\"nt rd\">P3 cuma sebagian, jangan loncat ke semua</div><div class=\"ln\">C dan E. <span class=\"x\">dibalik</span></div><div class=\"nt rd\">yang memaparkan bisa auditor lain juga</div><div class=\"ln\">D. <span class=\"x\">Tidak ada auditor yang pegawai baru</span></div><div class=\"nt rd\">melawan P3</div><div class=\"ln\"><span class=\"ok\">B. Sebagian pegawai baru wajib memaparkan</span></div></div>"),
+      Q("Jika target serapan anggaran dinas tercapai di atas 95%, maka alokasi dana insentif daerah untuk tahun depan akan dinaikkan. Jika alokasi dana insentif daerah untuk tahun depan dinaikkan, maka program pembangunan infrastruktur desa dapat dipercepat atau kuota beasiswa daerah ditambah. Program pembangunan infrastruktur desa tidak dapat dipercepat dan kuota beasiswa daerah tidak ditambah. Kesimpulan yang tepat adalah...", ["Target serapan anggaran dinas tercapai di atas 95% namun dana insentif tetap naik.", "Target serapan anggaran dinas tidak tercapai di atas 95%.", "Alokasi dana insentif daerah untuk tahun depan tetap dinaikkan secara bertahap.", "Kuota beasiswa daerah ditambahkan melalui skema anggaran perubahan.", "Pembangunan infrastruktur desa dialihkan ke tahun anggaran berikutnya."], 1, "<div class=\"coret\"><div class=\"ln\">P = target serapan di atas 95%, Q = insentif naik, R = infrastruktur dipercepat, S = beasiswa ditambah</div><div class=\"ln\">P1: P → Q</div><div class=\"ln\">P2: Q → (R <b>atau</b> S)</div><div class=\"ln\">P3: ¬R <b>dan</b> ¬S</div><div class=\"ln\">¬R dan ¬S = ingkaran (R atau S) (De Morgan), jadi P3 melawan akibat P2</div><div class=\"ln\">Kontraposisi P2: ¬(R atau S) → ¬Q</div><div class=\"ln\">Kontraposisi P1: ¬Q → ¬P</div><div class=\"ln\">Rantai: ¬(R atau S) → ¬Q → ¬P</div><div class=\"ln\">A, C, D, E. <span class=\"x\">P, Q, S, R</span></div><div class=\"nt rd\">semuanya melawan ¬P, ¬Q, ¬S, ¬R</div><div class=\"ln\"><span class=\"ok\">B. Target serapan tidak tercapai di atas 95%</span></div></div>"),
+      Q("Jika seorang pranata komputer tidak memperbarui sertifikat keamanan siber secara berkala, maka ia tidak diizinkan mengelola server database utama instansi. Jika seorang pranata komputer tidak diizinkan mengelola server database utama instansi, maka ia wajib mengikuti kelas pendampingan teknis khusus di akhir pekan. Hari ini, Dani yang berprofesi sebagai pranata komputer dinyatakan tidak wajib mengikuti kelas pendampingan teknis khusus di akhir pekan. Kesimpulan yang sah adalah...", ["Dani diizinkan mengelola server database utama instansi namun belum memperbarui sertifikat keamanan.", "Dani tidak memperbarui sertifikat keamanan siber secara berkala.", "Dani telah memperbarui sertifikat keamanan siber secara berkala.", "Dani tidak diizinkan mengelola server database utama instansi.", "Server database utama instansi sedang mengalami gangguan teknis keamanan."], 2, "<div class=\"coret\"><div class=\"ln\">P = memperbarui sertifikat, Q = diizinkan kelola server, R = wajib ikut kelas</div><div class=\"ln\">P1: ¬P → ¬Q</div><div class=\"ln\">P2: ¬Q → R</div><div class=\"ln\">P3: Dani ¬R</div><div class=\"ln\">Lawankan akibat P2: ¬R → Q (Dani diizinkan)</div><div class=\"ln\">Lawankan akibat P1: Q → P (Dani memperbarui)</div><div class=\"ln\">Rantai: ¬R → Q → P</div><div class=\"ln\">A. <span class=\"x\">diizinkan tapi belum memperbarui</span></div><div class=\"nt rd\">belum memperbarui = ¬P, padahal ¬P → ¬Q</div><div class=\"ln\">B dan D. <span class=\"x\">kebalikan hasil rantai</span></div><div class=\"ln\">E. <span class=\"x\">gangguan teknis</span></div><div class=\"nt rd\">pengetahuan di luar premis</div><div class=\"ln\"><span class=\"ok\">C. Dani telah memperbarui sertifikat</span></div></div>"),
+      Q("Premis 1: Instansi pemerintah yang menerapkan zonasi integritas, bebas dari pungutan liar. Premis 2: Beberapa unit pelaksana teknis daerah adalah instansi pemerintah yang menerapkan zonasi integritas. Diberikan kesimpulan: (1) Semua unit pelaksana teknis daerah bebas dari pungutan liar. (2) Beberapa unit pelaksana teknis daerah bebas dari pungutan liar. Tentukan pernyataan yang benar!", ["Hanya kesimpulan (1) yang tepat.", "Hanya kesimpulan (2) yang tepat.", "Kesimpulan (1) dan (2) tidak relevan dengan pernyataan.", "Kesimpulan (1) atau (2) dapat dipilih secara bebas.", "Baik kesimpulan (1) maupun (2) tidak ada yang tepat."], 1, "<div class=\"coret\"><div class=\"ln\">P1: semua instansi zonasi integritas bebas pungli</div><div class=\"ln\">P2: <b>beberapa</b> UPTD = instansi zonasi integritas</div><div class=\"ln\">Gambar: (UPTD sebagian (zonasi integritas (bebas pungli)))</div><div class=\"ln\">Cuma UPTD di irisan zonasi yang pasti bebas pungli</div><div class=\"ln\">(1) <span class=\"x\">Semua UPTD bebas pungli</span></div><div class=\"nt rd\">UPTD di luar irisan tidak diketahui statusnya</div><div class=\"ln\">(2) <span class=\"ok\">Beberapa UPTD bebas pungli: pasti</span></div><div class=\"ln\">Sebagian + semua: kesimpulan ikut sebagian</div><div class=\"ln\"><span class=\"ok\">B. Hanya kesimpulan (2) yang tepat</span></div></div>")
+    );
+    // ---------- Coret-coretan cara cepat di tiap sub materi TIU ----------
+    (function () {
+      const cr = (t, ls) => `<div class="coret"><span class="tt">${t}</span>${ls.map(l => l[0] === '>' ? `<div class="nt">${l.slice(1).trim()}</div>` : l[0] === '!' ? `<div class="nt rd">${l.slice(1).trim()}</div>` : `<div class="ln">${l.replace(/~~(.+?)~~/g, '<span class="x">$1</span>').replace(/\^\^(.+?)\^\^/g, '<span class="ok">$1</span>')}</div>`).join('')}</div>`;
+      const add = (id, title, blocks) => { const m = MATERI[id] || '', h = `<h4>${title}</h4>` + blocks.map(b => cr(b[0], b.slice(1))).join(''), i = m.lastIndexOf('<h4>Jebakan'); MATERI[id] = i < 0 ? m + h : m.slice(0, i) + h + m.slice(i); };
+      add('analogi', 'Coret-coretan: cara cepat mengerjakan', [
+        ['Contoh 1: alat dan fungsi', 'SENDOK : MAKAN = KUAS : ...', 'Kalimat: sendok alat untuk makan', 'A. ~~cat~~', '> bahan, bukan fungsi', 'B. ~~kanvas~~', '> tempat, bukan fungsi', 'C. ^^melukis^^', 'Kuas alat untuk melukis: cocok'],
+        ['Contoh 2: pelaku dan tempat kerja', 'KOKI : DAPUR = PILOT : ...', 'Kalimat: koki bekerja di dapur', 'A. ~~pesawat~~', '> alat, bukan tempat', 'B. ^^kokpit^^', 'Pilot bekerja di kokpit: cocok'],
+        ['Contoh 3: urutan', 'SENIN : SELASA = MEI : ...', 'Kalimat: Selasa hari sesudah Senin', 'Terapkan: sesudah Mei adalah ^^Juni^^', '! jangan dibalik jadi April']]);
+      add('analitis', 'Coret-coretan: cara cepat mengerjakan', [
+        ['Contoh 1: urutan dari petunjuk', 'A lebih tinggi dari B', 'B lebih tinggi dari C', 'D lebih rendah dari C', 'Sambung: A > B > C > D', 'Peringkat ketiga: ^^C^^'],
+        ['Contoh 2: tabel jadwal', 'Ani, Budi, Cici ke hari Sen, Sel, Rab', 'Budi bukan Sen, bukan Rab: Budi = Selasa', 'Ani bukan Sen, Selasa penuh: Ani = Rabu', 'Sisa: Cici = ^^Senin^^'],
+        ['Contoh 3: siapa yang jujur', 'Eka: Fira bohong. Fira: Gita bohong.', 'Gita: Eka dan Fira bohong.', 'Misal Eka jujur: Fira bohong, Gita jujur', '~~tapi Gita bilang Eka bohong: bentrok~~', 'Misal Eka bohong: Fira jujur, Gita bohong, cocok', 'Yang jujur: ^^Fira^^']]);
+      add('banding', 'Coret-coretan: cara cepat mengerjakan', [
+        ['Contoh 1: hitung dulu', 'P = 25% dari 240 = 60', 'Q = 1/3 dari 180 = 60', 'Hubungan: ^^P = Q^^'],
+        ['Contoh 2: ada huruf, uji dua nilai', 'x > 0. P = x, Q = x kuadrat', 'x = 2: P = 2, Q = 4, P < Q', 'x = 0,5: P = 0,5, Q = 0,25, P > Q', 'Hasil beda-beda: ^^tidak dapat ditentukan^^'],
+        ['Contoh 3: pecahan, kali silang', 'P = 3/7, Q = 4/9', '3 x 9 = 27, 4 x 7 = 28', '27 < 28, jadi ^^P < Q^^']]);
+      add('kecdata', 'Coret-coretan: cara cepat mengerjakan', [
+        ['Contoh: uji satu per satu', 'Harga 1 buku? (1) 3 buku Rp15.000. (2) 5 buku Rp25.000.', '(1) sendirian: 15.000 : 3 = 5.000, cukup', '(2) sendirian: 25.000 : 5 = 5.000, cukup', 'Jawab: ^^masing-masing cukup^^']]);
+      add('figanalogi', 'Coret-coretan: cara cepat mengerjakan', [
+        ['Contoh 1: tulis aturan A ke B', 'A ke B: bentuk diputar 90 derajat searah jarum jam', 'Terapkan ke C: putar 90 derajat searah jarum jam', '~~opsi diputar berlawanan~~', '~~opsi dicerminkan, bukan diputar~~', 'Sisa satu: ^^itu jawabannya^^'],
+        ['Contoh 2: cek jumlah, lalu posisi', 'A ke B: titik hitam jadi dua kali lipat', 'C punya 3 titik: hasilnya harus 6 titik', '~~opsi yang titiknya bukan 6~~', 'Cek posisi di opsi yang tersisa']]);
+      add('figbeda', 'Coret-coretan: cara cepat mengerjakan', [
+        ['Contoh 1: periksa ciri satu per satu', 'Lima gambar: empat segitiga biru, satu merah', 'Bentuk: sama semua', 'Warna: satu yang beda', 'Yang beda: ^^yang merah^^'],
+        ['Contoh 2: diputar atau dicerminkan?', 'Huruf L diputar 90 derajat: tetap L, hanya miring', 'Huruf L dicermin: jadi bayangan terbalik', 'Gambar yang cuma bisa dari cermin: ^^itu yang beda^^', '! memutar di kepala tidak bisa jadi bayangan']]);
+      add('figserial', 'Coret-coretan: cara cepat mengerjakan', [
+        ['Contoh 1: serial bergerak', 'Titik hitam geser satu sudut tiap langkah', 'Langkah 1: kiri-atas. Langkah 2: kanan-atas', 'Langkah 3: kanan-bawah', 'Langkah 4: ^^kiri-bawah^^'],
+        ['Contoh 2: matriks 3 x 3', 'Baris 1: 1 garis, 2 garis, 3 garis', 'Baris 2: 2 garis, 3 garis, ?', 'Tiap kotak ke kanan tambah satu garis', 'Isi ?: ^^4 garis^^']]);
+      if (MATERI.ctabel) MATERI.ctabel = MATERI.ctabel.replace(/<div class="coret"><span class="tt">Contoh selisih<\/span>[\s\S]*?<\/div><\/div>/,
+        cr('Contoh selisih: pipa', ['A: 3 Alfa + 1 Gama', 'C: 2 Alfa + 1 Beta + 1 Gama', 'Coret yang sama: 2 Alfa + 1 Gama', 'Sisa: A punya 1 Alfa (30.000)', 'Sisa: C punya 1 Beta (39.000)', 'A lebih murah ^^Rp9.000^^']) +
+        cr('Contoh selisih: cat', ['B: 2 A + 2 B + 1 D', 'D: 1 A + 3 B + 1 D', 'Coret yang sama: 1 A + 2 B + 1 D', 'Sisa: B punya 1 Kaleng A (80.000)', 'Sisa: D punya 1 Kaleng B (135.000)', 'B lebih murah ^^Rp55.000^^']));
+    })();
+
+    QZ.analogi.push(
+      Q('API : PANAS = ES : ...', ['dingin', 'air', 'kulkas', 'minum', 'mencair'], 0, 'Hubungan ciri atau sifat: api bersifat panas, es bersifat dingin. Pilihan lain cuma sama topik, bukan sama hubungan.'),
+      Q('PETANI : SAWAH = NELAYAN : ...', ['ikan', 'laut', 'perahu', 'jaring', 'pantai'], 1, 'Hubungan pelaku dan tempat kerja: petani bekerja di sawah, nelayan bekerja di laut. Perahu dan jaring adalah alat, bukan tempat.'),
+      Q('BENIH : POHON = TELUR : ...', ['ayam', 'sarang', 'kuning', 'cangkang', 'induk'], 0, 'Hubungan tahap tumbuh: benih tumbuh menjadi pohon, telur menetas menjadi ayam. Kuning dan cangkang cuma bagian telur.')
+    );
+    QZ.analitis.push(
+      Q('Empat orang (P, Q, R, S) duduk berderet. Q di ujung kiri. S tepat di sebelah kanan Q. P tidak duduk di ujung. R tepat di sebelah kanan P. Siapa di ujung kanan?', ['P', 'Q', 'R', 'S', 'Tidak dapat ditentukan'], 2, 'Kotak 1 = Q, kotak 2 = S. P bukan di ujung, jadi P di kotak 3. R di kanan P, jadi R di kotak 4. Urutan: Q, S, P, R. Ujung kanan adalah R.'),
+      Q('Ani berkata: Budi berbohong. Budi berkata: Cici berbohong. Cici berkata: Ani dan Budi berbohong. Siapa yang jujur?', ['Ani', 'Budi', 'Cici', 'Ani dan Cici', 'Tidak ada'], 1, 'Misalkan Ani jujur: Budi bohong, jadi Cici jujur, tapi Cici bilang Ani bohong. Bertentangan. Misalkan Ani bohong: Budi jujur, Cici bohong, dan semuanya cocok. Yang jujur hanya Budi.')
+    );
     QZ.nas.push(
       Q('Organisasi yang menjadi penanda awal Kebangkitan Nasional dan berdiri pada 20 Mei 1908 adalah...', ['Sarekat Islam', 'Budi Utomo', 'Indische Partij', 'Perhimpunan Indonesia', 'PNI'], 1, 'Budi Utomo berdiri 20 Mei 1908. Tanggal itu diperingati sebagai Hari Kebangkitan Nasional.'),
       Q('Sikap merasa bangsa sendiri paling unggul sambil merendahkan bangsa lain disebut...', ['Patriotisme', 'Chauvinisme', 'Nasionalisme', 'Bela negara', 'Cinta tanah air'], 1, 'Chauvinisme adalah bangga berlebihan disertai merendahkan bangsa lain, berbeda dari nasionalisme yang sehat.'),
@@ -2824,30 +2847,72 @@
       }));
     })();
 
-    const qzOf = l => l.subs ? l.subs.flatMap(id => (QZ[id] || []).map(q => Object.assign({ tag: lessonById(id).t }, q))) : (QZ[l.id] || []);
+    const qzOf = (l, f) => (l.subs ? (f ? [f] : l.subs) : [l.id]).flatMap(id => (QZ[id] || []).map((q, si) => Object.assign({ tag: l.subs ? lessonById(id).t : '', sid: id, si }, q)));
+    const pbh = (x, sid, pick) => {
+      const e = x.e || '', sd = sid || x.sid, ls = sd && lessonById(sd), L = 'ABCDE';
+      const isC = /^\s*<div class="coret"/.test(e);
+      if (!(ls && ls.g === 'tiu')) {
+        if (isC) return e;
+        const ss = /</.test(e) ? [e] : e.split(/(?<=\.)\s+(?=[A-Z])/);
+        return `<div class="coret"><span class="tt">Pembahasan</span>${ss.map(y => `<div class="ln">${y}</div>`).join('')}<div class="ln vr"><span class="tx">Jawaban</span><span class="vd"><span class="ok">${L[x.a]}</span></span></div></div>`;
+      }
+      const inner = isC ? e.replace(/^\s*<div class="coret"[^>]*>/, '').replace(/<\/div>\s*$/, '') : (/</.test(e) ? [e] : e.split(/(?<=\.)\s+(?=[A-Z])/)).map(y => `<div class="ln">${y}</div>`).join('');
+      const opts = /class="x"/.test(e) ? '' : '<div class="ln"><b>Cek tiap opsi:</b></div>' + x.o.map((o, j) => j === x.a
+        ? `<div class="ln vr"><span class="tx">${L[j]}. ${o}</span><span class="vd"><span class="ok">ini</span></span></div>`
+        : `<div class="ln">${L[j]}. <span class="x">${o}</span></div>${pick === j ? '<div class="nt rd">pilihan lo, belum pas</div>' : ''}`).join('');
+      return `<div class="coret">${/class="tt"/.test(e) ? '' : '<span class="tt">Coret-coretan</span>'}${inner}${opts}</div>`;
+    };
+    const EX = {
+      analogi: Q('PENA : MENULIS = GUNTING : ...', ['mengikat', 'memotong', 'melipat', 'menempel', 'mengukur'], 1, 'Kalimat penghubung: pena adalah alat untuk menulis. Terapkan ke gunting: gunting adalah alat untuk memotong. Arah hubungannya sama: alat dulu, fungsi kemudian.'),
+      analitis: Q('Lima orang (A, B, C, D, E) antre dari depan ke belakang. A di depan B. C di belakang B. D di depan A. E paling belakang. Siapa di urutan ketiga?', ['A', 'B', 'C', 'D', 'E'], 1, 'Tulis lima kotak. E paling belakang, jadi kotak 5 = E. Rantai: D di depan A, A di depan B, B di depan C. Urutan lengkap: D, A, B, C, E. Urutan ketiga adalah B.'),
+      deret: Q('Lanjutan deret 2, 6, 18, 54, ... adalah...', ['108', '148', '162', '216', '172'], 2, 'Cek selisih: 4, 12, 36, tidak tetap. Cek rasio: 6 : 2 = 3, 18 : 6 = 3, 54 : 18 = 3. Polanya dikali 3. Suku berikutnya 54 × 3 = 162.'),
+      hitung: Q('25% dari 480 ditambah 15% dari 200 sama dengan...', ['130', '140', '150', '160', '170'], 2, '25% sama dengan seperempat: 480 : 4 = 120. 15% dari 200 = 10% (20) + 5% (10) = 30. Jumlahnya 120 + 30 = 150.'),
+      banding: Q('P = 3/4 dari 80. Q = 2/3 dari 90. Hubungan P dan Q yang benar adalah...', ['P > Q', 'P < Q', 'P = Q', 'Hubungan tidak dapat ditentukan', 'P = 2Q'], 2, 'Hitung masing-masing dulu, jangan menebak. P = 3/4 × 80 = 60. Q = 2/3 × 90 = 60. Nilainya sama, jadi P = Q.'),
+      cerita: Q('Andi menempuh 120 km dalam 2 jam dengan kecepatan tetap. Berapa jam waktu untuk menempuh 300 km?', ['4 jam', '4,5 jam', '5 jam', '5,5 jam', '6 jam'], 2, 'Ubah cerita jadi angka: kecepatan = 120 : 2 = 60 km/jam. Waktu = jarak : kecepatan = 300 : 60 = 5 jam.'),
+      kecdata: Q('Berapa umur Rina? (1) Rina 2 tahun lebih tua dari Dina. (2) Umur Dina 15 tahun.', ['(1) saja cukup, (2) tidak', '(2) saja cukup, (1) tidak', '(1) dan (2) harus digabung', '(1) saja atau (2) saja sudah cukup', '(1) dan (2) tidak cukup'], 2, 'Uji (1) sendirian: umur Dina belum diketahui, jadi umur Rina belum ketemu. Uji (2) sendirian: umur Dina tidak menjawab umur Rina. Gabung: Rina = 15 + 2 = 17. Keduanya harus digabung.')
+    };
+    const exOf = id => EX[id] || (QZ[id] || [])[0];
+    const exHTML = (l, f) => {
+      const ids = l.subs ? (f ? [f] : l.subs) : [l.id];
+      const cards = ids.map(id => {
+        const x = exOf(id); if (!x) return '';
+        return `<article class="ex"><span class="ex-tag">Contoh soal · ${lessonById(id).t}</span><div class="ex-q">${x.q}</div><ol class="ex-o">${x.o.map((o, j) => `<li><b>${'ABCDE'[j]}</b><span>${o}</span></li>`).join('')}</ol><details class="ex-a"><summary>Lihat jawaban dan coretannya</summary><div class="ex-k">Jawaban: <span class="ok-chip">${'ABCDE'[x.a]}. ${x.o[x.a]}</span></div>${pbh(x, id)}</details></article>`;
+      }).join('');
+      return cards + '<div class="lc-act"><button class="btn" data-qm="latih">Mulai latihan soal</button></div>';
+    };
     function latihanHTML(l) {
-      const qs = qzOf(l);
-      if (!qs.length) return '<div class="lc"><p>Soal latihan untuk materi ini sedang disiapkan.</p></div>';
-      const i = (cur.q || 0) % qs.length, x = qs[i], p = cur.pick;
-      const T = cur.tally || {}, ans = Object.keys(T).filter(k => k.indexOf(l.id + ':') === 0), okN = ans.filter(k => T[k]).length;
-      const last = i === qs.length - 1;
-      return `<div class="lc qz"><div class="qhd"><small class="qn">Soal ${i + 1} dari ${qs.length}${x.tag ? ' · ' + x.tag : ''}</small>${ans.length ? `<span class="qsc">Benar ${okN}/${ans.length}</span>` : ''}</div>
-        <div class="qprog"><i style="width:${(i + (p == null ? 0 : 1)) / qs.length * 100}%"></i></div><div class="qt">${x.q}</div>
+      const md = cur.qm || 'contoh', qs = qzOf(l, cur.qf);
+      const seg = `<div class="lt-seg" role="tablist"><button class="${md === 'contoh' ? 'is-active' : ''}" data-qm="contoh">Contoh soal</button><button class="${md === 'latih' ? 'is-active' : ''}" data-qm="latih">Latihan (${qzOf(l).length})</button></div>`;
+      const chips = l.subs ? `<div class="qf" role="group" aria-label="Pilih subtes"><button class="${cur.qf ? '' : 'is-active'}" data-qf="">Semua subtes</button>${l.subs.map(id => `<button class="${cur.qf === id ? 'is-active' : ''}" data-qf="${id}">${lessonById(id).t}${md === 'latih' ? ' · ' + (QZ[id] || []).length : ''}</button>`).join('')}</div>` : '';
+      if (md === 'contoh') return seg + chips + exHTML(l, cur.qf);
+      if (!qs.length) return seg + chips + '<div class="lc"><p>Soal latihan untuk materi ini sedang disiapkan.</p></div>';
+      const i = (cur.q || 0) % qs.length, x = qs[i], p = cur.pick, T = cur.tally || {};
+      const kk = j => l.id + ':' + (cur.qf || '') + ':' + j;
+      const ans = qs.map((_, j) => T[kk(j)]).filter(v => v !== undefined), okN = ans.filter(Boolean).length;
+      const last = i === qs.length - 1, pct = ans.length ? Math.round(okN / ans.length * 100) : 0;
+      const dots = `<div class="lt-dots" aria-label="Navigasi soal">${qs.map((_, j) => `<button type="button" class="${T[kk(j)] === undefined ? '' : (T[kk(j)] ? 'ok' : 'no')} ${j === i ? 'now' : ''}" data-qi="${j}" aria-label="Soal ${j + 1}"></button>`).join('')}</div>`;
+      return seg + chips + `<div class="lc qz lt"><div class="qhd"><small class="qn">Soal ${i + 1} dari ${qs.length}${x.tag ? ' · ' + x.tag : ''}</small>${ans.length ? `<span class="qsc">Benar ${okN}/${ans.length}</span>` : ''}</div>${dots}<div class="qt">${x.q}</div>
         ${x.o.map((o, j) => `<button class="opt ${p == null ? '' : (j === x.a ? 'ok' : (j === p ? 'no' : ''))}" data-j="${j}" ${p == null ? '' : 'disabled'}><span class="ol">${'ABCDE'[j]}</span><span class="ot">${o}</span></button>`).join('')}
-        ${p == null ? '' : `<div class="pk-detail ${p === x.a ? 'good' : 'bad'}" role="status" aria-live="polite"><strong>${p === x.a ? 'Yoi, bener!' : 'Belum pas, jawabannya ' + 'ABCDE'[x.a]}</strong>${x.e}</div>${last ? `<div class="qres">Satu putaran selesai: benar ${okN} dari ${ans.length} soal yang dijawab.</div>` : ''}<div class="lc-act" style="margin-top:12px"><button class="btn" id="qNext">${last ? 'Ulangi dari awal' : 'Soal berikutnya'}</button></div>`}</div>`;
+        ${p == null ? '' : `<div class="pk-detail ${p === x.a ? 'good' : 'bad'}" role="status" aria-live="polite"><strong>${p === x.a ? 'Yoi, bener!' : 'Belum pas, jawabannya ' + 'ABCDE'[x.a]}</strong>${pbh(x, x.sid, p)}</div>${last ? `<div class="lt-res"><div class="lt-ring" style="--p:${pct}"><b>${pct}%</b></div><p>Satu putaran selesai: benar ${okN} dari ${ans.length} soal.</p></div>` : ''}<div class="lc-act" style="margin-top:12px"><button class="btn" id="qNext">${last ? 'Ulangi dari awal' : 'Soal berikutnya'}</button></div>`}</div>`;
     }
     function bindLatihan() {
       if (cur.t !== 'latihan') return;
-      const n = qzOf(cur.l).length || 1;
+      const clr = () => { if (cur.tally) Object.keys(cur.tally).forEach(k => { if (k.indexOf(cur.l.id + ':') === 0) delete cur.tally[k]; }); };
+      $$('[data-qm]').forEach(b => b.onclick = () => { cur.qm = b.dataset.qm; cur.pick = null; cur.q = 0; renderLesson(); window.scrollTo({ top: 0 }); });
+      $$('.qf button').forEach(b => b.onclick = () => { cur.qf = b.dataset.qf || null; cur.q = 0; cur.pick = null; clr(); renderLesson(); });
+      if ((cur.qm || 'contoh') !== 'latih') return;
+      $$('.lt-dots button').forEach(b => b.onclick = () => { cur.q = +b.dataset.qi; cur.pick = null; renderLesson(); });
+      const n = qzOf(cur.l, cur.qf).length || 1;
       $$('.qz .opt').forEach(b => b.onclick = () => {
-        const qs = qzOf(cur.l), qi = (cur.q || 0) % qs.length;
-        (cur.tally = cur.tally || {})[cur.l.id + ':' + qi] = (+b.dataset.j === qs[qi].a);
+        const qs = qzOf(cur.l, cur.qf), qi = (cur.q || 0) % qs.length, q = qs[qi], ok = (+b.dataset.j === q.a);
+        (cur.tally = cur.tally || {})[cur.l.id + ':' + (cur.qf || '') + ':' + qi] = ok;
+        if (ok) { PR['qz|' + q.sid + '|' + q.si] = 'paham'; savePR(); }
         cur.pick = +b.dataset.j; renderLesson();
       });
       const nx = $('#qNext');
       if (nx) nx.onclick = () => {
         const nq = ((cur.q || 0) + 1) % n;
-        if (nq === 0 && cur.tally) Object.keys(cur.tally).forEach(k => { if (k.indexOf(cur.l.id + ':') === 0) delete cur.tally[k]; });
+        if (nq === 0) clr();
         cur.q = nq; cur.pick = null; renderLesson();
       };
       if (cur.pick != null) { const d = $('.qz .pk-detail'); if (d && d.scrollIntoView) setTimeout(() => d.scrollIntoView({ block: 'nearest', behavior: 'smooth' }), 80); }
@@ -2923,7 +2988,7 @@
       });
       if (ch) savePR();
     })();
-    const stat = l => { const a = itemsOf(l); return [a.filter(it => PR[key(l, it)] === 'paham').length, a.length]; };
+    const stat = l => { const qs = qzOf(l); return [qs.filter(q => PR['qz|' + q.sid + '|' + q.si] === 'paham').length, qs.length]; };
     const short = t => t.replace(/^[^·]*· /, '');
     const STEPS = ['Cara baku', 'Cara mudah', 'Contoh'];
     let cur = { l: null, i: 0, s: 0, t: 'materi' };
@@ -3039,25 +3104,14 @@
     function renderLesson() {
       parkSims();
       const l = cur.l, its = itemsOf(l), it = its[cur.i], [d, n] = stat(l), subs = l.subs ? l.subs.map(lessonById) : null;
-      const body = [`<b>Cara baku</b>${it[1]}`, `<b>Cara mudah</b>${it[2]}`, `<b>Contoh</b>${it[3]}`][cur.s];
-      const tabs = `<div class="tabs2"><button class="${cur.t === 'materi' ? 'is-active' : ''}" data-t="materi">Materi lengkap</button><button class="${cur.t === 'teknik' ? 'is-active' : ''}" data-t="teknik">Teknik dan contoh (${d}/${n})</button><button class="${cur.t === 'latihan' ? 'is-active' : ''}" data-t="latihan">Latihan soal</button></div>`;
+            const tabs = `<div class="tabs2"><button class="${cur.t === 'materi' ? 'is-active' : ''}" data-t="materi">Materi lengkap</button><button class="${cur.t === 'latihan' ? 'is-active' : ''}" data-t="latihan">Latihan soal (${d}/${n})</button></div>`;
       const simT = sb => sb.sims.length ? `<h4 class="subh2">Alur dan simulasi</h4><div class="simslot" data-sub="${sb.id}"></div>` : '';
       const analogiBox = ANALOGI[l.id] ? `<div class="analogi"><b>Analogi biar nempel</b>${ANALOGI[l.id]}</div>` : '';
-      const main = cur.t === 'latihan' ? latihanHTML(l) : cur.t === 'materi'
-        ? (subs
+      const main = cur.t === 'latihan' ? latihanHTML(l) : (subs
           ? `<div class="lc materi">${analogiBox}<div class="mctl"><button class="obtn" id="mcAll">Tutup semua</button></div></div>
              ${subs.map((sb, si) => `<section class="sub-sec"><div class="lc materi"><div class="subk">Submateri ${si + 1} dari ${subs.length}</div><h3 class="subh"><span class="subn">${si + 1}</span>${sb.t}</h3><p class="subg">${sb.goal}</p>${ANALOGI[sb.id] ? `<div class="analogi"><b>Analogi biar nempel</b>${ANALOGI[sb.id]}</div>` : ''}${cards(MATERI[sb.id] || '', false, si === 0 ? 1 : 0)}</div>${simT(sb)}</section>`).join('')}
-             <div class="lc-act" style="margin-top:20px"><button class="btn" data-t="teknik">Lanjut ke teknik dan contoh</button></div>`
-          : `<div class="lc materi">${analogiBox}${cards(MATERI[l.id] || '')}<div class="lc-act"><button class="btn" data-t="teknik">Lanjut ke teknik dan contoh</button></div></div>${l.sims.length ? '<h3 class="tricks-title">Alur dan simulasi</h3><div class="simslot" data-sub="' + l.id + '"></div>' : ''}`)
-        : `<div class="lgrid">
-            <nav class="ilist" aria-label="Daftar teknik">${its.map((x, j) => (x.sub && (j === 0 || its[j - 1].sub !== x.sub) ? `<span class="ilh">${x.subt}</span>` : '') + `<button class="${j === cur.i ? 'is-active' : ''}" data-j="${j}"><span class="dot ${PR[key(l, x)] || ''}"></span>${short(x[0])}</button>`).join('')}</nav>
-            <div class="lc">
-              <div class="tk-meta"><span>Teknik ${cur.i + 1} dari ${its.length}</span>${it.subt ? `<span class="alt">${it.subt}</span>` : ''}</div><h3>${short(it[0])}</h3>
-              <div class="steps">${STEPS.map((t, k) => `<button class="${k === cur.s ? 'is-active' : ''} ${k < cur.s ? 'done' : ''}" data-s="${k}"><span class="sn">${k + 1}</span><span class="st">${t}</span></button>`).join('')}</div>
-              <div class="lc-body">${body}</div>
-              <div class="lc-act">${cur.s < 2 ? '<button class="btn" id="lNext">Lanjut</button>' : '<button class="btn" data-m="paham">Udah paham</button><button class="btn ghost" data-m="ulang">Ulang nanti aja</button>'}</div>
-            </div>
-          </div>`;
+             <div class="lc-act" style="margin-top:20px"><button class="btn" data-t="latihan">Lanjut ke latihan soal</button></div>`
+          : `<div class="lc materi">${analogiBox}${cards(MATERI[l.id] || '')}<div class="lc-act"><button class="btn" data-t="latihan">Lanjut ke latihan soal</button></div></div>${l.sims.length ? '<h3 class="tricks-title">Alur dan simulasi</h3><div class="simslot" data-sub="' + l.id + '"></div>' : ''}`);
       $('#lesson').innerHTML = `
         <button class="back" id="lBack" aria-label="Kembali ke peta belajar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span>Kembali</span></button>
         <h2>${l.t}</h2><p class="goal">${l.goal}</p>
@@ -3078,8 +3132,8 @@
 
     function lanjutBelajar() {
       for (const l of TOP()) {
-        const j = itemsOf(l).findIndex(x => PR[key(l, x)] !== 'paham');
-        if (j >= 0) return openLesson(l.id, j, j ? 'teknik' : 'materi');
+        const [d, n] = stat(l);
+        if (d < n) return openLesson(l.id, 0, d ? 'latihan' : 'materi');
       }
       openLesson(TOP()[0].id);
     }
@@ -3088,6 +3142,7 @@
     // ---------- 7. Alur beranimasi ----------
     function renderFlow(id, judul, hint, steps) {
       const box = $('#' + id);
+      if (!box) return;
       box.innerHTML = `<h4>${judul}</h4><p class="hint">${hint}</p>
         <div class="fl-ctl"><button class="btn" data-a="play">Putar animasi</button><button class="btn ghost" data-a="all">Tampilkan semua</button></div>
         <ol class="flow">${steps.map(x => `<li><i class="fl-dot"></i><div><small>${x[0]}</small><strong>${x[1]}</strong><span>${x[2]}</span></div></li>`).join('')}</ol>`;
@@ -4871,7 +4926,7 @@
     document.addEventListener('click', (e) => {
       if (e.target.closest('.lcard, #fab')) mulai = Date.now();
       if (e.target.closest('[data-m="paham"]') && ++paham >= 2) setTimeout(() => tampil('paham'), 1200);
-      if (e.target.closest('.lc-act [data-t="teknik"]')) setTimeout(() => tampil('selesai-materi'), 1400);
+      if (e.target.closest('.lc-act [data-t="latihan"]')) setTimeout(() => tampil('selesai-materi'), 1400);
     });
     const cekBawah = () => {
       tunggu = false;
@@ -4914,6 +4969,46 @@ button.sg-r{cursor:pointer}button.sg-r:hover{background:var(--cream,#FBF5EA)}
 .sg-r mark{background:#FFE08A;color:inherit;border-radius:3px;padding:0 1px}
 .sg-ltr{margin:14px 0 0;font:800 13px var(--font);color:var(--brand)}
 .sg-sug{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+
+/* ===== Latihan soal: tampilan baru ===== */
+.lt-seg { display: flex; gap: 6px; padding: 5px; margin: 0 0 14px; background: #EAEEF4; border-radius: 18px; }
+.lt-seg button { flex: 1; padding: 11px 12px; border: 0; border-radius: 14px; background: transparent; color: #5F6678; font-weight: 800; font-size: 14px; cursor: pointer; transition: background .2s, color .2s, box-shadow .2s; }
+.lt-seg button.is-active { background: #fff; color: #1B6466; box-shadow: 0 3px 10px rgba(20, 22, 28, .14); }
+.qf button { border: 1.5px solid #D5DBE5; box-shadow: none; color: #3B4252; transition: all .15s; }
+.qf button:hover { border-color: #247B7D; }
+.qf button.is-active { background: #247B7D; border-color: #247B7D; color: #fff; }
+.qz.lt { padding: 20px; border: 1.5px solid #E1E6EE; border-radius: 26px; background: #fff; box-shadow: 0 14px 34px -16px rgba(36, 123, 125, .35); }
+.qz.lt .qn { color: #1B6466; }
+.qz.lt .qsc { border: 0; background: #DDF4E8; color: #147B54; }
+.lt-dots { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 18px; }
+.lt-dots button { width: 12px; height: 12px; padding: 0; border: 0; border-radius: 50%; background: #D9DEE7; cursor: pointer; transition: transform .15s; }
+.lt-dots button:hover { transform: scale(1.3); }
+.lt-dots button.ok { background: #1FA971; }
+.lt-dots button.no { background: #E5484D; }
+.lt-dots button.now { outline: 2px solid #247B7D; outline-offset: 2px; }
+.qz.lt .qt, .ex-q { font-size: 17px; line-height: 1.7; margin: 0 0 14px; padding: 14px 16px; background: #F4F7FA; border-radius: 16px; border-left: 4px solid #247B7D; }
+.qz.lt .opt { border: 1.5px solid #D9DFE8; border-radius: 16px; box-shadow: none; background: #fff; transition: border-color .15s, background .15s, transform .15s, box-shadow .15s; }
+.qz.lt .opt:not(:disabled):hover { border-color: #247B7D; background: #F0F8F8; transform: translateY(-1px); box-shadow: 0 8px 18px -10px rgba(36, 123, 125, .6); }
+.qz.lt .opt .ol { width: 30px; height: 30px; border: 0; border-radius: 10px; background: #E5F0F0; color: #1B6466; }
+.qz.lt .opt.ok { border-color: #1FA971; background: #EAF8F1; }
+.qz.lt .opt.ok .ol { background: #1FA971; color: #fff; }
+.qz.lt .opt.no { border-color: #E5484D; background: #FDEEEE; }
+.qz.lt .opt.no .ol { background: #E5484D; color: #fff; }
+.qz.lt .pk-detail { margin-top: 16px; padding: 14px 16px; border-radius: 18px; animation: ltUp .35s ease; }
+@keyframes ltUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.lt-res { text-align: center; padding: 18px 8px 4px; }
+.lt-ring { width: 112px; height: 112px; margin: 0 auto 10px; border-radius: 50%; background: conic-gradient(#1FA971 calc(var(--p) * 1%), #E1E6EE 0); display: grid; place-items: center; }
+.lt-ring b { display: grid; place-items: center; width: 86px; height: 86px; border-radius: 50%; background: #fff; font-size: 24px; }
+.ex { margin: 0 0 16px; padding: 18px; border: 1.5px solid #E1E6EE; border-radius: 24px; background: #fff; box-shadow: 0 14px 34px -18px rgba(36, 123, 125, .35); }
+.ex-tag { display: inline-block; margin-bottom: 12px; padding: 4px 12px; border-radius: 99px; background: #E5F0F0; color: #1B6466; font-weight: 800; font-size: 12px; letter-spacing: .03em; }
+.ex-o { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.ex-o li { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border: 1.5px solid #E1E6EE; border-radius: 14px; line-height: 1.5; }
+.ex-o li b { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 9px; background: #E5F0F0; color: #1B6466; font-size: 13px; }
+.ex-a summary { list-style: none; margin-top: 14px; padding: 12px 14px; border-radius: 14px; background: #247B7D; color: #fff; font-weight: 800; text-align: center; cursor: pointer; }
+.ex-a summary::-webkit-details-marker { display: none; }
+.ex-a[open] summary { background: #E5F0F0; color: #1B6466; }
+.ex-k { margin: 12px 0 6px; font-weight: 700; }
+.ok-chip { padding: 2px 10px; border-radius: 99px; background: #DDF4E8; color: #147B54; }
 </style>
 <style>
 /* Nav bawah: bar putih bersih, tab aktif pil teal lembut */
@@ -5052,6 +5147,9 @@ button.sg-r{cursor:pointer}button.sg-r:hover{background:var(--cream,#FBF5EA)}
 .lc-act [data-m="paham"]::before { content: "\2713  "; }
 
 /* ===== Latihan soal ===== */
+.qf { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+.qf button { padding: 7px 13px; border: 2px solid #14161C; border-radius: 99px; background: #fff; color: #14161C; font-weight: 700; font-size: 13px; cursor: pointer; box-shadow: 0 2px 0 #14161C; }
+.qf button.is-active { background: var(--brand-soft, #DDF0EF); color: var(--brand-strong, #1F7274); }
 .qz { padding: 20px 20px 18px; }
 .qhd { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .qz .qn { color: var(--brand-strong, #1F7274); font-weight: 800; letter-spacing: .03em; text-transform: uppercase; font-size: 12px; }
@@ -5460,7 +5558,7 @@ button, a, summary, [role="button"] { touch-action: manipulation; }
     close();
     const v = $('.nav-btn[data-view="belajar"]'); if (v && !v.classList.contains('is-active')) v.click();
     if (!r.lid || !window.__openLesson) return;
-    window.__openLesson(r.lid, r.i || 0, r.k === 'trik' ? 'teknik' : r.k === 'soal' ? 'latihan' : 'materi');
+    window.__openLesson(r.lid, r.i || 0, r.k === 'trik' ? 'materi' : r.k === 'soal' ? 'latihan' : 'materi');
     setTimeout(() => {
       const h = r.sec && $$('#lesson h4, #lesson .tt').find(e => e.textContent.trim() === r.sec), m = r.k === 'soal' ? null : markIn(FL), t = h || m;
       if (h) { h.classList.add('sg-flash'); setTimeout(() => h.classList.remove('sg-flash'), 2400); }
@@ -6016,10 +6114,9 @@ button, a, summary, [role="button"] { touch-action: manipulation; }
   var POSK='skd-mkm-pos',POS={},posT;try{POS=JSON.parse(localStorage.getItem(POSK)||'{}')}catch(_){POS={}}
   function savePos(){if(!active()||!lesKey||tabKey==='teknik'||tabKey==='latihan')return;var p=prog();if(document.documentElement.scrollHeight-innerHeight<600)return;
     if(p>.97)delete POS[lesKey];else if(p<.03)return;else POS[lesKey]=+p.toFixed(3);try{localStorage.setItem(POSK,JSON.stringify(POS))}catch(_){}}
-  function endChips(){var a=[],bt=L.querySelector('[data-t="teknik"]'),bl=L.querySelector('[data-t="latihan"]');
+  function endChips(){var a=[],bt=null,bl=L.querySelector('[data-t="latihan"]');
     if(tabKey==='latihan')return null;
-    if(bt&&tabKey!=='teknik')a.push(['Teknik dan contoh',function(){hide();bt.click()},1]);
-    if(bl)a.push(['Latihan soal',function(){hide();bl.click()},tabKey==='teknik']);
+    if(bl)a.push(['Latihan soal',function(){hide();bl.click()},1]);
     if(a.length)a.push(['Nanti',hide]);return a.length?a:null}
   function range(){var bb=parseInt(getComputedStyle(document.documentElement).getPropertyValue('--bottombar-h'))||64,h=el.offsetHeight||66;
     return [78,Math.max(110,innerHeight-(innerWidth<900?bb:0)-h-150)]}
@@ -6125,7 +6222,7 @@ var sp=POS[h2],tl=document.documentElement.scrollHeight-innerHeight;
       ['Lupa, tunjukin',function(){var c=cardOf(o);if(c){c.open=true;c.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'})}say('Gapapa lupa, itu wajar. Baca lagi bagian ini, terus coba uji lagi.','',{chips:[['Uji lagi',uji],['Menu',function(){menu()}]]})}]]})}
   function lanjut(){var o=current()||curN,i=o?nodes.indexOf(o):-1,nx=null;
     for(var j=i+1;j<nodes.length;j++){if(nodes[j].k==='sub'||nodes[j].k==='card'||nodes[j].k==='key'){nx=nodes[j];break}}
-    hide();if(!nx){var bt=L.querySelector('[data-t="teknik"]');say('Udah ujung materi. Lanjut ke "Teknik dan contoh"?','happy',{chips:bt?[['Gas, lanjut',function(){hide();bt.click()},1],['Nanti dulu',hide]]:[['Oke',hide]]});return}
+    hide();if(!nx){var bt=L.querySelector('[data-t="latihan"]');say('Udah ujung materi. Lanjut ke "Latihan soal"?','happy',{chips:bt?[['Gas, lanjut',function(){hide();bt.click()},1],['Nanti dulu',hide]]:[['Oke',hide]]});return}
     jumpTo(nx)}
   var kN=0,kT=0,kOff=false,t0=Date.now();
   try{kN=+sessionStorage.getItem('mkmKopiN')||0;kT=+sessionStorage.getItem('mkmKopiT')||0;kOff=sessionStorage.getItem('mkmKopiOff')==='1'}catch(_){}
