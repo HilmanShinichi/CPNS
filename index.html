@@ -1250,9 +1250,10 @@
   <ellipse class="mk-m-w" cx="187" cy="181" rx="7" ry="9" fill="#14161C"/>
   <path class="mk-m-f" d="M177 179 Q187 184 197 179" fill="none" stroke="#14161C" stroke-width="5" stroke-linecap="round"/>
   <path class="mk-m-d" d="M165 178 q5 -7 10 0 t10 0 t10 0 t10 0" fill="none" stroke="#14161C" stroke-width="4.5" stroke-linecap="round"/>
-  <text x="187" y="226" text-anchor="middle" font-family="Poppins,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="800" letter-spacing="1.2" fill="#6C5CE7">PEJUANG NIP</text>
-  <rect x="147" y="239" width="80" height="9" rx="4.5" fill="#E6E6F0"/>
-  <rect x="147" y="261" width="42" height="15" rx="7.5" fill="#6C5CE7" stroke="#14161C" stroke-width="4"/>
+  <g class="mk-korpri"><rect x="155" y="197" width="64" height="40" rx="9" fill="#14532D" stroke="#14161C" stroke-width="3.5"/><g fill="#F2B632"><g><path d="M178 227 C169.5 226 164 221 161.5 213 C166 216.5 172 217.5 178 217.5 Z"/><path d="M178 222 C171.5 221 167.5 217 166 210.5 C170 213.3 174 214 178 214 Z"/><path d="M178 217.5 C173 216.5 170.5 213 170 208.5 C173 210.5 175.5 211 178 211 Z"/></g><g transform="translate(374 0) scale(-1 1)"><path d="M178 227 C169.5 226 164 221 161.5 213 C166 216.5 172 217.5 178 217.5 Z"/><path d="M178 222 C171.5 221 167.5 217 166 210.5 C170 213.3 174 214 178 214 Z"/><path d="M178 217.5 C173 216.5 170.5 213 170 208.5 C173 210.5 175.5 211 178 211 Z"/></g><circle cx="187" cy="204.5" r="5.6"/><circle cx="181.8" cy="208.2" r="3.8"/><circle cx="192.2" cy="208.2" r="3.8"/><rect x="185.8" y="209" width="2.4" height="8"/><path d="M178.5 222.5 L187 216 L195.5 222.5 Z"/><rect x="179.6" y="223.5" width="1.8" height="6"/><rect x="183.4" y="223.5" width="1.8" height="6"/><rect x="188.8" y="223.5" width="1.8" height="6"/><rect x="192.6" y="223.5" width="1.8" height="6"/><rect x="177.5" y="229.5" width="19" height="2.4" rx="1"/></g><path d="M187 208.5 V203 M187 206.5 L184 203.8 M187 206.5 L190 203.8" fill="none" stroke="#14532D" stroke-width="1" stroke-linecap="round"/></g>
+  <text x="187" y="252" text-anchor="middle" font-family="Poppins,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="800" letter-spacing="1.2" fill="#6C5CE7">PEJUANG NIP</text>
+  <rect x="147" y="259" width="80" height="8" rx="4" fill="#E6E6F0"/>
+  <rect x="147" y="272" width="42" height="14" rx="7" fill="#6C5CE7" stroke="#14161C" stroke-width="4"/>
   </g></g>
   <g class="mk-zz" font-family="Poppins,'Segoe UI',Arial,sans-serif" font-weight="800" fill="#14161C">
     <text x="262" y="78" font-size="26">Z</text><text x="284" y="56" font-size="20">z</text><text x="300" y="38" font-size="15">z</text>
@@ -6448,6 +6449,38 @@ var sp=POS[h2],tl=document.documentElement.scrollHeight-innerHeight;
   try{renderLib()}catch(e){}
 })();
 </script>
+<script id="read-kopi-js">
+// Ajakan traktir kopi sesekali saat satu materi sudah dibaca tuntas (semua bagian dibuka + digulir sampai bawah)
+(function(){
+  const lesson=document.getElementById('lesson'); if(!lesson) return;
+  const CAP=2,JEDA=4*60*1000,MINWAKTU=45*1000;
+  const g=k=>{try{return sessionStorage.getItem(k)}catch(_){return null}},s=(k,v)=>{try{sessionStorage.setItem(k,v)}catch(_){}};
+  let opened=new Set(),t0=Date.now(),fired=false,judul='';
+  const reset=()=>{opened=new Set();t0=Date.now();fired=false;judul=(lesson.querySelector('h1,h2,h3')||{}).textContent||''};
+  new MutationObserver(()=>{const j=(lesson.querySelector('h1,h2,h3')||{}).textContent||'';if(j!==judul)reset()}).observe(lesson,{childList:true});
+  lesson.addEventListener('toggle',e=>{if(e.target.open)opened.add(e.target);cek()},true);
+  function tabMateri(){const a=lesson.querySelector('button.is-active');return !a||/materi/i.test(a.textContent)}
+  function cek(){
+    if(fired||lesson.hidden||!tabMateri()) return;
+    if(window.kopiSudah&&window.kopiSudah()) return;
+    if(g('kopi-off')==='1'||document.querySelector('.kp-ov.is-open')) return;
+    const n=+(g('kopi-baca-n')||0),tt=+(g('kopi-baca-t')||0);
+    if(n>=CAP||(n&&Date.now()-tt<JEDA)) return;
+    if(Date.now()-t0<MINWAKTU) return;
+    const ds=[...lesson.querySelectorAll('details')];
+    if(ds.length<3) return;
+    if(!ds.every(d=>d.open||opened.has(d))) return;
+    const bawah=window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-90;
+    if(!bawah) return;
+    fired=true;s('kopi-baca-n',n+1);s('kopi-baca-t',Date.now());
+    if(window.kopiLog)window.kopiLog('tampil','materi-100');
+    setTimeout(()=>{if(document.querySelector('.kp-ov.is-open'))return;const a=document.createElement('a');a.href='#traktir';a.setAttribute('data-kopi','');a.dataset.src='materi-100';a.hidden=true;document.body.appendChild(a);a.click();a.remove()},900);
+  }
+  window.addEventListener('scroll',()=>{clearTimeout(cek.t);cek.t=setTimeout(cek,250)},{passive:true});
+  setInterval(cek,5000);
+  reset();
+})();
+</script>
 <style id="arena-css">
 #ar .ar-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
 #ar .ar-timer{font-weight:800;padding:6px 14px;border:2px solid #14161C;border-radius:99px;background:#fff;font-variant-numeric:tabular-nums}
@@ -6488,19 +6521,7 @@ tiu:[
 ['analogi','Dokter : Pasien = Guru : ...',['Sekolah','Murid','Buku','Kelas','Ujian'],1,'Hubungan: pihak yang melayani dan pihak yang dilayani.'],
 ['analogi','Panas : Dingin = Terang : ...',['Lampu','Siang','Gelap','Redup','Matahari'],2,'Hubungan antonim.'],
 ['banding','x = 2 pangkat 5, y = 5 pangkat 2. Hubungan x dan y...',['x > y','x < y','x = y','Tidak dapat ditentukan','x = 2y'],0,'x = 32, y = 25, jadi x > y.']],
-tkp:[
-['pel','Seorang warga marah karena berkasnya belum selesai. Sikap Anda...',['Meminta warga datang lagi besok','Meminta maaf, mengecek status berkas, dan memberi kepastian waktu penyelesaian','Menyarankan warga bertanya ke bagian lain','Menjelaskan bahwa itu bukan kesalahan Anda','Membiarkan sampai warga tenang'],[2,5,3,2,1],'Nilai 5: empati, tindak lanjut nyata, dan kepastian informasi.'],
-['pel','Ada warga menawarkan uang agar urusannya dipercepat. Anda...',['Menerima karena sebagai tanda terima kasih','Menolak dengan sopan dan menjelaskan prosedur resmi','Menerima lalu melaporkan nanti','Menolak dan marah-marah','Pura-pura tidak mendengar'],[1,5,2,3,2],'Nilai 5: menolak sopan, tegas, tetap melayani sesuai aturan.'],
-['jej','Rekan dari unit lain butuh data yang Anda pegang untuk laporannya. Anda...',['Memberikan dengan catatan sesuai prosedur dan sumbernya jelas','Menyuruh meminta lewat atasan saja','Memberi tanpa dicek','Menunda sampai urusan sendiri selesai','Menolak karena bukan tugas Anda'],[5,3,2,2,1],'Nilai 5: kolaboratif dan tetap tertib prosedur.'],
-['jej','Dalam tim terjadi miskomunikasi sehingga tugas tumpang tindih. Anda...',['Menyalahkan rekan','Mengajak tim rapat singkat merapikan pembagian tugas','Diam dan mengerjakan bagian sendiri','Melapor atasan tanpa bicara ke tim','Menarik diri dari tim'],[1,5,2,3,1],'Nilai 5: inisiatif memperjelas peran bersama.'],
-['sos','Rekan kerja Anda berbeda agama dan sedang beribadah saat rapat dijadwalkan. Anda...',['Tetap memulai rapat','Menggeser jadwal agar semua bisa hadir','Melanjutkan tanpa dia','Menyindir waktu ibadahnya','Mengabaikan'],[2,5,2,1,1],'Nilai 5: menghormati keberagaman dan mencari solusi bersama.'],
-['sos','Warga setempat punya adat yang asing bagi Anda. Anda...',['Mempelajari dan menghormatinya sambil tetap bekerja sesuai tugas','Memintanya diubah','Mengabaikan','Membicarakannya di belakang','Menghindari warga'],[5,1,2,1,2],'Nilai 5: adaptasi dan hormat tanpa melanggar aturan.'],
-['tik','Kantor Anda memakai aplikasi baru yang belum Anda kuasai. Anda...',['Menunggu rekan mengerjakan','Mengikuti pelatihan, mencoba sendiri, dan bertanya bila perlu','Tetap memakai cara lama','Mengeluh ke atasan','Berharap aplikasi diganti'],[2,5,2,1,1],'Nilai 5: proaktif belajar teknologi.'],
-['tik','Anda menerima pesan berantai tentang kebijakan kantor yang belum jelas kebenarannya. Anda...',['Menyebarkannya segera','Memeriksa ke sumber resmi sebelum meneruskan','Mengabaikan','Menyebarkan dengan catatan "belum tentu benar"','Menanyakan ke grup tanpa cek'],[1,5,3,2,2],'Nilai 5: verifikasi dulu ke sumber resmi.'],
-['prof','Atasan memberi tugas mendadak saat Anda sedang menyelesaikan pekerjaan penting lain. Anda...',['Menolak karena sibuk','Menyampaikan kondisi, lalu menyepakati prioritas dengan atasan','Mengerjakan keduanya asal-asalan','Mengerjakan yang mudah dulu','Meminta rekan mengerjakan tanpa izin'],[1,5,2,3,2],'Nilai 5: komunikasi prioritas dan tanggung jawab.'],
-['prof','Anda sadar telah membuat kesalahan pada laporan yang sudah dikirim. Anda...',['Diam sampai ketahuan','Segera melapor, memperbaiki, dan mengirim revisi','Menyalahkan sistem','Memperbaiki diam-diam','Menunggu ditegur'],[1,5,1,3,2],'Nilai 5: jujur dan bertanggung jawab.'],
-['anti','Rekan Anda menyebarkan ujaran kebencian terhadap kelompok tertentu di grup kantor. Anda...',['Ikut menanggapi','Menegur dengan baik dan mengingatkan aturan, lapor bila berlanjut','Keluar dari grup','Diam saja','Menyebarkan ulang'],[1,5,2,2,1],'Nilai 5: menegur dan memakai jalur resmi.'],
-['anti','Ada ajakan membenci pemerintah dengan hoaks di media sosial. Anda...',['Mencari kebenaran dan melaporkan/klarifikasi ke kanal resmi','Membagikannya','Membalas dengan emosi','Mengabaikan','Menutup akun'],[5,1,2,3,2],'Nilai 5: cek fakta dan laporkan.']]};
+tkp:[]};
   // ===== BATCH 2 =====
   const KD=['Pernyataan (1) SAJA cukup, pernyataan (2) SAJA tidak cukup','Pernyataan (2) SAJA cukup, pernyataan (1) SAJA tidak cukup','DUA pernyataan BERSAMA-SAMA cukup, tetapi SATU pernyataan SAJA tidak cukup','Pernyataan (1) SAJA cukup dan pernyataan (2) SAJA cukup','Pernyataan (1) dan (2) tidak cukup'];
   NEW.tiu.push(
@@ -6517,19 +6538,6 @@ tkp:[
 ['silo','Semua ikan bernapas dengan insang. Paus tidak bernapas dengan insang. Kesimpulan...',['Paus adalah ikan','Paus bukan ikan','Sebagian paus ikan','Semua ikan paus','Tidak ada kesimpulan'],1,'Modus tollens: tidak berinsang berarti bukan ikan.'],
 ['deret','5, 10, 20, 40, ...',['50','60','80','100','45'],2,'Dikali 2.'],
 ['deret','100, 95, 85, 70, 50, ...',['35','30','25','20','15'],2,'Selisih -5, -10, -15, -20, lalu -25.']);
-  NEW.tkp.push(
-['prof','Rekan meminta Anda memalsukan tanda tangan atasan agar urusannya cepat. Anda...',['Menuruti karena kasihan','Menolak dan menjelaskan risikonya, menyarankan jalur resmi','Menuruti asal tidak ketahuan','Menolak lalu membocorkan ke semua orang','Pura-pura sibuk'],[1,5,1,3,2],'Nilai 5: tegas menjaga integritas dan tetap membantu lewat prosedur.'],
-['prof','Jam kerja sudah lewat tapi laporan yang harus selesai hari ini belum rampung. Anda...',['Pulang dan melanjutkan besok','Menyelesaikan hari ini dan memberi tahu atasan bila ada kendala','Meminta orang lain menyelesaikan','Menyerahkan laporan seadanya','Menunda tanpa kabar'],[2,5,2,3,1],'Nilai 5: bertanggung jawab pada tenggat sambil komunikatif.'],
-['pel','Pemohon layanan tidak membawa salah satu berkas persyaratan. Anda...',['Menolak langsung','Menjelaskan kekurangannya dan membantu mencari solusi sesuai aturan','Menerima tanpa berkas','Menyuruh pulang tanpa penjelasan','Meminta bayaran'],[2,5,1,1,1],'Nilai 5: ramah, jelas, tetap sesuai aturan.'],
-['pel','Antrean panjang dan loket Anda satu-satunya yang buka. Anda...',['Melayani seperti biasa tanpa peduli antrean','Mengatur antrean, melayani cepat dan tepat, dan melapor agar loket ditambah','Mengurangi ketelitian demi cepat','Menutup loket sebentar','Mengeluh ke warga'],[3,5,2,1,1],'Nilai 5: efisien tanpa mengorbankan mutu dan mencari solusi sistemik.'],
-['jej','Rekan baru kesulitan beradaptasi dan sering salah. Anda...',['Membiarkan','Menawarkan bimbingan dan berbagi cara kerja','Melaporkan kesalahannya ke atasan','Menertawakannya','Mengambil alih semua tugasnya'],[1,5,3,1,2],'Nilai 5: kolaboratif dan suportif.'],
-['jej','Anda dan tim lain butuh ruang rapat yang sama pada jam sama. Anda...',['Tetap memakai ruangan','Berkoordinasi mencari pembagian waktu atau ruang lain','Mengalah tanpa bicara','Mengadu ke atasan','Meminta tim lain pergi'],[1,5,3,2,1],'Nilai 5: komunikasi langsung dan solusi bersama.'],
-['sos','Dalam tim ada rekan yang logat bicaranya sering jadi bahan tertawaan. Anda...',['Ikut tertawa','Menegur halus dan mengajak menghargai perbedaan','Diam','Menjauhi rekan itu','Mengganti topik'],[1,5,2,1,3],'Nilai 5: berani menjaga kerukunan.'],
-['sos','Anda diundang acara adat setempat di hari libur. Anda...',['Menolak','Menghadiri dan menghormati tata caranya','Datang hanya sebentar tanpa pamit','Menyuruh orang lain datang','Mengabaikan undangan'],[2,5,3,2,1],'Nilai 5: menghargai budaya dan membangun kedekatan.'],
-['tik','Data penting kantor tersimpan di flashdisk pribadi Anda. Anda...',['Membiarkan','Memindahkan ke penyimpanan resmi dan mengikuti kebijakan keamanan data','Menyebarkan ke grup','Menghapus data','Membawa pulang untuk dipakai pribadi'],[2,5,1,1,1],'Nilai 5: patuh pada kebijakan keamanan informasi.'],
-['tik','Anda menemukan celah pada aplikasi layanan kantor. Anda...',['Memanfaatkan celah itu','Melaporkan ke tim TI agar diperbaiki','Mengumumkan di media sosial','Membiarkan','Memberi tahu teman'],[1,5,1,2,2],'Nilai 5: melapor lewat jalur resmi.'],
-['anti','Anda mendengar rekan mengajak ikut kelompok yang ingin mengganti dasar negara. Anda...',['Ikut mencari tahu','Menolak, mengingatkan dasar negara Pancasila, dan melapor bila perlu','Diam','Menjauhi saja','Mengajak orang lain bergabung'],[1,5,2,3,1],'Nilai 5: tegas menolak dan memakai jalur resmi.'],
-['anti','Ada perbedaan pendapat politik di grup kantor yang mulai memanas. Anda...',['Ikut menyerang','Mengingatkan agar tetap santun dan kembali ke topik kerja','Menyalahkan satu pihak','Keluar grup tanpa kata','Mengunggah ulang di media sosial'],[1,5,2,3,1],'Nilai 5: menenangkan dan menjaga netralitas.']);
   // ===== BATCH 3: TKP gaya soal panjang (skenario asli) =====
   NEW.tkp.push(
 ['pel','Anda bertugas di loket pendaftaran Puskesmas. Seorang pasien lansia kesulitan mengisi formulir pendaftaran digital, sementara antrean di belakangnya mulai menumpuk. Sikap Anda...',['Membantu mengisi formulir sampai selesai dan meminta rekan mengatur antrean','Membantu mengisi formulir sampai selesai tanpa memedulikan antrean','Menjelaskan caranya lalu mempersilakan pasien mencoba sendiri','Menyarankan pasien kembali bersama keluarga yang mendampingi','Meminta pasien menyelesaikan sendiri karena aturan mengharuskannya'],[5,4,3,2,1],'Nilai 5: empati pada pasien rentan sekaligus menjaga kelancaran layanan.'],
@@ -6621,6 +6629,66 @@ tkp:[
 ['anti','Anda melihat poster ajakan intoleran di fasilitas umum dekat kantor. Anda...',['Memotret lalu membagikan ke grup','Tidak menyebarkan dan melaporkan ke pengelola atau aparat berwenang','Mencopot sendiri lalu diam','Mengabaikan','Menempel poster tandingan'],[2,5,3,1,2],'Nilai 5: jalur resmi.',3],
 ['anti','Rekan Anda mulai menjauh dari keluarga karena terpengaruh kelompok eksklusif. Anda...',['Menjauhinya','Mendengarkan, menyarankan konsultasi dengan tokoh atau ahli, dan melibatkan pihak berwenang bila ada indikasi bahaya','Menceritakannya ke seluruh kantor','Menceramahinya keras','Mengabaikan'],[1,5,1,3,2],'Nilai 5: peduli dan memakai jalur tepat.',3],
 ['anti','Debat tentang isu agama di kantor mulai memanas. Anda...',['Ikut membela kelompok sendiri','Menenangkan dengan mengingatkan saling menghormati dan mengalihkan ke fakta atau topik kerja','Meninggalkan ruangan','Merekam lalu menyebarkannya','Menyuruh salah satu pihak diam'],[1,5,3,1,2],'Nilai 5: menengahi dengan netral.',3]);
+  // ===== BATCH 6: soal tambahan Paket 1 (non-hafalan, jawaban benar tidak selalu terpanjang) =====
+  NEW.twk.push(
+['nas','Seorang ASN membagikan tulisan tentang kemajuan daerahnya di media sosial dengan data lama yang tidak akurat agar terlihat hebat. Penilaian yang tepat...',['Tidak masalah selama niatnya baik','Cinta tanah air perlu disertai kejujuran informasi','Wajar sebagai promosi daerah','Boleh asal tidak merugikan siapa pun','Benar karena membanggakan bangsa'],1,'Kebanggaan tidak boleh dibangun di atas data yang menyesatkan.'],
+['int','Anda diminta menandatangani dokumen tanpa membaca isinya karena "sudah biasa". Sikap yang sesuai integritas...',['Menandatangani karena atasan sudah menyetujui','Membaca dan memastikan isinya benar sebelum menandatangani','Menandatangani lalu memeriksa kemudian','Meminta rekan menandatangani','Menandatangani bila ada cap'],1,'Tanggung jawab melekat pada tanda tangan.'],
+['int','Hasil seleksi internal menempatkan Anda di peringkat atas karena kesalahan input panitia. Tindakan Anda...',['Diam karena menguntungkan','Menunggu pengumuman lalu menggugat','Menyampaikan kesalahan itu kepada panitia agar dikoreksi','Memberi tahu teman dekat saja','Meminta posisi dipertahankan'],2,'Jujur meski merugikan diri sendiri.'],
+['bela','Warga membangun posko ronda swadaya, dan saat menangkap pelaku pencurian mereka menyerahkannya kepada polisi tanpa menghakimi. Sikap ini menunjukkan...',['Kerelaan berkontribusi tanpa melanggar hukum','Main hakim sendiri','Ketidakpercayaan kepada negara','Pengabaian aparat','Ancaman keamanan'],0,'Partisipasi warga tetap berada dalam koridor hukum.'],
+['bela','Pemuda desa membangun lumbung pangan bersama untuk ketahanan pangan. Dalam bela negara, hal ini...',['Tidak relevan','Hanya urusan ekonomi','Bela negara nonmiliter di bidang pangan','Hanya tugas pemerintah','Bukan kewajiban warga'],2,'Ketahanan pangan bagian dari ketahanan nasional.'],
+['pancasila','Kebijakan menutup warung warga demi investor besar tanpa kompensasi dan musyawarah. Nilai yang paling terabaikan...',['Ketuhanan dan toleransi','Keadilan sosial dan musyawarah','Persatuan wilayah','Kemanusiaan semata','Kekeluargaan semata'],1,'Warga terdampak harus diajak bermusyawarah dan diperlakukan adil.'],
+['uud','Pemerintah membatasi kritik warga di internet secara luas tanpa dasar hukum yang jelas. Analisis yang tepat...',['Sah demi ketertiban','Perlu dasar hukum dan tidak boleh meniadakan kebebasan berpendapat yang dijamin konstitusi','Sah bila presiden setuju','Tidak berpengaruh pada hak','Hanya berlaku untuk ASN'],1,'Pembatasan hak harus berdasarkan hukum dan proporsional.'],
+['nkri','Suatu daerah ingin mengatur sendiri seluruh urusan pertahanan karena merasa lebih tahu kondisinya. Tanggapan yang sesuai NKRI...',['Boleh karena otonomi','Pertahanan merupakan urusan pemerintah pusat','Boleh bila gubernur setuju','Boleh sebagian','Boleh bila DPRD setuju'],1,'Pertahanan termasuk urusan yang dipegang pemerintah pusat.'],
+['bti','Rekrutmen sebuah dinas otomatis memprioritaskan pelamar dari suku tertentu karena kedekatan dengan pimpinan. Penilaian...',['Sesuai kearifan lokal','Bertentangan dengan keadilan dan semangat kesatuan dalam keberagaman','Wajar demi kenyamanan','Sah selama ada aturan internal','Menguatkan persatuan'],1,'Seleksi harus berdasarkan kompetensi.'],
+['nas','Sebuah merek lokal viral dengan desain yang meniru karya orang lain dan mengklaim itu cinta produk Indonesia. Tanggapan...',['Cinta produk dalam negeri tidak membenarkan pelanggaran hak karya','Wajar karena produk lokal','Tidak masalah selama laku','Harus dilindungi apa pun alasannya','Itu strategi pemasaran'],0,'Nasionalisme tidak berarti mengabaikan hak orang lain.']);
+  NEW.tiu.push(
+['deret','4, 6, 10, 18, 34, ...',['50','58','64','66','68'],3,'Selisih 2, 4, 8, 16, lalu 32: 34 + 32 = 66.'],
+['deret','3, 6, 11, 18, 27, ...',['36','37','38','40','42'],2,'Selisih 3, 5, 7, 9, lalu 11: 27 + 11 = 38.'],
+['hitung','Harga Rp200.000 didiskon 30%, lalu dikenai PPN 10% dari harga setelah diskon. Harga akhir...',['Rp150.000','Rp154.000','Rp160.000','Rp168.000','Rp140.000'],1,'200.000 x 0,7 = 140.000; x 1,1 = 154.000.'],
+['cerita','Tiga pekerja menyelesaikan proyek dalam 12 hari. Bila dua pekerja dengan kemampuan sama ditambahkan, proyek selesai dalam...',['6 hari','7,2 hari','7,5 hari','8 hari','9 hari'],1,'3 x 12 = 36 pekerja-hari; 36 : 5 = 7,2 hari.'],
+['cerita','Rata-rata nilai 8 siswa adalah 70. Setelah satu siswa bergabung, rata-ratanya 72. Nilai siswa tambahan...',['82','84','86','88','90'],3,'Total awal 560, total akhir 9 x 72 = 648; selisih 88.'],
+['silo','Tidak ada pegawai teladan yang terlambat. Sebagian pegawai senior terlambat. Kesimpulan yang pasti benar...',['Semua pegawai senior teladan','Sebagian pegawai senior bukan pegawai teladan','Tidak ada pegawai senior yang teladan','Semua pegawai teladan senior','Sebagian pegawai teladan terlambat'],1,'Pegawai senior yang terlambat pasti bukan pegawai teladan.'],
+['silo','Jika anggaran disetujui, proyek dimulai. Proyek tidak dimulai. Kesimpulan...',['Anggaran disetujui','Anggaran tidak disetujui','Proyek selesai','Anggaran mungkin disetujui','Tidak ada kesimpulan'],1,'Kontraposisi: bukan dimulai berarti bukan disetujui.'],
+['banding','P = 3/7 dan Q = 4/9. Hubungan P dan Q...',['P > Q','P < Q','P = Q','Tidak dapat ditentukan','P = 2Q'],1,'Silang: 27 < 28, jadi 3/7 < 4/9.'],
+['analitis','Budi lebih tinggi dari Ani. Citra lebih pendek dari Ani. Dedi lebih tinggi dari Budi. Urutan dari tertinggi...',['Dedi, Budi, Ani, Citra','Budi, Dedi, Ani, Citra','Dedi, Ani, Budi, Citra','Ani, Budi, Dedi, Citra','Dedi, Budi, Citra, Ani'],0,'Dedi > Budi > Ani > Citra.'],
+['argumen','Survei di satu sekolah menunjukkan siswa yang sarapan nilainya lebih tinggi, sehingga disimpulkan sarapan meningkatkan nilai. Kelemahan paling mendasar...',['Faktor lain mungkin memengaruhi keduanya','Menu sarapan setiap siswa tidak dirinci secara lengkap dalam laporan survei tersebut','Survei dilakukan oleh guru yang mengajar di sekolah tersebut sendiri','Sekolah tersebut berada di kota yang cukup besar dan padat penduduk','Nilai siswa tidak diumumkan secara terbuka kepada publik umum'],0,'Korelasi belum tentu sebab-akibat.'],
+['kecdata','Apakah x bilangan genap? (1) x kuadrat adalah bilangan genap. (2) x lebih besar dari 3.',KD,0,'Jika x kuadrat genap maka x genap; (2) saja tidak menentukan.'],
+['hitung','Jika 2x + 3 = 4x - 5, maka nilai 3x adalah...',['8','10','12','14','16'],2,'2x = 8, x = 4, jadi 3x = 12.']);
+  NEW.tkp.push(
+['pel','Warga menanyakan hal di luar wewenang Anda. Anda...',['Mengarahkan ke petugas yang tepat','Menjawab seadanya agar cepat selesai dan tidak menunggu terlalu lama','Menyuruh bertanya ke orang lain tanpa menunjukkan siapa orangnya','Bilang tidak tahu lalu sibuk dengan pekerjaan lain di meja','Menjelaskan panjang lebar hal yang sebenarnya tidak Anda kuasai'],[5,2,3,1,2],'Nilai 5: mengarahkan dengan benar.'],
+['jej','Rekan lintas unit meminta bantuan saat Anda sedang sibuk. Anda...',['Menolak karena sibuk dan tidak peduli apa pun alasannya','Menjadwalkan bantuan pada waktu yang jelas','Membantu seadanya tanpa memikirkan hasil pekerjaan sendiri nanti','Menyuruh orang lain tanpa memberi kabar kepada peminta bantuan','Mengabaikan sampai ia bertanya kembali dua kali berturut-turut'],[2,5,3,1,1],'Nilai 5: realistis dan kooperatif.'],
+['prof','Anda salah mengirim laporan kepada pihak luar yang tidak berhak. Anda...',['Segera melapor ke atasan dan meminta pihak itu menghapusnya','Diam menunggu respons dari pihak tersebut sampai ada kabar','Menarik kembali tanpa memberi tahu siapa pun karena takut ditegur','Mengganti pesan dengan versi benar tanpa penjelasan agar tidak terlihat','Menyalahkan sistem pengiriman surel yang tidak memberi peringatan'],[5,1,2,2,1],'Nilai 5: jujur dan memitigasi risiko.'],
+['tik','Anda ragu sebuah tautan aman. Anda...',['Tidak membuka dan konfirmasi ke pengirim lewat kanal lain','Membuka di perangkat kantor karena sudah ada antivirus yang melindungi','Membuka di ponsel pribadi karena data kantor tidak ada di sana','Membagikannya kepada rekan agar mereka memeriksa lebih dahulu','Membuka saja karena kemungkinan besar aman bagi mayoritas pengguna'],[5,2,3,1,2],'Nilai 5: verifikasi sebelum membuka.'],
+['sos','Rekan baru memakai pakaian adat yang dipertanyakan beberapa orang di kantor. Anda...',['Menghargai dan menegur komentar yang menyinggung','Menyarankan rekan itu menggantinya agar tidak menimbulkan komentar di kantor','Menertawakannya bersama teman-teman supaya suasana lebih santai','Diam agar tidak ikut dalam perdebatan yang tidak penting','Melaporkannya sebagai pelanggaran seragam padahal belum ada aturannya'],[5,2,1,3,1],'Nilai 5: menghargai keberagaman.'],
+['anti','Anda diajak menyebarkan pamflet yang menjelekkan pemerintah dengan data belum diverifikasi. Anda...',['Menolak dan mengecek faktanya terlebih dahulu','Ikut membagikan karena terlihat meyakinkan dan banyak yang mendukung','Membagikan dengan catatan bahwa belum tentu benar kepada pembaca','Membantu mencetak tanpa membaca isinya karena hanya diminta teman','Melaporkan teman Anda tanpa berbicara dengannya terlebih dahulu'],[5,1,2,2,3],'Nilai 5: verifikasi dan tidak ikut menyebarkan.'],
+['prof','Tenggat mendekat dan Anda sakit ringan. Anda...',['Memberi tahu atasan dan menyerahkan progres','Memaksakan bekerja tanpa memberi tahu karena tidak enak hati kepada atasan','Tidak masuk tanpa kabar karena kondisi dirasa tidak memungkinkan bekerja','Meminta rekan menyelesaikan seluruhnya tanpa menjelaskan kondisi Anda','Menyerahkan hasil seadanya agar cepat selesai dan bisa segera beristirahat'],[5,3,1,2,2],'Nilai 5: komunikatif dan bertanggung jawab.'],
+['jej','Anda butuh data dari unit lain yang tidak merespons surel. Anda...',['Menelepon atau menemui langsung dan menjelaskan kebutuhan','Menunggu sampai mereka membalas surel setelah beberapa hari kerja berlalu','Mengirim surel ulang berkali-kali dengan nada marah kepada seluruh tim mereka','Mengerjakan dengan asumsi sendiri tanpa data resmi agar tidak terhambat','Mengeluh ke atasan tanpa mencoba menghubungi lagi dengan cara lain'],[5,2,1,2,3],'Nilai 5: inisiatif komunikasi langsung.']);
+  // ===== BATCH 7: penulisan ulang TKP lama (opsi benar tidak lagi dibuat paling panjang) =====
+  NEW.tkp.push(
+['pel','Warga marah di loket karena berkas persyaratannya kedaluwarsa. Anda...',['Menjelaskan aturan secara tegas lalu meminta warga mengurus ulang ke tempat lain','Menenangkan warga, menjelaskan aturan, dan menunjukkan langkah perbaikan','Menerima berkas sementara agar warga tidak marah, lalu memprosesnya setelah ada kelonggaran yang belum tentu diberikan atasan','Membiarkan warga marah sampai reda sendiri','Mengajak warga menemui atasan sambil menjelaskan persoalannya'],[3,5,2,1,4],'Nilai 5: empati, kejelasan aturan, dan solusi.'],
+['pel','Dua warga bersamaan meminta dilayani dan saling mengklaim lebih dulu datang. Anda...',['Melayani yang lebih dulu berbicara','Melayani yang tampak lebih terburu-buru','Meminta atasan memutuskan siapa yang dilayani lebih dahulu','Meminta mereka bergantian sesuai kesepakatan bersama','Memeriksa nomor antrean dan melayani sesuai urutan dengan sopan'],[3,1,2,4,5],'Nilai 5: objektif dan adil.'],
+['pel','Warga lansia berulang kali menanyakan hal yang sama. Anda...',['Menjawab singkat sambil menunjukkan rasa kesal','Menjawab sabar dan menuliskan jawabannya agar mudah diingat','Mengabaikan pertanyaan yang sama','Meminta rekan lain menjawab','Menjawab sabar tanpa mencatat apa pun untuknya'],[2,5,1,3,4],'Nilai 5: sabar dan memberi solusi praktis.'],
+['pel','Printer rusak dan warga meminta Anda memotret dokumen pribadinya dengan ponsel pribadi Anda. Anda...',['Memotret lalu menghapus fotonya segera','Memotret dan menyimpan salinan untuk berjaga-jaga','Menolak karena data pribadi, menawarkan perangkat kantor atau jadwal ulang','Menolak dan meminta warga kembali besok','Memotret dengan ponsel rekan agar bukan ponsel Anda'],[3,1,5,4,2],'Nilai 5: menjaga data pribadi dan tetap solutif.'],
+['jej','Anda memimpin tim kecil; dua anggota berselisih soal pembagian tugas. Anda...',['Meminta mereka menyelesaikan sendiri','Menetapkan pembagian sendiri dan menjelaskan alasannya','Mendengar keduanya lalu memfasilitasi pembagian menurut keahlian dan beban kerja','Memihak yang lebih senior','Mengganti keduanya dengan orang lain'],[3,4,5,2,1],'Nilai 5: partisipatif dan adil.'],
+['jej','Instansi lain meminta data bersama, sebagian bersifat rahasia. Anda...',['Membagikan seluruhnya agar proyek lancar','Menolak berbagi apa pun','Memilah data yang boleh dibagikan dan menyepakati mekanisme aman','Membagikan lewat grup pesan agar cepat','Meminta persetujuan atasan terlebih dahulu'],[3,2,5,1,4],'Nilai 5: kolaboratif dan menjaga kerahasiaan.'],
+['jej','Rekan menyelesaikan bagian Anda tanpa diminta karena Anda terlambat. Anda...',['Merasa tersinggung','Mengklaim hasilnya sebagai kerja bersama','Berterima kasih, menjelaskan kendala, dan menyusun jadwal agar tidak terulang','Berterima kasih saja','Menyalahkan keadaan'],[2,1,5,4,3],'Nilai 5: bertanggung jawab dan memperbaiki.'],
+['jej','Mitra swasta mengajak makan malam untuk membahas kerja sama. Anda...',['Datang tanpa melapor','Datang bersama rekan dan melapor ke atasan','Menyarankan pertemuan resmi di kantor dan melaporkan agenda ke atasan','Datang tetapi tidak membahas pekerjaan','Datang dan meminta mitra yang membayar'],[2,4,5,3,1],'Nilai 5: menjaga jarak profesional dan transparan.'],
+['sos','Rekan Anda sering tidak diajak makan siang karena dianggap berbeda keyakinan. Anda...',['Ikut menjauhinya','Membiarkan karena bukan urusan Anda','Menyarankan ia lebih aktif bergaul','Mengajaknya makan saja tanpa menegur siapa pun','Mengajaknya bergabung dan menegur dengan baik'],[1,3,2,4,5],'Nilai 5: inklusif dan berani menegur.'],
+['sos','Hajatan adat tetangga bersuara keras hingga larut. Anda...',['Memahami tradisi dan tidak mengatakan apa pun','Memprotes di media sosial','Melapor ke ketua RT','Mendatangi dengan sopan, menyampaikan keluhan, dan mencari kesepakatan batas waktu','Melapor ke polisi'],[3,1,4,5,2],'Nilai 5: komunikasi langsung dan saling menghargai.'],
+['sos','Di daerah tugas, warga sulit memahami penjelasan Anda karena beda bahasa. Anda...',['Mengulang penjelasan dengan suara lebih keras','Meminta warga belajar bahasa Indonesia','Memakai bahasa sederhana dan gambar','Belajar ungkapan dasar setempat dan meminta bantuan tokoh atau penerjemah','Mengabaikan yang tidak paham'],[2,1,4,5,1],'Nilai 5: adaptif dan menghargai budaya.'],
+['sos','Menu acara kantor tidak sesuai dengan keyakinan sebagian pegawai. Anda...',['Menyindir mereka','Mengatakan seharusnya mereka membawa bekal','Mengusulkan panitia menyediakan pilihan yang sesuai untuk semua','Menyediakan pilihan tambahan sendiri','Membiarkan peserta menyesuaikan sendiri'],[1,2,5,4,3],'Nilai 5: inklusif lewat jalur panitia.'],
+['tik','Anda diminta membuat presentasi memakai aplikasi desain yang belum dikuasai, tenggat dua hari. Anda...',['Menolak karena belum bisa','Meminta rekan mengerjakannya','Mengerjakan seadanya','Memakai aplikasi yang sudah dikuasai dan memberi tahu atasan','Mempelajari fitur dasar lewat panduan resmi dan meminta rekan yang paham menunjukkan jalan pintas'],[1,3,2,4,5],'Nilai 5: belajar cepat dan berkolaborasi.'],
+['tik','Listrik padam saat Anda mengolah data penting. Anda...',['Menyimpan versi terakhir, memeriksa integritas data setelah listrik hidup, dan melapor bila ada yang hilang','Berharap data tersimpan otomatis','Menyalakan ulang dan melanjutkan tanpa memeriksa','Menyuruh rekan memeriksa','Menunggu besok baru melihat'],[5,2,3,2,1],'Nilai 5: mengamankan data dan transparan.'],
+['tik','Rekan meminta kata sandi akun kerja Anda karena akunnya terkunci. Anda...',['Memberi sandi dan menggantinya setelah itu','Memberi sandi sementara','Login atas namanya','Menolak dan membantunya mengajukan pemulihan akun ke TI','Memberi sandi secara permanen'],[3,2,1,5,1],'Nilai 5: menjaga kerahasiaan akun.'],
+['tik','Sistem layanan baru membuat banyak warga lansia kesulitan. Anda...',['Meminta warga belajar sendiri','Menyediakan pendampingan langsung dan panduan sederhana serta menampung masukan untuk perbaikan sistem','Menyediakan pendampingan langsung saja','Kembali ke cara lama tanpa izin','Mengatakan mereka harus menyesuaikan diri'],[2,5,4,1,1],'Nilai 5: inklusif dan memperbaiki sistem.'],
+['prof','Anda menemukan kesalahan kecil pada laporan rekan yang telah disetujui atasan. Anda...',['Membiarkan karena sudah disetujui','Memperbaiki diam-diam','Memberi tahu rekan saja','Menyebarkannya di grup','Memberi tahu rekan dan atasan secara santun sebelum laporan dipakai'],[3,2,4,1,5],'Nilai 5: jujur dan santun.'],
+['prof','Anda diminta menyusun laporan dengan data yang bisa disesuaikan agar target tampak tercapai. Anda...',['Menyusun apa adanya dan menyertakan analisis kendala','Menyesuaikan sedikit saja','Menuruti karena perintah atasan','Meminta rekan yang menyusun','Menunda sampai ditegur'],[5,2,1,2,1],'Nilai 5: data apa adanya.'],
+['prof','Pekerjaan Anda selesai lebih cepat dari jadwal. Anda...',['Menyembunyikan agar tidak diberi tugas lain','Memeriksa ulang hasil lalu beristirahat menunggu tugas','Meninggalkan kantor lebih awal','Memberi tahu atasan dan menawarkan bantuan pada tugas yang mendesak','Memeriksa ulang dan memperbaiki hasil'],[1,3,1,5,4],'Nilai 5: proaktif.'],
+['prof','Atasan baru mengubah cara kerja yang sudah Anda kuasai. Anda...',['Tetap memakai cara lama','Mengikuti sambil menggerutu','Mengikuti tanpa komentar','Mempelajari cara baru, menyampaikan kekhawatiran dengan data, lalu mengikuti keputusan','Menghasut rekan menolak'],[2,3,4,5,1],'Nilai 5: adaptif dan konstruktif.'],
+['anti','Anda menerima tulisan yang menyebut dasar negara tidak cocok untuk Indonesia. Anda...',['Menyebarkan agar didiskusikan','Mengabaikan dan menghapus','Tidak menyebarkan, memeriksa sumbernya, dan melapor bila terindikasi propaganda','Membalas dengan emosional','Menyimpan tanpa tindakan'],[1,3,5,2,3],'Nilai 5: verifikasi dan jalur resmi.'],
+['anti','Teman mengajak Anda ke pelatihan tertutup yang mewajibkan baiat kepada seorang tokoh. Anda...',['Ikut sekali untuk melihat','Menolak tanpa melapor','Menolak dan melaporkan indikasinya','Menyuruh orang lain datang','Ikut karena tidak enak'],[2,4,5,1,1],'Nilai 5: menolak dan melapor.'],
+['anti','Unggahan kelompok warga mengajak memboikot usaha milik etnis tertentu. Anda...',['Ikut memboikot','Membiarkan unggahan itu','Tidak ikut, mengingatkan bahaya diskriminasi, dan melaporkannya ke platform atau aparat','Tidak ikut tetapi diam','Membalas dengan unggahan serupa'],[1,2,5,3,1],'Nilai 5: menolak diskriminasi lewat jalur resmi.'],
+['anti','Anda diminta menjadi pembicara di acara kelompok yang dikenal menolak Pancasila. Anda...',['Datang agar bisa meluruskan','Datang tetapi tidak membahas politik','Menolak dan melaporkan permintaan itu','Menolak tanpa melapor','Menyuruh rekan datang'],[2,2,5,4,1],'Nilai 5: menolak tegas dan melapor.']);
   const QUOTA={twk:30,tiu:35,tkp:45},THR={twk:65,tiu:80,tkp:156},NAME={twk:'TWK',tiu:'TIU',tkp:'TKP'};
   function pool(){
     const P={twk:[],tiu:[],tkp:[]};
@@ -6646,6 +6714,16 @@ tkp:[
     const sh=(arr,seed)=>{const r=rng(seed),a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
     const rot=(a,k)=>a.length?a.slice(k%a.length).concat(a.slice(0,k%a.length)):a;
     const kk=x=>x.id+'|'+x.q,items=[];
+    // Seimbangkan panjang opsi TKP: posisi panjang opsi skor 5 diacak (peringkat 1 sampai 5), agar tidak bisa ditebak dari panjang kalimat
+    const balance=(x,seed)=>{if(!x.s)return x;const k=x.s.indexOf(5);if(k<0)return x;const L=x.o[k].length;if(x.o.some((t,i)=>i!==k&&t.length>=L))return x;
+      let h=(seed*2654435761)>>>0;const R=()=>{h=(Math.imul(h^h>>>15,2246822507)+1013904223)>>>0;return h/4294967296};
+      const r=Math.floor(R()*5);if(!r)return x;
+      const A=[', karena dianggap paling praktis',', dengan alasan situasinya sedang mendesak',', karena merasa itu bukan tanggung jawab Anda'],B=[' dan tidak memakan banyak waktu',' tanpa menunggu penjelasan lebih lanjut',' sambil berharap masalahnya selesai dengan sendirinya'],C=[' serta menganggap persoalan itu cukup sampai di situ',' lalu melanjutkan pekerjaan seperti biasa',' tanpa melibatkan pihak lain yang berwenang'];
+      const cand=x.o.map((_,i)=>i).filter(i=>i!==k&&x.s[i]<=3).sort(()=>R()-.5).slice(0,r),o=x.o.slice();
+      cand.forEach(i=>{let t=o[i]+A[Math.floor(R()*3)],n=0;while(t.length<=L+3&&n<6){t+=(n%2?C:B)[Math.floor(R()*3)];n++}o[i]=t});
+      return Object.assign({},x,{o})};
+    const fixed=x=>x.id==='kecdata'||x.o.some(t=>/^(Pernyataan|Semua (jawaban )?(benar|salah)|Tidak ada (jawaban|kesimpulan)|[A-E] dan [A-E] )/i.test(t)||/\b(kecuali|bukan)\b.*\?$/i.test(x.q));
+    const shufOpts=(x0,seed)=>{const x=balance(x0,seed);if(fixed(x))return x;const ix=sh([0,1,2,3,4].slice(0,x.o.length),seed),y=Object.assign({},x,{o:ix.map(i=>x.o[i])});if(x.s)y.s=ix.map(i=>x.s[i]);else y.a=ix.indexOf(x.a);return y};
     ['twk','tiu','tkp'].forEach((g,gi)=>{
       const need=n[g];let list;
       if(pk==='acak'){
@@ -6659,7 +6737,7 @@ tkp:[
         else list=mine.concat(rot(base,off).slice(0,need-m));
         list=sh(list.slice(0,need),100*pk+gi);
       }
-      list.forEach(x=>items.push(Object.assign({g},x)));
+      list.forEach((x,ix)=>items.push(Object.assign({g},shufOpts(x,pk==='acak'?Math.floor(Math.random()*1e9):pk*1009+gi*101+ix))));
     });
     S={items,ans:{},i:0,left:mins*60,n,max:{},pk};draw();
     tick=setInterval(()=>{S.left--;const t=document.getElementById('arT');if(t){t.textContent=fmt(S.left);t.classList.toggle('low',S.left<300)}if(S.left<=0)finish()},1000);
@@ -6695,6 +6773,9 @@ tkp:[
       const nb=document.querySelector('.nav-btn[data-view="belajar"]');if(nb)nb.click();
       setTimeout(()=>{try{openLesson(id)}catch(e){}},80)});
     window.scrollTo(0,0);
+    // Setelah analisis hasil tampil, buka kotak traktir kopi yang sudah ada (sekali per sesi, dilewati bila sudah traktir)
+    try{if(!(window.kopiSudah&&window.kopiSudah())&&!sessionStorage.getItem('arena-kopi')){sessionStorage.setItem('arena-kopi','1');
+      setTimeout(()=>{if(document.querySelector('.kp-ov.is-open'))return;const a=document.createElement('a');a.href='#traktir';a.setAttribute('data-kopi','');a.dataset.src='tryout';a.hidden=true;document.body.appendChild(a);a.click();a.remove()},1500)}}catch(e){}
   }
   home();
 })();
