@@ -971,12 +971,17 @@
     .kp-fm h3 { margin: 0; font-size: 19px; line-height: 1.25; }
     .kp-fm p { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--ink-soft); }
     .kp-fm label { display: grid; gap: 5px; font-size: 12.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-soft); }
-    .kp-fm input[type=text], .kp-fm textarea, .kp-fm input[type=file] { width: 100%; box-sizing: border-box; padding: 11px 13px; border: var(--out, 1px solid var(--line)); border-radius: 14px; background: #fff; color: var(--ink); font: 500 15px var(--font); text-transform: none; letter-spacing: 0; }
+    .kp-fm input[type=text], .kp-fm textarea, .kp-fm input[type=file] { width: 100%; box-sizing: border-box; padding: 11px 13px; border: var(--out, 1px solid var(--line)); border-radius: 14px; background: #fff; color: var(--ink); font: 500 16px var(--font); text-transform: none; letter-spacing: 0; }
     .kp-fm textarea { min-height: 76px; resize: vertical; }
     .kp-fm input:focus-visible, .kp-fm textarea:focus-visible { outline: 3px solid var(--ora, #F8B461); outline-offset: 1px; }
     .kp-fm .kp-priv { padding: 9px 12px; border-radius: 12px; background: var(--brand-soft, #EEF1FF); font-size: 12.5px; line-height: 1.45; color: var(--ink); }
     .kp-fm .kp-err { color: #B3261E; font-weight: 700; min-height: 0; }
     .kp-fm .kp-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+    .kp-prev { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border: var(--out, 1px solid var(--line)); border-radius: 14px; background: #E8F7EE; font-size: 13px; font-weight: 700; color: #14532D; }
+    .kp-prev[hidden] { display: none; }
+    .kp-prev img { flex: none; width: 44px; height: 44px; object-fit: cover; border-radius: 10px; border: 2px solid #14161C; }
+    .kp-prev span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .kp-note { margin-top: -4px !important; font-size: 12px !important; }
     .kp-send:disabled { opacity: .6; cursor: progress; }
     .kp-skip { display: block; margin: 2px auto 0; padding: 8px; border: 0; background: none; color: var(--ink-soft); font: 600 13px var(--font); text-decoration: underline; cursor: pointer; }
     .kw { margin: 14px 0 0; padding: 12px 12px 10px; border: var(--out, 1px solid var(--line)); border-radius: 16px; background: #fff; }
@@ -5129,7 +5134,7 @@
     const NAMA = 'Muhammad Yudha Pratama';
     // Opsional: isi dengan URL web app Apps Script (doPost) untuk mengumpulkan angka dari semua pengunjung.
     // Kosong = angka hanya tersimpan di perangkat ini (lihat lewat ?kopi=stat atau #kopi-stat).
-    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbx5aAozMTliGmcWZ3VnTduB-_duyWxtoJVyP4BLG2AM3WW-LNAxaah-iICejSSB4q_9/exec';
+    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxYu24q9GYdWtn1yoDS_UNcU5naBuYCF3EHqb80umklrnDzDdNoFgDSwiYxZ1TvPC2i1A/exec';
     const KEY_STAT = 'kopi-stat', KEY_DONE = 'kopi-done';
 
     const ls = {
@@ -5204,7 +5209,7 @@
       ).join('') +
       '<div class="kp-trust">Tanpa paksaan. Kalau belum bisa traktir, belajar dengan rajin sudah cukup. 💙</div>' +
       '<button type="button" class="kp-done">Udah traktir \u2713</button>' +
-      '<p class="kp-hint">Pencet kalau sudah traktir. Mau nama lo muncul di Dinding Traktiran? Lo cukup isi nama dan unggah bukti transfer (bukti tidak pernah ditampilkan ke publik).</p>';
+      '<p class="kp-hint">Pencet kalau sudah traktir. Mau nama lo muncul di daftar traktir? Lo cukup isi nama dan unggah bukti transfer (bukti tidak pernah ditampilkan ke publik).</p>';
 
     const TERIMA =
       '<div class="kp-thx">' +
@@ -5217,11 +5222,13 @@
     // ---------- Form nama + bukti transfer, dan Dinding Traktiran ----------
     const FORM_NAMA =
       '<div class="kp-fm">' +
-        '<h3 id="kp-jdl">Mau nama lo muncul di Dinding Traktiran? \u2615</h3>' +
-        '<p>Isi nama dan (kalau mau) kata-kata buat gue. Nama baru tampil setelah gue cocokkan dengan bukti transfer lo.</p>' +
+        '<h3 id="kp-jdl">Mau nama lo muncul di daftar traktir? \u2615</h3>' +
+        '<p>Isi nama dan (kalau mau) kata-kata buat gue. Bukti transfer dibaca otomatis. Kalau cocok, nama lo langsung tampil di daftar.</p>' +
         '<label>Nama (wajib, maks. 30 huruf)<input type="text" id="kp-nm" maxlength="30" autocomplete="nickname" placeholder="Contoh: Rani, calon CPNS 2026"></label>' +
+        '<p class="kp-note">Nama ini tampil ke publik. Boleh pakai nama panggilan atau inisial.</p>' +
         '<label>Kata-kata (opsional)<textarea id="kp-ms" maxlength="140" placeholder="Semangat terus, makasih materinya!"></textarea></label>' +
         '<label>Bukti transfer (wajib)<input type="file" id="kp-bk" accept="image/*"></label>' +
+        '<div class="kp-prev" id="kp-prev" hidden><img alt="" id="kp-pimg"><span id="kp-pnm"></span></div>' +
         '<div class="kp-priv">\ud83d\udd12 Bukti transfer cuma gue yang lihat, buat verifikasi. Tidak ditampilkan ke siapa pun.</div>' +
         '<input type="text" class="kp-hp" id="kp-hp" tabindex="-1" autocomplete="off" aria-hidden="true">' +
         '<p class="kp-err" id="kp-err" role="alert"></p>' +
@@ -5232,11 +5239,19 @@
       '<div class="kp-thx">' +
         '<span class="kp-thx-ic" aria-hidden="true">\u2615</span>' +
         '<h3 id="kp-jdl">Makasih banyak!</h3>' +
-        '<p>Data lo udah masuk. Begitu gue cocokkan dengan bukti transfernya, nama lo muncul di Dinding Traktiran (biasanya maksimal 1 sampai 2 hari).</p>' +
+        '<p>Nama lo udah masuk ke daftar traktir. Makasih banyak udah bantu gue terus update isinya!</p>' +
         '<button type="button" class="kp-done kp-ok">Lanjut belajar</button>' +
       '</div>';
 
-    // Kecilkan foto bukti (maks. 1280 px, JPEG) supaya kirimnya ringan.
+    const TERIMA_CEK =
+      '<div class="kp-thx">' +
+        '<span class="kp-thx-ic" aria-hidden="true">\u2615</span>' +
+        '<h3 id="kp-jdl">Makasih banyak!</h3>' +
+        '<p>Bukti lo udah masuk, tapi belum terbaca otomatis (mungkin fotonya kurang jelas). Gue cek manual dulu ya, nama lo muncul setelah itu.</p>' +
+        '<button type="button" class="kp-done kp-ok">Lanjut belajar</button>' +
+      '</div>';
+
+    // Kecilkan foto bukti // Kecilkan foto bukti supaya kirimnya ringan.
     const kecilkan = async (file) => {
       const gambar = async () => {
         if (window.createImageBitmap) {
@@ -5250,12 +5265,12 @@
       try { im = await gambar(); }
       catch (_) { throw new Error('Format foto ini tidak bisa dibaca browser (misalnya HEIC). Pakai screenshot bukti transfernya, atau simpan fotonya sebagai JPG/PNG'); }
       const w = im.width || im.naturalWidth, h = im.height || im.naturalHeight;
-      const k = Math.min(1, 1280 / Math.max(w, h));
+      const k = Math.min(1, 2400 / Math.max(w, h));
       const c = document.createElement('canvas');
       c.width = Math.max(1, Math.round(w * k)); c.height = Math.max(1, Math.round(h * k));
       const g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height); g.drawImage(im, 0, 0, c.width, c.height);
       if (im.close) im.close();
-      return c.toDataURL('image/jpeg', 0.72).split(',')[1];
+      return c.toDataURL('image/jpeg', 0.8).split(',')[1];
     };
 
     const bukaForm = () => {
@@ -5270,7 +5285,7 @@
       err.textContent = '';
       if (!nama) { err.textContent = 'Nama wajib diisi.'; return q('#kp-nm').focus(); }
       if (!f || !/^image\//.test(f.type)) { err.textContent = 'Bukti transfer wajib diunggah (foto atau screenshot).'; return; }
-      btn.disabled = true; btn.textContent = 'Mengirim...';
+      btn.disabled = true; btn.textContent = 'Memeriksa bukti...';
       try {
         const data = await kecilkan(f);
         const r = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -5278,8 +5293,9 @@
         const j = await r.json();
         if (!j.ok) throw new Error(j.err || 'Gagal mengirim');
         window.kopiLog('kirim');
+        setTimeout(muatDinding, 1500);
         terima = true; ls.set(KEY_DONE, '1');
-        isi.innerHTML = TERIMA_NAMA;
+        isi.innerHTML = (j.status === 'pending' ? TERIMA_CEK : TERIMA_NAMA);
         const ok = q('.kp-ok'); if (ok) ok.focus();
         document.dispatchEvent(new Event('kopi:sudah'));
       } catch (x) {
@@ -5296,7 +5312,7 @@
       const h = document.createElement('h4'); h.textContent = 'Mereka yang sudah traktir \u2615'; w.appendChild(h);
       const sm = document.createElement('small'); sm.textContent = 'Makasih, kalian bikin app ini terus hidup.'; w.appendChild(sm);
       const ol = document.createElement('ol');
-      (semua ? WALL : WALL.slice(0, 5)).forEach((o) => {
+      (semua ? WALL : WALL.slice(0, 3)).forEach((o) => {
         const li = document.createElement('li');
         const av = document.createElement('span'); av.className = 'kw-av'; av.textContent = (o.n || '?').trim().charAt(0).toUpperCase();
         const bx = document.createElement('div');
@@ -5306,7 +5322,7 @@
         li.appendChild(av); li.appendChild(bx); ol.appendChild(li);
       });
       w.appendChild(ol);
-      if (!semua && WALL.length > 5) {
+      if (!semua && WALL.length > 3) {
         const m = document.createElement('button'); m.type = 'button'; m.className = 'kw-more'; m.textContent = 'Lihat semua (' + WALL.length + ')';
         m.addEventListener('click', (e) => { e.stopPropagation(); isiDinding(w, true); }); w.appendChild(m);
       }
@@ -5317,20 +5333,22 @@
       isiDinding(w, false);
       isi.querySelector('.kp-trust').insertAdjacentElement('afterend', w);
     };
-    (function muatDinding() {
+    const muatDinding = () => {
       if (!ENDPOINT || ENDPOINT.indexOf('GANTI_DENGAN') > -1) return;
-      fetch(ENDPOINT + '?a=wall').then((r) => r.json()).then((j) => {
+      fetch(ENDPOINT + '?a=wall&t=' + Date.now()).then((r) => r.json()).then((j) => {
         if (!j || !j.ok || !j.list || !j.list.length) return;
         WALL = j.list;
         const tx = document.querySelector('#kopiHome .kopi-tx');
-        if (tx && !tx.querySelector('.kw-line')) {
-          const l = document.createElement('span'); l.className = 'kw-line';
+        if (tx) {
+          let l = tx.querySelector('.kw-line');
+          if (!l) { l = document.createElement('span'); l.className = 'kw-line'; tx.appendChild(l); }
           l.textContent = '\u2615 ' + WALL.length + ' orang sudah traktir, terakhir ' + WALL[0].n;
-          tx.appendChild(l);
         }
+        const lama = isi.querySelector('.kw'); if (lama) lama.remove();
         pasangDinding();
       }).catch(() => {});
-    })();
+    };
+    muatDinding();
 
     const ov = document.createElement('div');
     ov.className = 'kp-ov';
@@ -5389,6 +5407,15 @@
     };
 
     q('.kp-x').addEventListener('click', tutup);
+    ov.addEventListener('change', (e) => {
+      if (!e.target || e.target.id !== 'kp-bk') return;
+      const f = e.target.files[0], pv = q('#kp-prev');
+      if (!f) { pv.hidden = true; return; }
+      const old = q('#kp-pimg').src; if (old && old.indexOf('blob:') === 0) URL.revokeObjectURL(old);
+      q('#kp-pimg').src = URL.createObjectURL(f);
+      q('#kp-pnm').textContent = '\u2713 Foto terpilih: ' + f.name;
+      pv.hidden = false;
+    });
     ov.addEventListener('click', (e) => {
       if (e.target === ov) return tutup();
       const tb = e.target.closest('.kp-tab');
