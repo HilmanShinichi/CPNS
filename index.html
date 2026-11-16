@@ -979,9 +979,10 @@
     .kp-fm .kp-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
     .kp-send:disabled { opacity: .6; cursor: progress; }
     .kp-skip { display: block; margin: 2px auto 0; padding: 8px; border: 0; background: none; color: var(--ink-soft); font: 600 13px var(--font); text-decoration: underline; cursor: pointer; }
-    .kw { margin: 6px 0 18px; padding: 16px 16px 12px; border: var(--out, 2px solid #14161C); border-radius: 18px; background: #fff; box-shadow: 0 4px 0 #14161C; }
+    .kw { margin: 14px 0 0; padding: 12px 12px 10px; border: var(--out, 1px solid var(--line)); border-radius: 16px; background: #fff; }
+    .kw-line { display: block; margin-top: 6px; font-size: 13px; font-weight: 800; color: #8A4B00; }
     .kw[hidden] { display: none; }
-    .kw h4 { margin: 0 0 2px; font-size: 16px; }
+    .kw h4 { margin: 0 0 2px; font-size: 15px; }
     .kw > small { display: block; margin-bottom: 10px; font-size: 12.5px; color: var(--ink-soft); }
     .kw ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
     .kw li { display: flex; gap: 10px; align-items: flex-start; padding: 9px 11px; border-radius: 14px; background: #FFF7E0; }
@@ -5287,37 +5288,48 @@
       }
     };
 
-    // Dinding Traktiran di beranda (hanya yang sudah disetujui; diisi lewat Apps Script)
-    (function dinding() {
+    // Dinding Traktiran: tampil di dalam kotak traktir + satu baris ringkas di kartu beranda
+    let WALL = null;
+    const tglId = (t) => { try { return new Date(t).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }); } catch (_) { return ''; } };
+    const isiDinding = (w, semua) => {
+      w.textContent = '';
+      const h = document.createElement('h4'); h.textContent = 'Mereka yang sudah traktir \u2615'; w.appendChild(h);
+      const sm = document.createElement('small'); sm.textContent = 'Makasih, kalian bikin app ini terus hidup.'; w.appendChild(sm);
+      const ol = document.createElement('ol');
+      (semua ? WALL : WALL.slice(0, 5)).forEach((o) => {
+        const li = document.createElement('li');
+        const av = document.createElement('span'); av.className = 'kw-av'; av.textContent = (o.n || '?').trim().charAt(0).toUpperCase();
+        const bx = document.createElement('div');
+        const nm = document.createElement('div'); nm.className = 'kw-nm'; nm.textContent = o.n; bx.appendChild(nm);
+        if (o.p) { const ms = document.createElement('div'); ms.className = 'kw-ms'; ms.textContent = o.p; bx.appendChild(ms); }
+        const tg = document.createElement('div'); tg.className = 'kw-tg'; tg.textContent = tglId(o.t); bx.appendChild(tg);
+        li.appendChild(av); li.appendChild(bx); ol.appendChild(li);
+      });
+      w.appendChild(ol);
+      if (!semua && WALL.length > 5) {
+        const m = document.createElement('button'); m.type = 'button'; m.className = 'kw-more'; m.textContent = 'Lihat semua (' + WALL.length + ')';
+        m.addEventListener('click', (e) => { e.stopPropagation(); isiDinding(w, true); }); w.appendChild(m);
+      }
+    };
+    const pasangDinding = () => {
+      if (!WALL || !WALL.length || !isi.querySelector('.kp-trust') || isi.querySelector('.kw')) return;
+      const w = document.createElement('section'); w.className = 'kw'; w.setAttribute('aria-label', 'Yang sudah traktir');
+      isiDinding(w, false);
+      isi.querySelector('.kp-trust').insertAdjacentElement('afterend', w);
+    };
+    (function muatDinding() {
       if (!ENDPOINT || ENDPOINT.indexOf('GANTI_DENGAN') > -1) return;
-      const home = document.getElementById('kopiHome'); if (!home) return;
-      const w = document.createElement('section');
-      w.className = 'kw'; w.hidden = true; w.setAttribute('aria-label', 'Dinding Traktiran');
-      home.insertAdjacentElement('afterend', w);
-      const tgl = (t) => { try { return new Date(t).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }); } catch (_) { return ''; } };
-      const gambar = (list, semua) => {
-        w.textContent = '';
-        const h = document.createElement('h4'); h.textContent = 'Dinding Traktiran \u2615'; w.appendChild(h);
-        const s = document.createElement('small'); s.textContent = 'Terima kasih buat yang sudah traktir kopi. Kalian bikin app ini terus hidup.'; w.appendChild(s);
-        const ol = document.createElement('ol');
-        (semua ? list : list.slice(0, 8)).forEach((o) => {
-          const li = document.createElement('li');
-          const av = document.createElement('span'); av.className = 'kw-av'; av.textContent = (o.n || '?').trim().charAt(0).toUpperCase();
-          const bx = document.createElement('div');
-          const nm = document.createElement('div'); nm.className = 'kw-nm'; nm.textContent = o.n;
-          bx.appendChild(nm);
-          if (o.p) { const ms = document.createElement('div'); ms.className = 'kw-ms'; ms.textContent = o.p; bx.appendChild(ms); }
-          const tg = document.createElement('div'); tg.className = 'kw-tg'; tg.textContent = tgl(o.t); bx.appendChild(tg);
-          li.appendChild(av); li.appendChild(bx); ol.appendChild(li);
-        });
-        w.appendChild(ol);
-        if (!semua && list.length > 8) {
-          const m = document.createElement('button'); m.type = 'button'; m.className = 'kw-more'; m.textContent = 'Lihat semua (' + list.length + ')';
-          m.addEventListener('click', () => gambar(list, true)); w.appendChild(m);
+      fetch(ENDPOINT + '?a=wall').then((r) => r.json()).then((j) => {
+        if (!j || !j.ok || !j.list || !j.list.length) return;
+        WALL = j.list;
+        const tx = document.querySelector('#kopiHome .kopi-tx');
+        if (tx && !tx.querySelector('.kw-line')) {
+          const l = document.createElement('span'); l.className = 'kw-line';
+          l.textContent = '\u2615 ' + WALL.length + ' orang sudah traktir, terakhir ' + WALL[0].n;
+          tx.appendChild(l);
         }
-        w.hidden = false;
-      };
-      fetch(ENDPOINT + '?a=wall').then((r) => r.json()).then((j) => { if (j && j.ok && j.list && j.list.length) gambar(j.list, false); }).catch(() => {});
+        pasangDinding();
+      }).catch(() => {});
     })();
 
     const ov = document.createElement('div');
@@ -5341,7 +5353,7 @@
     };
     const buka = (sumber) => {
       pemicu = document.activeElement; terima = false;
-      isi.innerHTML = FORM;
+      isi.innerHTML = FORM; pasangDinding();
       window.kopiLog('buka', sumber);
       ov.classList.add('is-open'); document.body.style.overflow = 'hidden'; q('.kp-x').focus();
     };
