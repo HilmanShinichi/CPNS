@@ -5339,7 +5339,7 @@
         clearTimeout(tBaca); setLangkah(3);
         await new Promise((res) => setTimeout(res, 550));
         window.kopiLog('kirim');
-        terima = true; ls.set(KEY_DONE, '1');
+        terima = true; ls.set(KEY_DONE, '1'); ls.set('kopi-done-at', String(Date.now()));
         const lolos = j.status !== 'pending';
         isi.innerHTML = lolos ? TERIMA_NAMA : TERIMA_CEK;
         if (lolos) {
@@ -5431,7 +5431,10 @@
       barisBeranda();
     };
     document.addEventListener('kopi:sudah', kartuTerima);
-    if (window.kopiSudah && window.kopiSudah()) kartuTerima();
+    // Kartu terima kasih hanya tampil 3 hari setelah traktir, lalu kembali ke kartu ajakan biasa. ?kopi=1 mereset.
+    if (/[?&]kopi=1\b/.test(location.search)) { ls.set(KEY_DONE, '0'); ls.set('kopi-done-at', '0'); }
+    const barusTraktir = () => (Date.now() - (parseInt(ls.get('kopi-done-at'), 10) || 0)) < 3 * 864e5;
+    if (window.kopiSudah && window.kopiSudah() && barusTraktir()) kartuTerima();
     const muatDinding = () => {
       if (!ENDPOINT || ENDPOINT.indexOf('GANTI_DENGAN') > -1) return;
       fetch(ENDPOINT + '?a=wall&t=' + Date.now()).then((r) => r.json()).then((j) => {
@@ -5499,7 +5502,7 @@
     const sudah = () => {
       terima = true;
       window.kopiLog('sudah');
-      ls.set(KEY_DONE, '1');
+      ls.set(KEY_DONE, '1'); ls.set('kopi-done-at', String(Date.now()));
       isi.innerHTML = TERIMA;
       const ok = q('.kp-ok'); if (ok) ok.focus();
       document.dispatchEvent(new Event('kopi:sudah'));
