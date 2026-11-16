@@ -1008,6 +1008,7 @@
     #kopiHome.kopi-ok::before, #kopiHome.kopi-ok::after, #kopiHome.kopi-ok .kopi-ic, #kopiHome.kopi-ok .kopi-btn { display: none; }
     #kopiHome.kopi-ok .kopi-tx strong { font-size: 14.5px; }
     #kopiHome.kopi-ok .kopi-tx span { color: #14532D; }
+    #kopiHome.kopi-ok .kopi-lagi { display: inline-block; margin-top: 4px; padding: 2px 0; border: 0; background: none; color: #8A4B00; font: 800 13px var(--font); text-decoration: underline; cursor: pointer; }
     .kp-send:disabled { opacity: .6; cursor: progress; }
     .kp-skip { display: block; margin: 2px auto 0; padding: 8px; border: 0; background: none; color: var(--ink-soft); font: 600 13px var(--font); text-decoration: underline; cursor: pointer; }
     .kw { margin: 14px 0 0; padding: 12px 12px 10px; border: var(--out, 1px solid var(--line)); border-radius: 16px; background: #fff; }
@@ -5426,7 +5427,7 @@
       h.setAttribute('aria-label', 'Makasih udah traktir');
       const b = h.querySelector('.kopi-btn'); if (b) b.removeAttribute('data-kopi');
       const tx = h.querySelector('.kopi-tx');
-      if (tx) tx.innerHTML = '<strong>Makasih udah traktir \u2615</strong><span>Semangat belajarnya, semoga NIP lo cepet keluar!</span>';
+      if (tx) tx.innerHTML = '<strong>Makasih udah traktir \u2615</strong><span>Semangat belajarnya, semoga NIP lo cepet keluar!</span><button type="button" class="kopi-lagi" data-kopi>Mau traktir lagi? \u2615</button>';
       barisBeranda();
     };
     document.addEventListener('kopi:sudah', kartuTerima);
@@ -5465,6 +5466,10 @@
     const buka = (sumber) => {
       pemicu = document.activeElement; terima = false;
       isi.innerHTML = FORM; pasangDinding();
+      if (window.kopiSudah && window.kopiSudah()) {
+        const jd = isi.querySelector('#kp-jdl'); if (jd) jd.textContent = 'Makasih udah pernah traktir! \u2615';
+        const dn = isi.querySelector('.kp-done'); if (dn) dn.textContent = 'Udah traktir lagi \u2713';
+      }
       window.kopiLog('buka', sumber);
       ov.classList.add('is-open'); document.body.style.overflow = 'hidden'; q('.kp-x').focus();
     };
