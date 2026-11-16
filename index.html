@@ -1178,6 +1178,68 @@
   .home-mascot, .mk-arm, .mk-arm-l, .mk-tail, .mk-eyes, .mk-zz text, .mk-btn, .mk-bubble { animation: none !important; }
 }
 </style>
+<style id="sim-ruu-css">
+#sim-ruu .rq,#sim-makmk .rq{display:grid;gap:10px;margin:10px 0}
+#sim-ruu .rq small,#sim-makmk .rq small,#sim-ruu .rs small{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft)}
+#sim-ruu .ro,#sim-makmk .ro{display:grid;gap:8px}
+#sim-ruu .ro .btn,#sim-makmk .ro .btn{justify-content:flex-start;text-align:left;white-space:normal}
+#sim-ruu .btn.ok,#sim-makmk .btn.ok{background:var(--ok-soft)}
+#sim-makmk .btn.no{background:var(--bad-soft)}
+#sim-ruu .rtrail{list-style:none;margin:8px 0;padding:0;display:grid;gap:6px}
+#sim-ruu .rtrail li{display:grid;gap:2px;padding:8px 12px;border-left:4px solid var(--ink-faint);background:var(--cream);border-radius:10px}
+#sim-ruu .rtrail small{font-size:12px;color:var(--ink-soft)}
+#sim-ruu .rs,#sim-makmk .rs{display:grid;gap:6px;padding:14px 16px;border-radius:14px;margin:10px 0;background:var(--cream);border-left:6px solid var(--ink-faint)}
+#sim-ruu .rs.ok,#sim-makmk .rs.ok{border-left-color:#1FA971;background:var(--ok-soft)}
+#sim-ruu .rs.bad{border-left-color:#E5484D;background:var(--bad-soft)}
+#sim-ruu .rs.wait{border-left-color:#F59E0B}
+</style>
+<style id="stg-css">
+.stg{width:100%;height:auto;display:block;margin:6px 0 12px}
+.stg line,.stg .fc,.stg .pl{stroke:var(--ink);stroke-width:3;stroke-linecap:round;fill:none}
+.stg .gr{stroke-width:2;opacity:.35}.stg .fc{stroke-width:2.6}.stg .pl{stroke-width:1.5}
+.stg .hd{fill:var(--cream);stroke:var(--ink);stroke-width:3}
+.stg .dpr .hd{fill:#BFD7FF}.stg .pres .hd{fill:#FFD79A}.stg .judge .hd{fill:#D9CCFF}
+.stg .sml{font-size:10px;font-weight:700;text-anchor:middle;fill:var(--ink)}
+.stg .sm{transition:transform .7s ease}.stg .ar,.stg .hdw{transform-origin:0 0}.stg .hdw{transform-origin:0 -25px}
+.stg .pg{fill:#fff;stroke:var(--ink);stroke-width:2}.stg .pt{font-size:9px;font-weight:700;text-anchor:middle;fill:var(--ink)}
+.stg .pp{transition:transform .7s ease;transform-origin:0 0}
+.stg .bd{opacity:0;transition:opacity .3s}.stg text.bd,.stg .bd text{font-size:11px;font-weight:700;text-anchor:middle;fill:var(--ink)}
+.stg .bd-sah rect{fill:none;stroke:#E5484D;stroke-width:2.5}.stg .bd-sah text{fill:#E5484D;font-size:12px}
+.stg .bd-30 rect{fill:var(--cream);stroke:var(--ink);stroke-width:2}
+.stg .bd-z{fill:var(--ink-soft)}.stg .plq rect,.stg .desk{fill:var(--cream);stroke:var(--ink);stroke-width:2.5}
+.stg .plq .k{font-size:16px;font-weight:800;text-anchor:middle;fill:var(--ink)}.stg .plq .s{font-size:8px;text-anchor:middle;fill:var(--ink-soft)}
+.stg .gv{fill:#8B5E34;stroke:var(--ink);stroke-width:2}
+.stg[data-st=bahas] .dpr .arr{animation:stw 1.3s ease-in-out infinite}
+.stg[data-st=bahas] .pres .al{animation:stwl 1.3s ease-in-out .35s infinite}
+.stg[data-st=bahas] .pp{animation:stb 1.6s ease-in-out infinite}
+.stg[data-st=sepakat] .dpr{transform:translateX(58px)}.stg[data-st=sepakat] .pres{transform:translateX(-58px)}
+.stg[data-st=sepakat] .dpr .arr{transform:rotate(-32deg)}.stg[data-st=sepakat] .pres .al{transform:rotate(32deg)}
+.stg[data-st=sepakat] .pp{transform:translateY(-22px)}.stg[data-st=sepakat] .bd-ok{opacity:1}
+.stg[data-st=tolak] .dpr{transform:translateX(-18px)}.stg[data-st=tolak] .pres{transform:translateX(18px)}
+.stg[data-st=tolak] .hdw{animation:stk .5s ease-in-out 3}.stg[data-st=tolak] .pp{transform:translateY(26px) rotate(28deg);opacity:.5}
+.stg[data-st=tolak] .bd-x{opacity:1}
+.stg[data-st=sah] .pp{transform:translateX(62px)}.stg[data-st=sah] .pres .al{animation:stp .9s ease-in-out 2}
+.stg[data-st=sah] .dpr .arr{transform:rotate(-110deg)}.stg[data-st=sah] .dpr .al{transform:rotate(80deg)}
+.stg[data-st=sah] .bd-sah{opacity:1;animation:stpop .5s ease .8s both}
+.stg[data-st=tunggu] .pres .hdw,.stg[data-st=otomatis] .pres .hdw{transform:rotate(22deg)}
+.stg[data-st=tunggu] .bd-30,.stg[data-st=otomatis] .bd-30{opacity:1}
+.stg[data-st=tunggu] .bd-z,.stg[data-st=otomatis] .bd-z{opacity:1;animation:stz 1.8s ease-in-out infinite}
+.stg[data-st=otomatis] .bd-sah{opacity:1;animation:stpop .5s ease .6s both}
+.stg[data-st=idle] .judge .arr{animation:sth 2.2s ease-in-out infinite}
+.stg[data-st=ok] .judge .arr{transform:rotate(-110deg)}.stg[data-st=ok] .judge .al{transform:rotate(80deg)}
+.stg[data-st=ok] .judge{animation:stj .5s ease 3}.stg[data-st=ok] .bd-ok{opacity:1;fill:#1FA971}
+.stg[data-st=no] .judge .hdw{animation:stk .5s ease-in-out 3}.stg[data-st=no] .judge .arr{animation:sth .5s ease 2}.stg[data-st=no] .bd-x{opacity:1}
+@keyframes stw{0%,100%{transform:rotate(0)}50%{transform:rotate(-110deg)}}
+@keyframes stwl{0%,100%{transform:rotate(0)}50%{transform:rotate(110deg)}}
+@keyframes stb{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes stk{0%,100%{transform:rotate(0)}25%{transform:rotate(-14deg)}75%{transform:rotate(14deg)}}
+@keyframes stp{0%,100%{transform:rotate(60deg)}50%{transform:rotate(15deg)}}
+@keyframes stpop{0%{transform:scale(2.2) rotate(-12deg);opacity:0}100%{transform:scale(1) rotate(-12deg);opacity:1}}
+@keyframes stz{0%{transform:translateY(6px);opacity:0}50%{opacity:1}100%{transform:translateY(-8px);opacity:0}}
+@keyframes sth{0%,100%{transform:rotate(-30deg)}50%{transform:rotate(18deg)}}
+@keyframes stj{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@media (prefers-reduced-motion:reduce){.stg *{animation:none!important;transition:none!important}}
+</style>
 </head>
 
 <body>
@@ -1299,6 +1361,8 @@
             <div class="card sim" id="sim-timeline"></div>
             <div class="card sim" id="sim-alur-lembaga"></div>
             <div class="card sim" id="sim-lembaga"></div>
+            <div class="card sim" id="sim-ruu"></div>
+            <div class="card sim" id="sim-makmk"></div>
             <div class="card sim" id="sim-tkp"></div>
             <div class="card sim" id="sim-kisah"></div>
             <div class="card sim" id="sim-butir"></div>
@@ -2090,7 +2154,7 @@
          ['sim-alur-pancasila', 'sim-sila', 'sim-butir'], true),
       Ls('uud', 'twk', 'UUD 1945', 'Isi pasal, perubahan, lembaga negara, sistem pemerintahan, dan hierarki peraturan menurut UUD 1945.',
          ['Pasal UUD 1945', 'Peta pasal', 'Amandemen', 'Lembaga negara', 'Sistem pemerintahan', 'Hierarki peraturan', 'Hak asasi', 'Angka kunci'],
-         ['sim-uud-isi', 'sim-pasal', 'sim-alur-amandemen', 'sim-alur-lembaga', 'sim-lembaga', 'sim-alur-berhenti', 'sim-alur-hierarki', 'sim-angka'], true),
+         ['sim-uud-isi', 'sim-pasal', 'sim-alur-amandemen', 'sim-alur-lembaga', 'sim-lembaga', 'sim-ruu', 'sim-makmk', 'sim-alur-berhenti', 'sim-alur-hierarki', 'sim-angka'], true),
       Ls('nkri', 'twk', 'NKRI', 'Bentuk negara kesatuan, otonomi daerah, serta wilayah dan kedaulatan.',
          ['Otonomi daerah', 'Wilayah dan kedaulatan'], ['sim-nkri'], true),
       Ls('bti', 'twk', 'Bhinneka Tunggal Ika', 'Semboyan Bhinneka Tunggal Ika serta lambang dan identitas negara.',
@@ -2768,6 +2832,188 @@
         MATERI.cerita = m;
       })();
 
+    // ---------- TWK model terbaru: kasus pilar negara, lembaga negara, nasionalisme, bela negara ----------
+    (function () {
+      const tb = (h, rows) => `<div class="tbw"><table class="tb "><thead><tr>${h.map(x => `<th>${x}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+      const cr = (t, ls) => `<div class="coret"><span class="tt">${t}</span>${ls.map(l => l[0] === '!' ? `<div class="nt rd">${l.slice(1).trim()}</div>` : `<div class="ln">${l}</div>`).join('')}</div>`;
+      const memo = t => `<div class="memo">${t}</div>`;
+      const ins = (id, html) => { const m = MATERI[id]; if (!m) return; const i = m.lastIndexOf('<h4>Jebakan'); MATERI[id] = i < 0 ? m + html : m.slice(0, i) + html + m.slice(i); };
+      const jb = (id, li) => { const m = MATERI[id]; if (!m) return; const k = m.lastIndexOf('<h4>Jebakan'), j = m.lastIndexOf('</ul>'); if (k >= 0 && j > k) MATERI[id] = m.slice(0, j) + li + m.slice(j); else MATERI[id] = m + '<h4>Jebakan</h4><ul>' + li + '</ul>'; };
+
+      // ===== Pancasila: flexing dan sila kelima =====
+      ins('pancasila',
+        '<h4>Soal kasus terbaru: flexing, pemerasan, dan hak milik (sila kelima)</h4>' +
+        '<p>Model terbaru TWK memakai fenomena media sosial dan berita, lalu menanyakan sikap yang sesuai dengan satu sila. Jangan memilih kalimat yang cuma terdengar baik. Cari butir sila yang persis menjawab perilaku di kasus.</p>' +
+        tb(['Perilaku di kasus', 'Butir sila kelima yang cocok', 'Kata kunci di pilihan'], [
+          ['Pamer harta, flexing, gaya hidup mewah', 'Tidak menggunakan hak milik untuk hal yang bersifat pemborosan dan gaya hidup mewah', 'pemborosan, gaya hidup mewah, hidup sederhana'],
+          ['Menaikkan harga saat bencana, memeras', 'Tidak menggunakan hak milik untuk hal yang bersifat pemerasan terhadap orang lain', 'pemerasan'],
+          ['Limbah pabrik merugikan warga', 'Tidak menggunakan hak milik yang bertentangan atau merugikan kepentingan umum', 'kepentingan umum'],
+          ['Bantuan hanya untuk satu daerah', 'Bersama-sama berusaha mewujudkan kemajuan yang merata', 'merata, adil'],
+          ['Malas atau meremehkan karya orang', 'Suka bekerja keras dan menghargai hasil karya orang lain', 'kerja keras, menghargai karya']
+        ]) +
+        cr('Contoh: flexing keluarga pejabat (sila kelima)', [
+          'Kata kunci kasus: <b>flexing atau pamer kekayaan</b>; yang ditanya: sikap sesuai <b>sila kelima</b>',
+          'A. peduli pada yang kesulitan ekonomi: <span class="x">baik, tapi tidak menjawab perilaku pamer</span>',
+          'B. tidak memakai hak milik untuk pemborosan dan gaya hidup mewah: <span class="ok">pas dengan flexing</span>',
+          'C. etos kerja demi kesejahteraan pribadi: <span class="x">berorientasi pribadi, bukan butir sila 5</span>',
+          'D. gemar berbagi: <span class="x">baik, tapi bukan lawan dari pamer</span>',
+          'E. kepentingan bersama: <span class="x">terlalu umum, lebih dekat ke sila 3 dan 4</span>',
+          '!Opsi yang benar secara umum tetapi tidak menyentuh perilaku di kasus adalah pengecoh.'
+        ]) +
+        memo('<b>Pegangan:</b> kasus pamer harta selalu dijawab butir tentang pemborosan dan gaya hidup mewah. Kasus memeras dijawab butir tentang pemerasan. Samakan kata kunci kasus dengan kata kunci butir.'));
+      jb('pancasila', '<li>Soal kasus sila kelima: peduli, berbagi, dan kerja keras memang butir yang baik, tapi bukan jawaban untuk perilaku pamer harta atau memeras. Cocokkan dengan perilaku di kasus.</li>');
+
+      // ===== UUD: hak DPR, pembentukan UU, fungsi lembaga, Pasal 33 =====
+      ins('uud',
+        '<h4>Hak DPR dan hak anggota DPR (Pasal 20A dan 21)</h4>' +
+        tb(['Hak', 'Pemegang', 'Isi singkat'], [
+          ['Interpelasi', 'DPR sebagai lembaga', 'meminta keterangan kepada Pemerintah tentang kebijakan penting dan strategis'],
+          ['Angket', 'DPR sebagai lembaga', 'menyelidiki pelaksanaan undang-undang atau kebijakan yang diduga melanggar hukum'],
+          ['Menyatakan pendapat', 'DPR sebagai lembaga', 'menyatakan sikap atas kebijakan Pemerintah atau kejadian luar biasa'],
+          ['Mengajukan pertanyaan, usul, dan pendapat', 'setiap anggota', 'bertanya, mengusulkan, dan berpendapat dalam menjalankan tugas'],
+          ['Mengajukan usul RUU', 'anggota (Pasal 21)', 'mengusulkan rancangan undang-undang'],
+          ['<b>Imunitas</b>', 'setiap anggota', 'tidak dapat dituntut di pengadilan atas pernyataan, pertanyaan, atau pendapat yang disampaikan <b>dalam rapat DPR</b>, selama sesuai Tata Tertib dan kode etik']
+        ]) +
+        memo('<b>Kata kunci imunitas:</b> "dalam rapat" dan "tanpa dapat dituntut". Imunitas bukan kebal hukum total. Pernyataan di luar rapat, misalnya di media sosial pribadi, dan pembukaan rahasia negara tidak dilindungi (UU MD3).') +
+        cr('Contoh: penerapan hak imunitas', [
+          'A. mengajukan RUU: <span class="x">hak usul (Pasal 21), bukan imunitas</span>',
+          'B. kegiatan politik tanpa proses hukum: <span class="x">imunitas tidak berarti kebal</span>',
+          'C. pendapat dalam rapat DPR tanpa dapat dituntut: <span class="ok">inilah imunitas</span>',
+          'D. penyelidikan atas aspirasi: <span class="x">fungsi pengawasan, hak angket</span>',
+          'E. menolak proses hukum atas segala tindakan: <span class="x">kebal total, salah</span>'
+        ]) +
+        '<h4>Pembentukan undang-undang (Pasal 20 ayat 1 sampai 5)</h4>' +
+        tb(['Ayat', 'Isi', 'Kata kunci'], [
+          ['1', 'DPR memegang kekuasaan membentuk undang-undang', 'pembentuk UU: DPR'],
+          ['2', 'Tiap RUU dibahas DPR dan Presiden untuk mendapat persetujuan bersama', 'persetujuan bersama'],
+          ['3', 'RUU yang tidak mendapat persetujuan bersama tidak boleh diajukan lagi dalam persidangan DPR masa itu', 'tidak disetujui: tidak boleh diajukan lagi'],
+          ['4', 'Presiden mengesahkan RUU yang telah disetujui bersama', 'pengesahan oleh Presiden'],
+          ['5', 'Bila dalam 30 hari sejak disetujui bersama RUU tidak disahkan Presiden, RUU sah menjadi UU dan wajib diundangkan', '30 hari: otomatis sah']
+        ]) +
+        cr('Contoh: Presiden tidak menandatangani RUU lewat 30 hari', [
+          'Syarat: sudah <b>disetujui bersama</b>, lalu 30 hari tanpa pengesahan',
+          'A. gugur otomatis: <span class="x">kebalikan ayat 5</span>',
+          'B. diajukan kembali di persidangan berikutnya: <span class="x">itu ayat 3, untuk RUU yang tidak disetujui</span>',
+          'C. tetap sah menjadi UU dan wajib diundangkan: <span class="ok">Pasal 20 ayat 5</span>',
+          'D. DPR mengesahkan tanpa Presiden, E. MPR mengambil alih: <span class="x">tidak ada dasarnya</span>',
+          '!Cek dulu: sudah disetujui bersama atau belum. Itu penentu ayat 3 atau ayat 5.'
+        ]) +
+        '<h4>Pembentuk, pelaksana, penguji: fungsi lembaga di soal kasus</h4>' +
+        tb(['Tindakan di soal', 'Fungsi', 'Lembaga'], [
+          ['membentuk UU, membahas RUU, menyetujui RAPBN, mengawasi', 'legislatif', 'DPR (UU bersama Presiden)'],
+          ['menetapkan Peraturan Pemerintah, menjalankan UU', 'eksekutif (pelaksana UU)', 'Presiden (PP: Pasal 5 ayat 2)'],
+          ['mengadili perkara tingkat kasasi', 'yudikatif', 'Mahkamah Agung'],
+          ['menguji peraturan di bawah UU terhadap UU', 'yudikatif', 'Mahkamah Agung (Pasal 24A)'],
+          ['menguji UU terhadap UUD', 'yudikatif', 'Mahkamah Konstitusi (Pasal 24C)'],
+          ['memutus sengketa kewenangan lembaga negara, pembubaran partai, sengketa hasil pemilu', 'yudikatif', 'Mahkamah Konstitusi (Pasal 24C)']
+        ]) +
+        cr('Tiga soal kasus lembaga negara', [
+          '1) MA mengadili kasasi dan menguji peraturan di bawah UU: <span class="ok">menjalankan kekuasaan kehakiman lewat penyelesaian perkara dan pengujian hukum</span>',
+          '<span class="x">membentuk norma baru, mengawasi DPR, mengendalikan eksekutif</span> bukan tugas yudikatif',
+          '2) Presiden menetapkan PP sebagai tindak lanjut UU: <span class="ok">legislatif membentuk UU, eksekutif melaksanakan UU</span>',
+          '3) Pengujian UU terhadap UUD: <span class="ok">yudikatif melalui pengujian konstitusionalitas (MK)</span>',
+          '!Kata kunci memutuskan lembaga: UU ke UUD = MK; peraturan di bawah UU ke UU = MA.'
+        ]) +
+        '<h4>Pasal 33 UUD 1945: perekonomian dan asas kekeluargaan</h4>' +
+        tb(['Ayat', 'Isi', 'Kata kunci'], [
+          ['1', 'Perekonomian disusun sebagai usaha bersama berdasar asas kekeluargaan', 'usaha bersama, kekeluargaan, koperasi'],
+          ['2', 'Cabang produksi yang penting dan menguasai hajat hidup orang banyak dikuasai negara', 'cabang produksi penting'],
+          ['3', 'Bumi, air, dan kekayaan alam dikuasai negara untuk sebesar-besar kemakmuran rakyat', 'bumi, air, kekayaan alam'],
+          ['4', 'Demokrasi ekonomi: kebersamaan, efisiensi berkeadilan, berkelanjutan, berwawasan lingkungan, kemandirian, keseimbangan kemajuan', 'prinsip demokrasi ekonomi'],
+          ['5', 'Ketentuan lebih lanjut diatur dengan undang-undang', 'diatur UU']
+        ]) +
+        cr('Contoh: prinsip utama menghadapi persaingan ekonomi modern', [
+          'Kata kunci: <b>asas kekeluargaan</b> dan <b>tetap dipertahankan</b>',
+          'A. kebebasan individu mencari untung: <span class="x">corak liberal</span>',
+          'B. kepentingan bersama lewat kerja sama dan pemerataan kesejahteraan: <span class="ok">kekeluargaan</span>',
+          'C. seluruh kegiatan ekonomi diserahkan ke pemerintah: <span class="x">ayat 2 hanya cabang produksi penting</span>',
+          'D. persaingan sebagai dasar pertumbuhan, E. individu menguasai sumber daya: <span class="x">bukan asas kekeluargaan</span>'
+        ]) +
+        '<h4>Jebakan soal kasus lembaga negara dan Pasal 33</h4><ul>' +
+        '<li>Yudikatif tidak membentuk norma baru, tidak mengawasi pembentukan UU oleh DPR, dan tidak mengendalikan eksekutif. Tugasnya mengadili dan menguji.</li>' +
+        '<li>Membuat UU adalah legislatif, melaksanakannya lewat PP adalah eksekutif. Jangan ditukar.</li>' +
+        '<li>Imunitas hanya untuk pernyataan dalam rapat DPR. Bukan kebal terhadap segala tindakan.</li>' +
+        '<li>RUU belum disetujui bersama: ayat 3. Sudah disetujui lalu 30 hari tidak disahkan: ayat 5.</li>' +
+        '<li>Pasal 33 ayat 2 hanya mencakup cabang produksi penting, bukan seluruh kegiatan ekonomi.</li></ul>');
+
+      // ===== Nasionalisme =====
+      ins('nas',
+        '<h4>Soal kasus: apa yang mendorong semangat pengorbanan?</h4>' +
+        tb(['Pendorong yang benar', 'Pengecoh yang sering muncul'], [
+          ['Kesadaran nasional untuk memperjuangkan kemerdekaan dan kedaulatan bangsa', 'Ingin menguasai wilayah, ingin menang atas penjajah'],
+          ['Rasa senasib sepenanggungan dan cinta tanah air', 'Simpati pada rakyat saja, perjuangan hanya untuk daerah sendiri'],
+          ['Tujuan bersama: bangsa yang merdeka, bersatu, berdaulat', 'Tekad pribadi atau kelompok, keuntungan pribadi']
+        ]) +
+        cr('Contoh: pendiri bangsa tetap berjuang meski ditangkap dan disiksa', [
+          'A. membebaskan bangsa dari penderitaan: <span class="x">hanya akibat, belum ke akar semangat</span>',
+          'B. menguasai wilayah setelah mengalahkan penjajah: <span class="x">berorientasi kekuasaan</span>',
+          'C. kesadaran nasional untuk kemerdekaan dan kedaulatan bangsa: <span class="ok">akar semangat kebangsaan</span>',
+          'D. simpati pada rakyat, E. perjuangan daerah: <span class="x">sempit, tidak mencakup bangsa</span>'
+        ]) +
+        memo('<b>Pegangan:</b> semangat pengorbanan untuk bangsa digerakkan kesadaran nasional untuk merdeka dan berdaulat, bukan ambisi menguasai atau kepentingan satu daerah.'));
+      jb('nas', '<li>Semangat pengorbanan: pilih kesadaran nasional untuk kemerdekaan dan kedaulatan. Hindari opsi tentang menguasai wilayah, simpati semata, atau perjuangan satu daerah.</li>');
+
+      // ===== Bela negara: kerja sama internasional dan bebas aktif =====
+      ins('bela',
+        '<h4>Kerja sama internasional dan politik luar negeri bebas aktif</h4>' +
+        tb(['Konsep', 'Isi'], [
+          ['Bebas', 'tidak memihak blok kekuatan mana pun; menentukan sikap sendiri berdasarkan kepentingan nasional'],
+          ['Aktif', 'ikut serta menciptakan perdamaian, kemerdekaan, dan keadilan sosial dunia (Pembukaan UUD 1945 alinea 4)'],
+          ['Dasar hukum', 'Pembukaan UUD alinea 4; Pasal 11 (perjanjian dengan persetujuan DPR); UU 37/1999 tentang Hubungan Luar Negeri; UU 24/2000 tentang Perjanjian Internasional'],
+          ['Asal gagasan', 'Moh. Hatta, 1948: "mendayung di antara dua karang", tidak terseret dua blok besar'],
+          ['Alasan kerja sama', 'tiap negara terbatas sumber daya dan teknologi, jadi saling memenuhi kebutuhan lewat pertukaran potensi']
+        ]) +
+        cr('Contoh 1: alasan mendasar kerja sama internasional', [
+          'A. dominasi ekonomi dan C. memperluas pasar: <span class="x">tujuan sepihak</span>',
+          'B. pengaruh politik: <span class="x">bukan alasan dasar</span>',
+          'D. memenuhi kebutuhan melalui pertukaran potensi antarnegara: <span class="ok">menjawab keterbatasan sumber daya</span>',
+          'E. meningkatkan ketergantungan pada negara maju: <span class="x">bertentangan dengan kemandirian</span>'
+        ]) +
+        cr('Contoh 2: tawaran kerja sama pertahanan dari suatu negara', [
+          'Untung strategis, tapi berpotensi menempatkan Indonesia pada posisi berseberangan dengan negara lain',
+          'A. menerima karena untung: <span class="x">tanpa pertimbangan</span>; B. menolak karena dilarang: <span class="x">tidak ada larangan</span>',
+          'C. menerima jika mitra lebih kuat: <span class="x">ukuran bukan kekuatan</span>; E. serahkan ke organisasi regional: <span class="x">keputusan tetap di tangan Indonesia</span>',
+          'D. mengkaji berdasarkan kepentingan nasional dan prinsip bebas aktif: <span class="ok">jawaban</span>',
+          '!Pola jawaban: kaji dulu, ukurannya kepentingan nasional dan bebas aktif.'
+        ]) +
+        memo('<b>Pegangan:</b> terhadap tawaran kerja sama yang berisiko, jawaban hampir selalu "mengkaji berdasarkan kepentingan nasional dan bebas aktif". Menerima langsung, menolak total, atau menyerahkan ke pihak lain adalah pengecoh.'));
+      jb('bela', '<li>Kerja sama internasional: opsi dengan kata mendominasi, ketergantungan, atau menyerahkan keputusan ke pihak lain hampir pasti salah. Kerja sama itu saling memenuhi kebutuhan dan tetap bebas aktif.</li>');
+
+      // ===== Soal latihan =====
+      QZ.pancasila.push(
+        Q('Fenomena flexing atau pamer kekayaan oleh keluarga pejabat di media sosial menjadi sorotan masyarakat. Sikap yang sesuai dengan pengamalan sila kelima Pancasila adalah ....', ['Mengembangkan kepedulian terhadap masyarakat yang mengalami kesulitan ekonomi', 'Tidak menggunakan hak milik untuk pemborosan dan gaya hidup mewah', 'Meningkatkan etos kerja untuk mencapai kesejahteraan pribadi', 'Gemar berbagi kepada masyarakat yang membutuhkan', 'Mengutamakan kepentingan bersama dalam kehidupan bermasyarakat'], 1, 'Kata kunci kasus: flexing atau pamer kekayaan. Butir sila kelima yang menjawabnya langsung: tidak menggunakan hak milik untuk pemborosan dan gaya hidup mewah. Pilihan lain baik, tetapi tidak menjawab perilaku pamer.'),
+        Q('Saat banjir, seorang pedagang menaikkan harga air bersih berlipat-lipat karena tahu warga tidak punya pilihan. Perbuatan ini bertentangan dengan butir sila kelima, yaitu ....', ['Suka bekerja keras', 'Menghormati hak orang lain', 'Bersama-sama berusaha mewujudkan kemajuan yang merata', 'Tidak menggunakan hak milik untuk hal-hal yang bersifat pemerasan terhadap orang lain', 'Suka menghargai hasil karya orang lain'], 3, 'Memanfaatkan keadaan warga untuk keuntungan berlebih adalah pemerasan. Butir yang paling spesifik: tidak menggunakan hak milik untuk pemerasan terhadap orang lain.'),
+        Q('Sebuah pabrik membuang limbah ke sungai yang dipakai warga untuk mandi dan mencuci demi menekan biaya produksi. Butir sila kelima yang dilanggar adalah ....', ['Tidak menggunakan hak milik untuk pemborosan', 'Tidak menggunakan hak milik yang bertentangan atau merugikan kepentingan umum', 'Menghargai hasil karya orang lain', 'Suka bekerja keras', 'Suka memberi pertolongan kepada orang lain'], 1, 'Limbah merugikan warga banyak. Hak milik (pabrik) dipakai bertentangan dengan kepentingan umum.')
+      );
+      QZ.uud.push(
+        Q('Hak imunitas merupakan hak anggota DPR dalam menjalankan fungsi dan kewenangannya. Penerapan hak tersebut tercermin dalam tindakan ....', ['Mengajukan rancangan undang-undang sesuai dengan kewenangan konstitusional DPR', 'Melakukan kegiatan politik di masyarakat tanpa dapat dikenakan proses hukum', 'Menyampaikan pendapat dalam rapat DPR tanpa dapat dituntut atas pernyataan tersebut', 'Melakukan penyelidikan terhadap perkara hukum berdasarkan aspirasi masyarakat', 'Menolak proses hukum atas segala tindakan yang dilakukan selama menjabat sebagai anggota DPR'], 2, 'Imunitas melindungi pernyataan, pertanyaan, dan pendapat yang disampaikan dalam rapat DPR (Pasal 20A ayat 3). Bukan kebal hukum untuk segala tindakan.'),
+        Q('Dalam rapat komisi, seorang anggota DPR mengkritik kebijakan menteri dengan data dan argumen. Kritik itu tidak dapat dijadikan dasar menuntut anggota tersebut ke pengadilan. Perlindungan ini merupakan ....', ['Hak interpelasi', 'Hak angket', 'Hak menyatakan pendapat', 'Hak imunitas', 'Fungsi anggaran'], 3, 'Kata kunci: dalam rapat dan tidak dapat dituntut. Itulah hak imunitas anggota DPR.'),
+        Q('Seorang anggota DPR menyebarkan tuduhan tanpa bukti tentang seorang warga lewat akun media sosial pribadinya di luar rapat. Pernyataan yang benar mengenai kasus ini adalah ....', ['Dilindungi hak imunitas karena ia anggota DPR', 'Dilindungi hak imunitas selama ia masih menjabat', 'Tidak dilindungi hak imunitas karena bukan pernyataan dalam rapat DPR dan dapat diproses hukum', 'Baru dapat diproses setelah masa jabatannya berakhir', 'Hanya dapat ditindak oleh MPR'], 2, 'Imunitas terbatas pada pernyataan dalam rapat DPR. Pernyataan di media sosial pribadi tidak dilindungi.'),
+        Q('Pasal 33 ayat (1) UUD NRI Tahun 1945 mengatur perekonomian berdasarkan asas kekeluargaan. Dalam menghadapi persaingan ekonomi modern, prinsip utama yang harus tetap dipertahankan Indonesia adalah ....', ['Memberikan kebebasan kepada individu untuk mengembangkan usaha demi memperoleh keuntungan', 'Mengutamakan kepentingan bersama melalui kerja sama dan pemerataan kesejahteraan ekonomi', 'Menyerahkan pengelolaan kegiatan ekonomi kepada pemerintah secara menyeluruh', 'Mendorong persaingan usaha sebagai dasar peningkatan pertumbuhan ekonomi nasional', 'Memberikan kesempatan kepada setiap individu untuk menguasai sumber daya ekonomi'], 1, 'Asas kekeluargaan = usaha bersama, kepentingan bersama, pemerataan. Opsi individualistik, serba pemerintah, dan serba persaingan tidak sesuai.'),
+        Q('Pemerintah menyatakan air, tanah, dan kekayaan alam di dalam bumi dikuasai negara untuk sebesar-besar kemakmuran rakyat. Ketentuan ini terdapat pada ....', ['Pasal 33 ayat (1)', 'Pasal 33 ayat (2)', 'Pasal 33 ayat (3)', 'Pasal 34 ayat (1)', 'Pasal 27 ayat (2)'], 2, 'Ayat 1 asas kekeluargaan, ayat 2 cabang produksi penting, ayat 3 bumi, air, dan kekayaan alam dikuasai negara.'),
+        Q('Bentuk badan usaha yang paling mencerminkan asas kekeluargaan menurut Pasal 33 ayat (1) UUD 1945 adalah ....', ['Perseroan terbatas', 'Koperasi', 'Firma', 'Persekutuan komanditer (CV)', 'Usaha perseorangan'], 1, 'Koperasi dipandang paling sesuai dengan usaha bersama atas asas kekeluargaan: anggota adalah pemilik sekaligus pengguna.'),
+        Q('Presiden dan DPR membahas sebuah rancangan undang-undang. Setelah memperoleh persetujuan bersama, rancangan tersebut belum ditandatangani Presiden hingga melewati 30 hari. Berdasarkan UUD NRI Tahun 1945, keadaan tersebut berarti ....', ['Rancangan otomatis gugur karena belum memperoleh pengesahan Presiden', 'Rancangan harus diajukan kembali dalam persidangan DPR berikutnya', 'Rancangan tetap sah menjadi undang-undang dan wajib diundangkan', 'DPR dapat mengesahkan rancangan tersebut tanpa melibatkan Presiden', 'MPR mengambil alih pengesahan karena Presiden tidak menjalankan kewenangannya'], 2, 'Pasal 20 ayat 5: sudah disetujui bersama lalu 30 hari tidak disahkan Presiden, RUU sah menjadi UU dan wajib diundangkan.'),
+        Q('Rancangan undang-undang dibahas DPR dan Presiden, tetapi tidak mendapat persetujuan bersama. Menurut Pasal 20 ayat (3) UUD 1945, akibatnya adalah ....', ['Rancangan itu otomatis sah menjadi undang-undang', 'Rancangan itu diputuskan oleh MPR', 'Rancangan itu tidak boleh diajukan lagi dalam persidangan DPR masa itu', 'Rancangan itu boleh langsung diajukan lagi pada persidangan yang sama', 'Rancangan itu diserahkan kepada DPD untuk disahkan'], 2, 'Ayat 3: RUU yang tidak mendapat persetujuan bersama tidak boleh diajukan lagi dalam persidangan DPR masa itu.'),
+        Q('Mahkamah Agung mengadili perkara pada tingkat kasasi sekaligus melakukan pengujian terhadap peraturan di bawah undang-undang yang dianggap bertentangan dengan undang-undang. Peran tersebut menunjukkan bahwa badan yudikatif berfungsi ....', ['Membentuk norma hukum baru sebagai pelengkap kekosongan hukum', 'Memastikan pelaksanaan pemerintahan berjalan sesuai kebijakan nasional', 'Menjalankan kekuasaan kehakiman melalui penyelesaian perkara dan pengujian hukum', 'Mengawasi lembaga legislatif dalam membentuk undang-undang yang berlaku', 'Mengendalikan lembaga eksekutif agar seluruh kebijakan sesuai kepentingan rakyat'], 2, 'Kasasi dan pengujian peraturan adalah penyelesaian perkara dan pengujian hukum: kekuasaan kehakiman. Yudikatif tidak membentuk norma baru atau mengendalikan lembaga lain.'),
+        Q('Presiden menetapkan peraturan pemerintah sebagai tindak lanjut dari undang-undang yang telah berlaku. Tindakan tersebut menunjukkan hubungan antara fungsi ....', ['Legislatif sebagai pembentuk undang-undang dan eksekutif sebagai pelaksana ketentuan undang-undang', 'Eksekutif sebagai pembentuk undang-undang dan legislatif sebagai pelaksana kebijakan pemerintah', 'Yudikatif sebagai pembentuk norma hukum dan eksekutif sebagai penguji pelaksanaannya', 'Legislatif sebagai pengawas dan yudikatif sebagai pelaksana kebijakan berdasarkan undang-undang', 'Yudikatif sebagai penguji undang-undang dan legislatif sebagai pelaksana putusan pengadilan'], 0, 'Pasal 5 ayat 2: Presiden menetapkan PP untuk menjalankan UU. DPR membentuk UU, Presiden melaksanakannya.'),
+        Q('Sebuah undang-undang diduga bertentangan dengan UUD NRI Tahun 1945. Pihak yang berkepentingan mengajukan pengujian agar dapat dinilai kesesuaiannya dengan konstitusi. Peran yang dijalankan dalam kasus tersebut merupakan fungsi ....', ['Legislatif dalam memastikan produk hukum tetap sesuai kebutuhan masyarakat', 'Eksekutif dalam mengendalikan pelaksanaan undang-undang yang dianggap bermasalah', 'Yudikatif melalui pengujian konstitusionalitas undang-undang terhadap UUD', 'Legislatif melalui evaluasi terhadap undang-undang yang telah dibentuk bersama', 'Eksekutif melalui kewenangan mengoreksi substansi undang-undang yang berlaku'], 2, 'Pengujian UU terhadap UUD dilakukan Mahkamah Konstitusi (Pasal 24C), lembaga yudikatif.'),
+        Q('Seorang warga merasa dirugikan oleh peraturan daerah yang diduga bertentangan dengan undang-undang. Lembaga yang berwenang menguji peraturan tersebut adalah ....', ['Mahkamah Konstitusi', 'Mahkamah Agung', 'DPRD provinsi', 'Komisi Yudisial', 'Dewan Perwakilan Daerah'], 1, 'Peraturan di bawah UU diuji terhadap UU oleh Mahkamah Agung (Pasal 24A).'),
+        Q('Dua lembaga negara yang kewenangannya diberikan UUD 1945 berselisih mengenai batas kewenangan masing-masing. Lembaga yang berwenang memutus sengketa tersebut adalah ....', ['Mahkamah Agung', 'Dewan Perwakilan Rakyat', 'Mahkamah Konstitusi', 'Komisi Yudisial', 'Majelis Permusyawaratan Rakyat'], 2, 'Pasal 24C ayat 1: MK memutus sengketa kewenangan lembaga negara yang kewenangannya diberikan UUD.')
+      );
+      QZ.nas.push(
+        Q('Para pendiri bangsa tetap berjuang meskipun menghadapi penangkapan, penyiksaan, bahkan ancaman kematian dari penjajah. Semangat pengorbanan tersebut didorong oleh ....', ['Adanya keinginan untuk membebaskan bangsa dari penderitaan akibat penjajahan', 'Adanya tekad untuk menguasai wilayah bangsa setelah mengalahkan kekuatan penjajah', 'Adanya kesadaran nasional untuk memperjuangkan kemerdekaan dan kedaulatan bangsa', 'Adanya dorongan simpati terhadap rakyat melalui perlawanan terhadap kekuasaan penjajah', 'Adanya keinginan untuk menyatukan perjuangan daerah dalam menghadapi kekuatan penjajah'], 2, 'Akar semangat pengorbanan adalah kesadaran nasional untuk merdeka dan berdaulat. Opsi lain hanya akibat, ambisi kekuasaan, simpati, atau perjuangan daerah.'),
+        Q('Pada 1928 pemuda dari berbagai daerah mengikrarkan satu tanah air, satu bangsa, dan satu bahasa meski diawasi ketat aparat kolonial. Semangat itu didorong oleh ....', ['Keinginan menguasai wilayah daerah lain', 'Kesadaran nasional untuk bersatu sebagai satu bangsa', 'Simpati pada penguasa kolonial', 'Keinginan memperkuat kelompok daerah masing-masing', 'Kepentingan ekonomi para pemuda'], 1, 'Sumpah Pemuda lahir dari kesadaran nasional untuk bersatu, melampaui kepentingan daerah.'),
+        Q('Sekelompok tokoh hanya mau memperjuangkan kemerdekaan bagi daerahnya sendiri dan menolak bersatu dengan daerah lain. Sikap ini lebih tepat disebut ....', ['Nasionalisme', 'Patriotisme', 'Primordialisme atau kedaerahan sempit', 'Bela negara', 'Cinta tanah air'], 2, 'Nasionalisme mengutamakan persatuan bangsa. Mengutamakan daerah sendiri dan menolak bersatu adalah primordialisme.')
+      );
+      QZ.bela.push(
+        Q('Setiap negara memiliki keterbatasan sumber daya dan teknologi sehingga membutuhkan kerja sama internasional. Alasan mendasar kerja sama tersebut adalah ....', ['Memperkuat dominasi ekonomi dalam perdagangan global', 'Meningkatkan pengaruh politik dalam hubungan internasional', 'Memperluas pasar produk untuk memperoleh keuntungan ekonomi', 'Memenuhi kebutuhan melalui pertukaran potensi antarnegara', 'Meningkatkan ketergantungan terhadap negara yang lebih maju'], 3, 'Karena tiap negara terbatas, kebutuhan dipenuhi lewat pertukaran potensi. Dominasi dan ketergantungan bukan alasan dasar.'),
+        Q('Indonesia mengekspor batu bara dan mengimpor teknologi mesin dari negara lain karena tidak semua kebutuhan dapat dipenuhi sendiri. Alasan mendasar kerja sama ini adalah ....', ['Menunjukkan dominasi ekonomi Indonesia', 'Menguasai pasar dunia', 'Saling memenuhi kebutuhan karena keterbatasan sumber daya dan teknologi tiap negara', 'Menjadi bergantung pada negara maju', 'Menekan negara berkembang lain'], 2, 'Pertukaran potensi untuk menutup keterbatasan masing-masing negara.'),
+        Q('Indonesia memperoleh tawaran kerja sama pertahanan dari suatu negara. Kerja sama tersebut memberikan keuntungan strategis, tetapi berpotensi menempatkan Indonesia pada posisi yang berseberangan dengan negara lain. Pertimbangan yang paling sesuai dengan politik luar negeri Indonesia adalah ....', ['Menerima karena memberikan keuntungan strategis bagi pertahanan', 'Menolak karena Indonesia tidak boleh bekerja sama di bidang pertahanan', 'Menerima selama negara mitra memiliki kekuatan ekonomi yang lebih besar', 'Mengkaji kerja sama berdasarkan kepentingan nasional dan prinsip bebas aktif', 'Menyerahkan keputusan kepada organisasi regional agar tidak menimbulkan konflik'], 3, 'Politik luar negeri bebas aktif: setiap kerja sama dikaji berdasarkan kepentingan nasional. Menerima langsung, menolak total, atau menyerahkan keputusan ke pihak lain tidak tepat.'),
+        Q('Pemerintah memutuskan tidak bergabung dengan pakta militer blok mana pun, tetapi aktif menjadi mediator perdamaian dunia. Sikap ini mencerminkan politik luar negeri ....', ['Isolasi', 'Satu blok', 'Bebas aktif', 'Ekspansi', 'Netralitas mutlak'], 2, 'Bebas: tidak memihak blok. Aktif: ikut menciptakan perdamaian dunia.'),
+        Q('Sebuah negara besar mengajak Indonesia masuk aliansi militer yang mengharuskan Indonesia berpihak pada salah satu pihak dalam konflik. Sikap yang sesuai prinsip politik luar negeri Indonesia adalah ....', ['Menerima agar mendapat perlindungan', 'Menolak aliansi yang mengikat dan berpihak, tetapi tetap membuka kerja sama yang saling menguntungkan', 'Menolak semua bentuk kerja sama dengan negara tersebut', 'Menyerahkan keputusan kepada negara tetangga', 'Menerima asal mendapat bantuan alutsista'], 1, 'Bebas aktif berarti tidak terikat blok, namun tetap aktif bekerja sama untuk kepentingan nasional dan perdamaian.')
+      );
+    })();
+
     // ---------- Tambahan soal latihan: semua materi (kecuali figural, butuh gambar) ----------
     QZ.nas.push(
       Q('Organisasi modern pertama yang menandai Kebangkitan Nasional pada 20 Mei 1908 adalah...', ['Indische Partij', 'Budi Utomo', 'Muhammadiyah', 'Taman Siswa', 'Partai Nasional Indonesia'], 1, 'Budi Utomo berdiri 20 Mei 1908 dan harinya diperingati sebagai Hari Kebangkitan Nasional.'),
@@ -2963,7 +3209,7 @@
     };
     function latihanHTML(l) {
       const md = cur.qm || 'contoh', qs = qzOf(l, cur.qf);
-      const seg = `<div class="lt-seg" role="tablist"><button class="${md === 'contoh' ? 'is-active' : ''}" data-qm="contoh">Contoh soal</button><button class="${md === 'latih' ? 'is-active' : ''}" data-qm="latih">Latihan (${qzOf(l).length})</button></div>`;
+      const seg = `<div class="lt-seg" role="tablist"><button class="${md === 'contoh' ? 'is-active' : ''}" data-qm="contoh">Contoh soal</button><button class="${md === 'latih' ? 'is-active' : ''}" data-qm="latih">Latihan <span class="tb-n">${qzOf(l).length}</span></button></div>`;
       const chips = l.subs ? `<div class="qf" role="group" aria-label="Pilih subtes"><button class="${cur.qf ? '' : 'is-active'}" data-qf="">Semua subtes</button>${l.subs.map(id => `<button class="${cur.qf === id ? 'is-active' : ''}" data-qf="${id}">${lessonById(id).t}${md === 'latih' ? ' · ' + (QZ[id] || []).length : ''}</button>`).join('')}</div>` : '';
       if (md === 'contoh') return seg + chips + exHTML(l, cur.qf);
       if (!qs.length) return seg + chips + '<div class="lc"><p>Soal latihan untuk materi ini sedang disiapkan.</p></div>';
@@ -3185,7 +3431,7 @@
     function renderLesson() {
       parkSims();
       const l = cur.l, its = itemsOf(l), it = its[cur.i], [d, n] = stat(l), subs = l.subs ? l.subs.map(lessonById) : null;
-            const tabs = `<div class="tabs2"><button class="${cur.t === 'materi' ? 'is-active' : ''}" data-t="materi">Materi lengkap</button><button class="${cur.t === 'latihan' ? 'is-active' : ''}" data-t="latihan">Latihan soal (${d}/${n})</button></div>`;
+            const tabs = `<div class="tabs2"><button class="${cur.t === 'materi' ? 'is-active' : ''}" data-t="materi">Materi lengkap</button><button class="${cur.t === 'latihan' ? 'is-active' : ''}" data-t="latihan">Latihan soal <span class="tb-n">${d}/${n}</span></button></div>`;
       const simT = sb => sb.sims.length ? `<h4 class="subh2">Alur dan simulasi</h4><div class="simslot" data-sub="${sb.id}"></div>` : '';
       const analogiBox = ANALOGI[l.id] ? `<div class="analogi"><b>Analogi biar nempel</b>${ANALOGI[l.id]}</div>` : '';
       const main = cur.t === 'latihan' ? latihanHTML(l) : (subs
@@ -4587,6 +4833,113 @@
       ['Cek 5', 'Selang-seling?', 'Pisahkan suku ganjil dan genap, lalu cek masing-masing.']
     ]);
 
+    // ---------- Stickman untuk simulasi RUU dan MA vs MK ----------
+    const smk = (x, y, cls, lab, xr = '') => `<g transform="translate(${x},${y})"><g class="sm ${cls}"><g class="hdw"><circle class="hd" cx="0" cy="-34" r="9"/><path class="fc" d="M-3 -35h.01M3 -35h.01"/></g><line x1="0" y1="-25" x2="0" y2="4"/><g transform="translate(0,-20)"><g class="ar al"><line x1="0" y1="0" x2="-22" y2="14"/></g><g class="ar arr"><line x1="0" y1="0" x2="22" y2="14"/>${xr}</g></g><line x1="0" y1="4" x2="-9" y2="26"/><line x1="0" y1="4" x2="9" y2="26"/></g><text class="sml" x="0" y="42">${lab}</text></g>`;
+    const stgRUU = (st, cal) => `<svg class="stg" data-st="${st}" viewBox="0 0 360 120" role="img" aria-label="Animasi stickman DPR dan Presiden membahas RUU">
+      <line class="gr" x1="10" y1="96" x2="350" y2="96"/>
+      ${smk(100, 70, 'dpr', 'DPR')}${smk(260, 70, 'pres', 'Presiden')}
+      <g transform="translate(180,58)"><g class="pp"><rect class="pg" x="-16" y="-22" width="32" height="40" rx="3"/><path class="pl" d="M-9 -12h18M-9 -5h18M-9 2h12"/><text class="pt" y="14">RUU</text><g class="bd bd-sah"><rect x="-20" y="-6" width="40" height="16" rx="3"/><text y="6">SAH</text></g></g></g>
+      <text class="bd bd-ok" x="180" y="16">disetujui bersama</text>
+      <text class="bd bd-x" x="180" y="16">tidak sepakat</text>
+      <g class="bd bd-30"><rect x="140" y="2" width="80" height="22" rx="6"/><text x="180" y="17">${cal}</text></g>
+      <text class="bd bd-z" x="278" y="30">Zzz</text>
+    </svg>`;
+    const stgMK = st => `<svg class="stg" data-st="${st}" viewBox="0 0 360 120" role="img" aria-label="Animasi stickman hakim memegang palu">
+      <line class="gr" x1="10" y1="104" x2="350" y2="104"/>
+      <g class="plq"><rect x="14" y="44" width="78" height="56" rx="8"/><text class="k" x="53" y="68">MA</text><text class="s" x="53" y="84">peraturan di</text><text class="s" x="53" y="94">bawah UU</text></g>
+      <g class="plq"><rect x="268" y="44" width="78" height="56" rx="8"/><text class="k" x="307" y="68">MK</text><text class="s" x="307" y="84">UU terhadap</text><text class="s" x="307" y="94">UUD</text></g>
+      ${smk(180, 66, 'judge', '', '<line x1="22" y1="14" x2="22" y2="3"/><rect class="gv" x="16" y="-1" width="13" height="7" rx="2"/>')}
+      <rect class="desk" x="136" y="80" width="88" height="24" rx="4"/>
+      <text class="bd bd-ok" x="180" y="14">BENAR</text><text class="bd bd-x" x="180" y="14">SALAH</text>
+    </svg>`;
+
+    // ---------- Simulator alur RUU (Pasal 20) dan drill MA vs MK ----------
+    (function () {
+      const box = $('#sim-ruu'); if (!box) return;
+      const N = {
+        a: ['DPR dan Presiden sudah membahas RUU. Apakah keduanya mencapai persetujuan bersama?', [['Sepakat: disetujui bersama', 'b'], ['Tidak sepakat', 'x1']]],
+        b: ['RUU sudah disetujui bersama. Apa yang dilakukan Presiden?', [['Presiden mengesahkan', 'y1'], ['Presiden tidak mengesahkan', 'c']]],
+        c: ['Presiden belum mengesahkan. Sudah berapa lama sejak RUU disetujui bersama?', [['Belum 30 hari', 'y2'], ['Sudah lewat 30 hari', 'y3']]]
+      };
+      const R = {
+        x1: ['bad', 'RUU tidak boleh diajukan lagi', 'Pasal 20 ayat 3: RUU yang tidak mendapat persetujuan bersama tidak boleh diajukan lagi dalam persidangan DPR masa itu.'],
+        y1: ['ok', 'Sah menjadi undang-undang', 'Pasal 20 ayat 4: Presiden mengesahkan RUU yang telah disetujui bersama, lalu diundangkan.'],
+        y2: ['wait', 'Masih menunggu pengesahan', 'Belum lewat 30 hari, jadi Presiden masih dapat mengesahkan. Belum ada akibat hukum otomatis.'],
+        y3: ['ok', 'Sah otomatis dan wajib diundangkan', 'Pasal 20 ayat 5: sudah disetujui bersama, lewat 30 hari tanpa pengesahan Presiden, RUU sah menjadi UU.']
+      };
+      const S = [
+        ['Presiden dan DPR tidak mencapai kata sepakat atas pasal inti sebuah RUU.', 0, 'Tidak ada persetujuan bersama, jadi berlaku ayat 3.'],
+        ['RUU disetujui bersama pada 1 Maret. Presiden belum menandatangani sampai 5 April.', 1, 'Lewat 30 hari sejak disetujui bersama: sah otomatis (ayat 5).'],
+        ['RUU disetujui bersama, 10 hari kemudian Presiden menandatanganinya.', 2, 'Presiden mengesahkan (ayat 4).'],
+        ['RUU disetujui bersama pada 1 Maret. Pada 20 Maret Presiden belum menandatangani.', 3, 'Baru 19 hari, belum lewat 30 hari: masih menunggu.']
+      ];
+      const SO = ['Tidak boleh diajukan lagi', 'Sah otomatis', 'Sah lewat pengesahan Presiden', 'Masih menunggu'];
+      let path = [], res = null, si = 0, sd = false, sk = 0;
+      const draw = () => {
+        const cur = res ? '' : (path.length === 0 ? 'a' : path[path.length - 1][2]);
+        const trail = path.map(p => `<li><small>${p[0]}</small><b>${p[1]}</b></li>`).join('');
+        let main;
+        if (res) { const r = R[res]; main = `<div class="rs ${r[0]}"><small>HASIL</small><b>${r[1]}</b><span>${r[2]}</span></div><button class="btn ghost" data-a="reset">Ulangi dari awal</button>`; }
+        else { const n = N[cur]; main = `<div class="rq"><b>${n[0]}</b><div class="ro">${n[1].map(o => `<button class="btn ghost" data-n="${o[1]}" data-l="${o[0]}">${o[0]}</button>`).join('')}</div></div>`; }
+        const s = S[si];
+        const ln = path.length ? path[path.length - 1][2] : '';
+        const st = res ? { x1: 'tolak', y1: 'sah', y2: 'tunggu', y3: 'otomatis' }[res] : ln === 'b' ? 'sepakat' : ln === 'c' ? 'tunggu' : 'bahas';
+        const cal = st === 'otomatis' ? '30 hari lewat' : '30 hari';
+        box.innerHTML = `<h4>Simulator nasib RUU (Pasal 20)</h4>
+          <p class="hint">Jalani alurnya: ada persetujuan bersama atau tidak, lalu 30 hari. Jawaban soal kasus selalu bergantung pada dua pertanyaan ini.</p>
+          ${stgRUU(st, cal)}
+          <ol class="rtrail">${trail}</ol>${main}
+          <h4 style="margin-top:20px">Tebak cepat</h4>
+          <div class="rq"><b>${s[0]}</b><div class="ro">${SO.map((o, i) => `<button class="btn ghost${sd ? (i === s[1] ? ' ok' : '') : ''}" data-s="${i}" ${sd ? 'disabled' : ''}>${o}</button>`).join('')}</div>
+          ${sd ? `<p class="hint" style="margin-top:10px">${s[2]}</p><button class="btn" data-a="next">Soal berikutnya</button>` : ''}</div>
+          <p class="hint" style="margin-top:8px">Skor tebak cepat: ${sk}</p>`;
+      };
+      box.addEventListener('click', e => {
+        const b = e.target.closest('button'); if (!b) return;
+        if (b.dataset.n) { const n = b.dataset.n; path.push([N[path.length === 0 ? 'a' : path[path.length - 1][2]][0].split('.')[0].split('?')[0] + '?', b.dataset.l, n]); if (R[n]) res = n; draw(); }
+        else if (b.dataset.a === 'reset') { path = []; res = null; draw(); }
+        else if (b.dataset.s !== undefined) { sd = true; if (+b.dataset.s === S[si][1]) sk++; draw(); }
+        else if (b.dataset.a === 'next') { si = (si + 1) % S.length; sd = false; draw(); }
+      });
+      draw();
+    })();
+
+    (function () {
+      const box = $('#sim-makmk'); if (!box) return;
+      const C = [
+        ['Menguji undang-undang terhadap UUD 1945', 1, 'Pengujian UU terhadap UUD: Mahkamah Konstitusi (Pasal 24C).'],
+        ['Menguji peraturan daerah terhadap undang-undang', 0, 'Peraturan di bawah UU diuji terhadap UU oleh Mahkamah Agung (Pasal 24A).'],
+        ['Mengadili perkara pada tingkat kasasi', 0, 'Kasasi adalah kewenangan Mahkamah Agung.'],
+        ['Memutus sengketa kewenangan antarlembaga negara yang kewenangannya diberikan UUD', 1, 'Kewenangan Mahkamah Konstitusi (Pasal 24C).'],
+        ['Memutus pembubaran partai politik', 1, 'Kewenangan Mahkamah Konstitusi.'],
+        ['Memutus perselisihan hasil pemilihan umum', 1, 'Kewenangan Mahkamah Konstitusi.'],
+        ['Menguji Peraturan Pemerintah yang diduga bertentangan dengan undang-undang', 0, 'PP berada di bawah UU, jadi diuji oleh Mahkamah Agung.'],
+        ['Memutus pendapat DPR bahwa Presiden melanggar hukum berat (Pasal 7B)', 1, 'MK memeriksa dan memutus pendapat DPR itu paling lama 90 hari.'],
+        ['Mengusulkan pengangkatan hakim agung dan menjaga kehormatan hakim', 2, 'Itu tugas Komisi Yudisial (Pasal 24B), bukan MA atau MK.'],
+        ['Membentuk undang-undang bersama Presiden', 2, 'Pembentuk UU adalah DPR bersama Presiden, bukan lembaga yudikatif.'],
+        ['Menetapkan Peraturan Pemerintah untuk menjalankan UU', 2, 'Itu kewenangan Presiden (eksekutif), Pasal 5 ayat 2.']
+      ];
+      const O = ['Mahkamah Agung', 'Mahkamah Konstitusi', 'Bukan MA atau MK'];
+      let order = C.map((_, i) => i).sort(() => Math.random() - .5), p = 0, done = false, sc = 0, pick = -1;
+      const draw = () => {
+        if (p >= order.length) { box.innerHTML = `<h4>Drill MA vs MK</h4><div class="rs ok"><small>SELESAI</small><b>Skor ${sc} dari ${order.length}</b><span>Ulangi sampai tiap kata kunci terasa otomatis.</span></div><button class="btn" data-a="again">Acak ulang</button>`; return; }
+        const c = C[order[p]];
+        box.innerHTML = `<h4>Drill kewenangan: MA, MK, atau bukan keduanya</h4>
+          <p class="hint">Aturan cepat: UU ke UUD = MK. Peraturan di bawah UU ke UU = MA. Kasasi = MA. Sengketa lembaga, partai, hasil pemilu = MK.</p>
+          ${stgMK(done ? (pick === c[1] ? 'ok' : 'no') : 'idle')}
+          <div class="rq"><small>Soal ${p + 1} dari ${order.length}</small><b>${c[0]}</b><div class="ro">${O.map((o, i) => `<button class="btn ghost${done ? (i === c[1] ? ' ok' : (i === pick ? ' no' : '')) : ''}" data-s="${i}" ${done ? 'disabled' : ''}>${o}</button>`).join('')}</div>
+          ${done ? `<p class="hint" style="margin-top:10px">${c[2]}</p><button class="btn" data-a="next">Lanjut</button>` : ''}</div>
+          <p class="hint" style="margin-top:8px">Skor: ${sc}</p>`;
+      };
+      box.addEventListener('click', e => {
+        const b = e.target.closest('button'); if (!b) return;
+        if (b.dataset.s !== undefined) { pick = +b.dataset.s; done = true; if (pick === C[order[p]][1]) sc++; draw(); }
+        else if (b.dataset.a === 'next') { p++; done = false; pick = -1; draw(); }
+        else if (b.dataset.a === 'again') { order.sort(() => Math.random() - .5); p = 0; sc = 0; done = false; pick = -1; draw(); }
+      });
+      draw();
+    })();
+
     // Tahap berikutnya: bank soal, timer, dan scoring
   
     // ---------- Grafik pembeda 4 istilah (TWK) ----------
@@ -5443,6 +5796,14 @@ button, a, summary, [role="button"] { touch-action: manipulation; }
     ['Suap', 'Pemberian dengan kesepakatan timbal balik agar penerima berbuat atau tidak berbuat sesuatu dalam jabatannya.', 'TWK'],
     ['Toleransi', 'Sikap menghargai perbedaan suku, agama, ras, dan golongan.', 'TWK'],
     ['Wawasan Nusantara', 'Cara pandang bangsa Indonesia tentang diri dan lingkungannya sebagai satu kesatuan.', 'TWK'],
+    ['Hak imunitas', 'Hak anggota DPR untuk tidak dituntut di pengadilan atas pernyataan, pertanyaan, atau pendapat yang disampaikan dalam rapat DPR (Pasal 20A ayat 3). Bukan kebal hukum total.', 'TWK'],
+    ['Hak interpelasi', 'Hak DPR meminta keterangan kepada Pemerintah tentang kebijakan penting dan strategis.', 'TWK'],
+    ['Hak angket', 'Hak DPR menyelidiki pelaksanaan undang-undang atau kebijakan Pemerintah yang diduga melanggar hukum.', 'TWK'],
+    ['Politik luar negeri bebas aktif', 'Bebas: tidak memihak blok mana pun. Aktif: ikut menciptakan perdamaian dunia. Setiap kerja sama dikaji berdasarkan kepentingan nasional.', 'TWK'],
+    ['Asas kekeluargaan', 'Dasar perekonomian menurut Pasal 33 ayat 1 UUD 1945: usaha bersama, mengutamakan kepentingan bersama; bentuk yang sesuai adalah koperasi.', 'TWK'],
+    ['Kasasi', 'Pemeriksaan tingkat akhir oleh Mahkamah Agung atas putusan pengadilan di bawahnya.', 'TWK'],
+    ['Peraturan Pemerintah', 'Peraturan yang ditetapkan Presiden untuk menjalankan undang-undang sebagaimana mestinya (Pasal 5 ayat 2 UUD 1945).', 'TWK'],
+    ['Flexing', 'Pamer kekayaan atau gaya hidup mewah, terutama di media sosial. Bertentangan dengan butir sila kelima tentang pemborosan dan gaya hidup mewah.', 'TWK'],
     ['ZEE', 'Zona Ekonomi Eksklusif: 200 mil laut dari garis pangkal.', 'TWK'],
     ['Analogi', 'Hubungan antara dua kata atau gambar, lalu diterapkan pada pasangan lain.', 'TIU'],
     ['Deret', 'Barisan bilangan atau gambar yang disusun menurut pola tertentu.', 'TIU'],
@@ -6245,7 +6606,7 @@ button, a, summary, [role="button"] { touch-action: manipulation; }
   function sync(){clearTimeout(deb);deb=setTimeout(function(){
     if(!active()){el.classList.remove('on');hide();lesKey='';tabKey='';return}
     build();el.classList.add('on');if(!tick)tick=requestAnimationFrame(frame);touch();
-    var h2=clean((L.querySelector('h2')||{}).textContent),ta=L.querySelector('.tabs2 .is-active'),tn=ta?clean(ta.textContent).replace(/\s*\(.*\)/,''):'',t=ta?ta.getAttribute('data-t'):'';
+    var h2=clean((L.querySelector('h2')||{}).textContent),ta=L.querySelector('.tabs2 .is-active'),tn=ta?clean(ta.textContent).replace(/\s*\(.*\)/,'').replace(/\s*\d+\/\d+$/,''):'',t=ta?ta.getAttribute('data-t'):'';
     if(h2!==lesKey){lesKey=h2;marks={};seen={};tabKey=t;tkKey='';qKey='';cy=range()[0];scrollTo&&0;pulse();sleeping=false;quiet=false;mood('happy',2600);
 var sp=POS[h2],tl=document.documentElement.scrollHeight-innerHeight;
       if((!t||t==='materi')&&sp>.08&&sp<.95&&tl>600)say('Terakhir lo baca sampai sekitar '+Math.round(sp*100)+'%. Mau lanjut dari situ?','happy',{chips:[['Lanjut dari situ',function(){hide();scrollTo({top:sp*(document.documentElement.scrollHeight-innerHeight),behavior:reduce?'auto':'smooth'})},1],['Dari awal',hide]]});
@@ -6513,6 +6874,763 @@ var sp=POS[h2],tl=document.documentElement.scrollHeight-innerHeight;
   N.forEach(r=>{(QZ[r[0]]=QZ[r[0]]||[]).push(Q(r[1],r[2],r[3],r[4]))});
 })();
 </script>
+<script id="nas-plus-js">
+(function(){
+  // Tambahan soal Nasionalisme (gaya kasus/penerapan SKD terbaru). Ditaruh setelah filter hafalan twk-app-js supaya tidak ikut terbuang.
+  if (typeof QZ === 'undefined' || typeof Q === 'undefined') return;
+  const R = [["Dina selalu merinding dan bangga setiap Indonesia Raya berkumandang di luar negeri, tetapi ia belum pernah ikut kegiatan apa pun untuk bangsanya. Perasaan Dina paling tepat disebut ....",
+["Bela negara",
+"Patriotisme",
+"Cinta tanah air",
+"Chauvinisme",
+"Separatisme"],
+2,
+"Rasa bangga dan sayang yang masih berupa perasaan batin adalah cinta tanah air. Bela negara menuntut tindakan nyata, patriotisme menuntut kerelaan berkorban."],
+["Seorang relawan menembus arus banjir untuk mengevakuasi warga di daerah lain tanpa bayaran, meski keselamatannya sendiri terancam. Semangat yang paling menonjol adalah ....",
+["Patriotisme",
+"Cinta tanah air semata",
+"Chauvinisme",
+"Primordialisme",
+"Etnosentrisme"],
+0,
+"Patriotisme adalah semangat rela berkorban dan berani demi bangsa dan sesama warga negara."],
+["Pak Rahmat rutin membayar pajak tepat waktu, ikut ronda lingkungan, dan menaati aturan lalu lintas sebagai kewajiban warga negara. Perilaku ini paling tepat dikategorikan sebagai ....",
+["Perasaan cinta tanah air semata",
+"Chauvinisme",
+"Separatisme",
+"Bela negara dalam bentuk tindakan nyata",
+"Xenofobia"],
+3,
+"Bela negara adalah tindakan nyata sekaligus kewajiban warga negara (Pasal 27 ayat 3 UUD 1945), tidak berhenti pada perasaan."],
+["Seorang tokoh berkata, \"Bangsa kita paling unggul di dunia, jadi tidak perlu belajar apa pun dari bangsa lain.\" Sikap ini paling tepat disebut ....",
+["Nasionalisme",
+"Chauvinisme",
+"Patriotisme",
+"Bela negara",
+"Cinta tanah air"],
+1,
+"Merasa bangsa sendiri paling unggul dan menutup diri dari bangsa lain adalah chauvinisme. Nasionalisme yang sehat tetap terbuka belajar dari luar."],
+["Seorang kepala seksi hanya memasukkan staf sesukunya ke tim proyek karena menganggap suku lain kurang cakap, padahal ada staf lain yang kompeten. Sikap ini bertentangan dengan nasionalisme karena merupakan wujud ....",
+["patriotisme yang berlebihan",
+"cinta tanah air yang tinggi",
+"bela negara nonfisik",
+"meritokrasi dalam pengelolaan SDM",
+"etnosentrisme dan primordialisme sempit"],
+4,
+"Mengutamakan suku sendiri dan menilai suku lain rendah adalah etnosentrisme atau primordialisme. Nasionalisme mengutamakan persatuan dan keadilan untuk semua warga."],
+["Sekelompok warga membentak dan mengusir turis asing di desa wisata dengan alasan \"menjaga kehormatan bangsa\", padahal turis itu menaati semua aturan. Penilaian yang paling tepat adalah ....",
+["Tepat, karena nasionalisme berarti menolak semua orang asing",
+"Tepat, karena turis pasti merusak budaya setempat",
+"Keliru, karena desa wisata tidak boleh menerima turis",
+"Tepat, karena bela negara menuntut curiga pada semua pendatang",
+"Keliru, karena nasionalisme yang sehat tetap terbuka dan tidak memusuhi orang tanpa alasan"],
+4,
+"Nasionalisme bukan kebencian pada bangsa lain. Memusuhi orang asing tanpa alasan adalah xenofobia, bukan nasionalisme."],
+["Seorang guru ASN melihat siswa dari Jawa mengejek logat teman sekelasnya yang berasal dari Maluku. Tindakan guru yang paling tepat adalah ....",
+["Membiarkan karena dianggap hanya bercanda",
+"Memindahkan siswa Maluku ke kelas lain",
+"Menegur sambil menjelaskan bahwa keberagaman adalah kekayaan bangsa yang harus saling dihargai",
+"Meminta siswa Maluku menghentikan logat daerahnya",
+"Menghukum seluruh kelas tanpa penjelasan"],
+2,
+"Menanamkan sikap saling menghargai perbedaan menjaga persatuan sebagai satu bangsa, inti nasionalisme di lingkungan sekolah."],
+["Di grup RT beredar kabar tanpa sumber yang mengadu domba dua kelompok etnis di kampung. Langkah yang paling mencerminkan nasionalisme adalah ....",
+["Memeriksa kebenarannya lewat sumber resmi, lalu meluruskan di grup",
+"Meneruskan ke grup lain agar warga waspada",
+"Membalas dengan kabar serupa tentang kelompok lawan",
+"Mengabaikan sama sekali",
+"Keluar dari grup RT"],
+0,
+"Menolak provokasi dan meluruskan informasi menjaga persatuan. Meneruskan atau membalas justru memperluas perpecahan."],
+["Seorang pengrajin tenun memakai bahan baku lokal, menjaga motif tradisional, dan memasarkan produknya hingga mancanegara. Perilaku ini mencerminkan ....",
+["chauvinisme budaya",
+"separatisme ekonomi",
+"primordialisme sempit",
+"nasionalisme: menjaga budaya sambil memajukan ekonomi bangsa",
+"individualisme ekonomi"],
+3,
+"Melestarikan budaya dan menguatkan ekonomi dalam negeri sambil tetap terbuka pada pasar dunia adalah nasionalisme yang produktif."],
+["Seorang remaja menyukai budaya pop asing, tetapi tetap bangga memakai batik pada acara resmi, berbahasa Indonesia yang baik, dan rajin belajar bahasa asing. Sikap ini menunjukkan ....",
+["chauvinisme yang menutup diri",
+"nasionalisme terbuka: menyaring pengaruh asing sambil menjaga jati diri",
+"hilangnya identitas nasional",
+"penolakan total terhadap globalisasi",
+"ketergantungan pada budaya asing"],
+1,
+"Terbuka pada dunia tanpa kehilangan jati diri adalah cara sehat menghadapi globalisasi."],
+["Seorang ASN selalu memakai bahasa Indonesia yang baku dalam surat dinas, walau rekan-rekannya sering mencampur istilah asing. Perilaku ini mencerminkan penghargaan pada ....",
+["bahasa daerah sebagai satu-satunya bahasa resmi",
+"bahasa asing sebagai tanda profesional",
+"bahasa Indonesia sebagai identitas nasional dan pemersatu bangsa",
+"aturan kantor semata tanpa makna kebangsaan",
+"kebiasaan pribadi yang tidak berkaitan dengan bangsa"],
+2,
+"Bahasa Indonesia adalah identitas nasional sekaligus pemersatu keberagaman suku dan bahasa daerah."],
+["Seorang siswa menolak hormat bendera dengan alasan \"itu cuma kain\". Tindakan guru ASN yang paling tepat adalah ....",
+["Menjelaskan makna bendera sebagai lambang kedaulatan dan persatuan, lalu mengajak siswa ikut upacara",
+"Mengeluarkannya dari sekolah saat itu juga",
+"Membiarkan karena itu pilihan pribadi",
+"Mempermalukannya di depan teman-temannya",
+"Menyuruh siswa lain menjauhinya"],
+0,
+"Pendekatan edukatif menumbuhkan kesadaran kebangsaan. Hukuman atau pembiaran tidak menumbuhkan rasa memiliki."],
+["Seorang warga menggunakan hak pilihnya di TPS, tidak golput, dan menerima hasil pemilu dengan tenang walau calon pilihannya kalah. Sikap ini mencerminkan ....",
+["sikap apatis terhadap kehidupan bernegara",
+"primordialisme dalam memilih",
+"separatisme politik",
+"kedewasaan berbangsa: ikut berpartisipasi dan menghormati hasil demokrasi",
+"chauvinisme politik"],
+3,
+"Berpartisipasi dan menerima hasil secara damai mengutamakan persatuan di atas kepentingan golongan."],
+["Seorang WNI yang tinggal di luar negeri rutin mengenalkan kuliner dan tari Indonesia pada warga setempat dan membantu sesama WNI yang kesulitan. Hal ini menunjukkan ....",
+["sikap menutup diri dari pergaulan internasional",
+"cinta tanah air dan nasionalisme yang tetap hidup meski jauh dari tanah air",
+"lunturnya identitas nasional",
+"chauvinisme terhadap warga setempat",
+"ketergantungan pada negara asing"],
+1,
+"Mengenalkan budaya dan menolong sesama warga bangsa menunjukkan kebanggaan dan rasa kebersamaan sebagai satu bangsa."],
+["Seorang calon kepala desa memakai isu kesukuan untuk menjatuhkan lawannya agar menang pemilihan. Penilaian yang paling tepat adalah ....",
+["Sesuai nasionalisme karena membela suku sendiri",
+"Sesuai nasionalisme karena itu strategi politik biasa",
+"Tidak berkaitan dengan nasionalisme",
+"Sesuai bela negara karena menjaga budaya setempat",
+"Bertentangan dengan nasionalisme karena memecah persatuan demi kepentingan golongan"],
+4,
+"Memanfaatkan sentimen SARA melemahkan persatuan. Nasionalisme menuntut kepentingan bangsa di atas kepentingan golongan."],
+["Seorang warga menyampaikan kritik atas pelayanan publik lewat kanal pengaduan resmi, lengkap dengan data dan usulan perbaikan. Dalam kerangka nasionalisme, tindakan ini ....",
+["tanda tidak cinta tanah air",
+"tindakan melawan negara",
+"pelanggaran ketertiban umum",
+"bentuk separatisme",
+"wujud kepedulian terhadap kemajuan bangsa"],
+4,
+"Kritik yang santun, berbasis data, dan lewat jalur resmi adalah kepedulian untuk memperbaiki bangsa."],
+["Seseorang menuduh siapa pun yang mengkritik kebijakan pemerintah sebagai tidak nasionalis dan menolak melihat kekurangan bangsanya. Penilaian yang paling tepat adalah ....",
+["Tepat, karena nasionalisme berarti selalu setuju pada pemerintah",
+"Tepat, karena kritik pasti merusak persatuan",
+"Nasionalisme tidak berarti menutup mata, kritik yang santun justru bagian dari kepedulian",
+"Tepat, karena hanya pemerintah yang boleh menilai bangsa",
+"Keliru, karena nasionalisme tidak berhubungan dengan kepedulian"],
+2,
+"Membela bangsa tidak berarti anti kritik. Menyampaikan masukan secara santun adalah bagian dari mencintai bangsa."],
+["Seorang ASN di bagian anggaran menolak menggelembungkan harga pengadaan walau dijanjikan bagian keuntungan. Dalam konteks nasionalisme, tindakan itu mencerminkan ....",
+["sikap mengutamakan kepentingan negara dan publik di atas keuntungan pribadi",
+"sikap tidak mau bekerja sama dengan rekan",
+"kekakuan dalam menjalankan aturan semata",
+"ketakutan kehilangan jabatan",
+"kecurigaan berlebihan pada rekan kerja"],
+0,
+"Nasionalisme berarti menempatkan kepentingan bangsa di atas kepentingan pribadi. Menolak korupsi adalah wujud nyatanya bagi ASN."],
+["Seorang dokter lulusan luar negeri memilih pulang melayani puskesmas daerah terpencil walau gaji di luar negeri jauh lebih besar. Nilai yang tampak paling kuat adalah ....",
+["primordialisme: mengutamakan daerah asal",
+"individualisme: mengejar kepuasan diri",
+"chauvinisme: merasa bangsa paling unggul",
+"patriotisme: rela mengorbankan kepentingan pribadi demi bangsa",
+"etnosentrisme: merendahkan bangsa lain"],
+3,
+"Rela berkorban kenyamanan dan penghasilan demi pelayanan bagi bangsa adalah patriotisme."],
+["Setelah timnas kalah, sekelompok suporter melempari botol dan mengejek suporter negara lawan. Penilaian yang paling tepat adalah ....",
+["Sesuai nasionalisme karena menunjukkan keberanian",
+"Bertentangan dengan nasionalisme sehat karena kebanggaan harus disertai sportivitas dan penghargaan pada pihak lain",
+"Sesuai nasionalisme karena membela kehormatan bangsa",
+"Tidak ada hubungannya dengan nasionalisme sama sekali",
+"Sesuai bela negara karena melawan musuh"],
+1,
+"Nasionalisme yang sehat bangga pada bangsa sendiri tanpa merendahkan atau menyakiti pihak lain."],
+["Sekelompok warga mengunggah petisi agar daerahnya memisahkan diri karena kecewa pembangunan belum merata. Sikap ASN yang paling selaras dengan nasionalisme adalah ....",
+["Mendukung petisi demi menjaga hubungan dengan warga",
+"Menyebarkan petisi ke media sosial agar viral",
+"Mengajak dialog dan menyalurkan aspirasi pembangunan lewat forum resmi sambil menegaskan persatuan",
+"Mengabaikan karena bukan urusan ASN",
+"Mengancam warga yang ikut menandatangani"],
+2,
+"Aspirasi ditampung lewat jalur resmi, persatuan tetap dijaga. Dukungan pada pemisahan diri bertentangan dengan nasionalisme."],
+["Warga dari berbagai daerah menggalang donasi untuk korban gempa di provinsi lain yang tidak mereka kenal. Dasar utama kepedulian itu adalah ....",
+["rasa senasib sepenanggungan sebagai satu bangsa",
+"keinginan mendapat pujian publik",
+"ikatan keluarga dengan para korban",
+"kewajiban menurut hukum perdata",
+"kepentingan ekonomi kelompok"],
+0,
+"Solidaritas lintas daerah tumbuh dari rasa senasib sepenanggungan, fondasi nasionalisme."],
+["Seorang ASN menerima penempatan tugas di daerah terpencil dengan fasilitas terbatas dan menjalankannya dengan sungguh-sungguh. Sikap ini mencerminkan ....",
+["kepasrahan karena tidak punya pilihan",
+"sikap mencari penghargaan pribadi",
+"primordialisme terhadap daerah asal",
+"pengabdian dan kerelaan berkorban demi pelayanan bagi bangsa",
+"kesediaan menerima apa saja tanpa tujuan"],
+3,
+"Melayani dengan sungguh-sungguh walau kondisi sulit adalah wujud patriotisme dan pengabdian pada bangsa."],
+["Seorang warga selalu membela tindakan siapa pun dari bangsanya, termasuk yang jelas melanggar hukum, dengan alasan \"demi nama baik bangsa\". Penilaian yang paling tepat adalah ....",
+["Nasionalisme sejati karena selalu membela bangsa",
+"Nasionalisme buta, karena kebanggaan harus disertai kejujuran dan penegakan hukum",
+"Patriotisme karena rela berkorban",
+"Bela negara karena menjaga nama baik",
+"Cinta tanah air yang wajar"],
+1,
+"Membela pelanggaran hukum bukan nasionalisme. Nasionalisme yang sehat menjunjung kebenaran dan hukum."],
+["Manakah yang BUKAN merupakan ciri sikap nasionalisme?",
+["Mengutamakan kepentingan bangsa di atas kepentingan golongan",
+"Menghargai keberagaman suku dan agama",
+"Bangga memakai produk dan budaya dalam negeri",
+"Rela berpartisipasi menjaga persatuan",
+"Merendahkan bangsa lain agar bangsa sendiri tampak unggul"],
+4,
+"Merendahkan bangsa lain adalah ciri chauvinisme, bukan nasionalisme."],
+["Pernyataan yang paling tepat tentang hubungan nasionalisme dan globalisasi adalah ....",
+["Globalisasi harus ditolak seluruhnya agar nasionalisme terjaga",
+"Nasionalisme tidak diperlukan di era global",
+"Bangsa maju harus meniru budaya asing sepenuhnya",
+"Nasionalisme hanya relevan ketika terjadi perang",
+"Nasionalisme dapat berjalan bersama globalisasi selama bangsa mampu menyaring pengaruh dan menjaga jati diri"],
+4,
+"Menyaring unsur positif dari luar sambil menjaga jati diri adalah cara sehat menghadapi globalisasi."],
+["Warga di wilayah perbatasan menolak uang dari pihak asing untuk menggeser patok batas dan melaporkannya kepada aparat. Sikap ini mencerminkan ....",
+["sikap apatis terhadap urusan bangsa",
+"individualisme",
+"nasionalisme dan kesadaran menjaga kedaulatan wilayah",
+"primordialisme sempit",
+"cinta damai semata tanpa kaitan dengan bangsa"],
+2,
+"Menjaga batas wilayah dan melapor adalah wujud nasionalisme sekaligus bela negara."],
+["Seorang pelajar dari sekolah kecil berlatih dengan fasilitas terbatas dan menang olimpiade sains internasional, lalu mengatakan ingin mengharumkan nama Indonesia. Prestasi itu menunjukkan nasionalisme dalam bentuk ....",
+["berkarya dan berprestasi positif untuk nama baik bangsa",
+"kebanggaan yang berlebihan terhadap diri sendiri",
+"persaingan dengan bangsa lain",
+"perlawanan terhadap negara lain",
+"sikap menutup diri dari dunia"],
+0,
+"Nasionalisme tidak selalu berupa perjuangan fisik. Berprestasi dan mengharumkan nama bangsa juga wujud nyatanya."],
+["Pedagang dari berbagai daerah di sebuah pasar membentuk koperasi bersama dan sepakat tidak membeda-bedakan anggota berdasarkan suku. Hal ini mencerminkan ....",
+["primordialisme dalam ekonomi",
+"separatisme ekonomi",
+"chauvinisme daerah",
+"persatuan dan kebersamaan sebagai satu bangsa",
+"persaingan antarsuku"],
+3,
+"Bekerja sama lintas suku dengan setara adalah wujud persatuan kebangsaan."],
+["Seorang guru menolak mengajarkan sejarah perjuangan daerah lain dengan alasan \"itu bukan sejarah daerah kita\". Sikap guru ini paling tepat dinilai sebagai ....",
+["nasionalisme yang kuat",
+"primordialisme yang mempersempit wawasan kebangsaan",
+"patriotisme yang tinggi",
+"bela negara nonfisik",
+"cinta tanah air yang wajar"],
+1,
+"Perjuangan bangsa adalah milik bersama. Menolak sejarah daerah lain menunjukkan pandangan sempit yang mementingkan daerah sendiri."],
+["Sekelompok pemuda desa membuat konten digital tentang tarian tradisional dan menerjemahkannya ke bahasa Inggris agar dikenal dunia. Langkah ini mencerminkan ....",
+["chauvinisme budaya",
+"pengabaian terhadap budaya sendiri",
+"nasionalisme yang adaptif: melestarikan budaya dengan cara kekinian",
+"ketergantungan pada budaya asing",
+"sikap menutup diri dari dunia luar"],
+2,
+"Mengenalkan budaya sendiri lewat sarana modern menjaga jati diri sekaligus memperkenalkannya ke dunia."],
+["Seorang warga menolak tetangga yang berbeda agama membangun rumah ibadah padahal sesuai aturan dan izin. Penilaian yang paling tepat adalah ....",
+["Bertentangan dengan persatuan kebangsaan karena menolak hak sesama warga negara",
+"Sesuai nasionalisme karena menjaga lingkungan",
+"Sesuai bela negara karena menertibkan warga",
+"Tidak berkaitan dengan nasionalisme",
+"Sesuai cinta tanah air karena menjaga budaya"],
+0,
+"Nasionalisme menuntut menghargai keberagaman dan hak setiap warga negara."],
+["Komunitas pemuda dari berbagai provinsi rutin mengadakan pertukaran budaya dan kerja bakti bersama tanpa memandang asal daerah. Kegiatan ini menghidupkan semangat ....",
+["primordialisme daerah",
+"chauvinisme budaya",
+"separatisme budaya",
+"Sumpah Pemuda: persatuan di atas perbedaan",
+"individualisme pemuda"],
+3,
+"Semangat Sumpah Pemuda adalah satu bangsa dengan persatuan di atas perbedaan asal daerah."],
+["Seorang pejabat mengizinkan pabrik berdiri di lahan resapan air karena mendapat imbalan pribadi, padahal warga sekitar akan dirugikan. Penilaian yang paling tepat adalah ....",
+["Sesuai nasionalisme karena membuka lapangan kerja",
+"Bertentangan dengan nasionalisme karena mengutamakan keuntungan pribadi di atas kepentingan bangsa",
+"Sesuai bela negara karena memajukan ekonomi",
+"Tidak berkaitan dengan nasionalisme",
+"Sesuai cinta tanah air karena membangun daerah"],
+1,
+"Nasionalisme menempatkan kepentingan bangsa di atas kepentingan pribadi. Imbalan pribadi merusak itu."],
+["Cara yang paling relevan bagi generasi muda meneladani perjuangan pahlawan saat ini adalah ....",
+["Mengangkat senjata melawan penjajah",
+"Menunggu perang terjadi",
+"Menghafal nama pahlawan tanpa berbuat apa pun",
+"Mengganti sistem pemerintahan",
+"Belajar sungguh-sungguh, berprestasi, dan menjaga persatuan"],
+4,
+"Penjajahan fisik sudah berakhir. Tantangan kini adalah kebodohan, perpecahan, dan ketertinggalan."],
+["Seorang ASN yang dipindahtugaskan ke daerah baru berusaha mempelajari adat dan bahasa setempat serta menghormati tokoh adat. Sikap ini mencerminkan ....",
+["sikap mencari muka kepada warga",
+"hilangnya identitas diri",
+"kepatuhan buta pada adat",
+"sikap menunggu perintah atasan",
+"penghargaan pada kebhinekaan sebagai bagian dari persatuan kebangsaan"],
+4,
+"Menghargai adat setempat memperkuat persatuan, wujud nasionalisme dalam keberagaman."],
+["Admin akun media sosial sebuah komunitas menghapus komentar bernada SARA dan mengunggah klarifikasi yang menenangkan. Tindakan ini mencerminkan nasionalisme di ruang ....",
+["pribadi semata tanpa kaitan dengan bangsa",
+"kekuasaan: membatasi kebebasan berpendapat",
+"digital: menjaga persatuan dan menolak ujaran kebencian",
+"perdagangan: menjaga citra komunitas",
+"hiburan: menjaga suasana grup"],
+2,
+"Menolak ujaran kebencian dan meredam provokasi di ruang digital menjaga persatuan bangsa."],
+["Seorang siswa berkata, \"Penjajahan sudah selesai, jadi persatuan tidak diperlukan lagi.\" Tanggapan yang paling tepat adalah ....",
+["Persatuan tetap diperlukan untuk menghadapi tantangan seperti hoaks, perpecahan, dan kesenjangan",
+"Benar, karena persatuan hanya berguna saat perang",
+"Benar, karena tiap daerah bisa maju sendiri-sendiri",
+"Persatuan hanya perlu bagi pemerintah pusat",
+"Persatuan tidak berkaitan dengan kemajuan bangsa"],
+0,
+"Tantangan bangsa berubah, kebutuhan akan persatuan tidak."],
+["Manakah pasangan istilah dan contoh yang TEPAT?",
+["Cinta tanah air: rela gugur di medan perang",
+"Patriotisme: bangga memakai batik",
+"Bela negara: merasa bangga mendengar lagu kebangsaan",
+"Nasionalisme: menolak hoaks pemecah belah demi persatuan",
+"Chauvinisme: menghargai keberagaman antarbangsa"],
+3,
+"Rela gugur adalah patriotisme, bangga memakai batik adalah cinta tanah air, bangga mendengar lagu kebangsaan adalah cinta tanah air, dan chauvinisme adalah merendahkan bangsa lain."],
+["Seorang ASN mengikuti pelatihan di luar negeri, lalu pulang dan menerapkan ilmunya untuk memperbaiki pelayanan di kantornya. Sikap ini mencerminkan ....",
+["chauvinisme karena menganggap bangsa lain lebih unggul",
+"nasionalisme yang terbuka: belajar dari bangsa lain untuk memajukan bangsa sendiri",
+"kehilangan identitas nasional",
+"ketergantungan pada bangsa lain",
+"sikap menutup diri dari perubahan"],
+1,
+"Belajar dari luar lalu menerapkannya untuk kemajuan bangsa adalah nasionalisme yang sehat."],
+["Ketua kelompok kerja yang beranggotakan banyak suku memilih anggota berdasarkan kemampuan, bukan suku, dan memutuskan lewat musyawarah. Sikap ini mencerminkan ....",
+["primordialisme dalam kerja tim",
+"chauvinisme",
+"persatuan dan keadilan dalam keberagaman",
+"individualisme",
+"sikap menghindari konflik semata"],
+2,
+"Menilai berdasarkan kemampuan dan mengambil keputusan bersama menjaga persatuan serta keadilan bagi semua."]];
+  QZ.nas = QZ.nas || [];
+  R.forEach(r => QZ.nas.push(Q(r[0], r[1], r[2], r[3])));
+})();
+</script>
+<script id="hots-plus-js">
+(function(){
+  // Soal HOTS Integritas dan Bela Negara (dilema, analisis, pengecoh berat). Ditaruh setelah filter hafalan twk-app-js.
+  if (typeof QZ === 'undefined' || typeof Q === 'undefined') return;
+  const R = [["int",
+"Seorang ASN pemberi izin usaha menerima parsel bernilai besar dari pemohon yang izinnya telah terbit dua minggu lalu. Kartu ucapannya hanya berbunyi \"terima kasih atas bantuannya\". Ia tidak pernah meminta dan tidak ada janji apa pun sebelumnya. Analisis yang paling tepat adalah ....",
+["Suap, karena ada imbalan setelah izin terbit, sehingga cukup dikembalikan secara diam-diam",
+"Termasuk gratifikasi yang berhubungan dengan jabatan, sehingga wajib dilaporkan ke KPK paling lambat 30 hari kerja sejak diterima",
+"Bukan masalah, karena izin sudah terbit dan tidak ada janji sebelumnya",
+"Pemerasan, karena pemohon menekan lewat kartu ucapan",
+"Boleh diterima asalkan dibagikan kepada seluruh rekan kantor"],
+1,
+"Tidak ada kesepakatan timbal balik, jadi bukan suap. Pemberian yang berhubungan dengan jabatan tanpa kesepakatan adalah gratifikasi dan wajib dilaporkan ke KPK paling lambat 30 hari kerja sejak diterima. Membagikan ke rekan tidak menghapus kewajiban itu."],
+["int",
+"Atasan langsung meminta Anda memecah satu paket pengadaan menjadi beberapa paket kecil agar dapat ditunjuk langsung tanpa lelang, dengan alasan \"demi kecepatan dan bukti loyalitas pada pimpinan\". Penilaian dan langkah yang paling tepat adalah ....",
+["Menuruti, karena loyalitas pada pimpinan adalah bagian dari nilai dasar ASN",
+"Menuruti, tetapi mencatat keberatan di buku pribadi sebagai bukti",
+"Menuruti sekali ini lalu melapor setelah proyek selesai",
+"Menolak karena melanggar aturan pengadaan, menawarkan jalur percepatan yang sah, dan melapor lewat jalur resmi bila terus dipaksa",
+"Menolak sambil menyebarkan kasus ini ke media sosial agar atasan jera"],
+3,
+"Loyal dalam BerAKHLAK berarti setia pada Pancasila, UUD 1945, NKRI, dan pemerintah yang sah, bukan pada perintah yang menyimpang. Memecah paket untuk menghindari lelang adalah penyimpangan pengadaan."],
+["int",
+"Anda anggota kelompok kerja pemilihan penyedia. Salah satu peserta lelang adalah perusahaan milik adik ipar Anda. Anda yakin dapat menilai secara objektif dan atasan belum mengetahui hubungan itu. Tindakan yang paling tepat adalah ....",
+["Menyatakan benturan kepentingan kepada atasan dan mundur dari proses penilaian paket tersebut",
+"Tetap menilai karena yakin objektif dan hasilnya bisa diaudit",
+"Tetap menilai tetapi sengaja memberi nilai lebih rendah agar terlihat netral",
+"Meminta rekan menilai perusahaan adik ipar saja, sisanya tetap Anda nilai",
+"Diam karena hubungan keluarga tidak melanggar aturan selama tidak ada imbalan"],
+0,
+"Benturan kepentingan ada walau tanpa niat curang. Solusinya mengungkapkan dan menarik diri dari proses. Memberi nilai lebih rendah sama-sama bias, hanya arahnya berbeda."],
+["int",
+"Anda menemukan bukti awal bahwa kepala bagian memalsukan kuitansi perjalanan dinas. Anda khawatir bukti hilang dan takut dimutasi bila ketahuan melapor. Langkah yang paling tepat adalah ....",
+["Mengonfrontasi kepala bagian dan mengancam melapor bila ia tidak mengembalikan uang",
+"Mengunggah bukti ke media sosial agar cepat viral dan ditindak",
+"Menunggu kepala bagian pensiun agar tidak terjadi konflik di kantor",
+"Membuang bukti agar Anda tidak terseret sebagai saksi",
+"Mengamankan salinan bukti yang sah, lalu melapor lewat kanal resmi (atasan yang tidak terlibat, pengawas internal, atau kanal pengaduan KPK) dengan memanfaatkan perlindungan pelapor"],
+4,
+"Pelaporan dilakukan lewat jalur resmi dengan bukti yang sah. Konfrontasi bisa membuat bukti hilang, media sosial berisiko fitnah dan merusak proses hukum, menunda atau membuang bukti sama dengan membiarkan penyimpangan."],
+["int",
+"Manakah pemberian berikut yang paling jelas wajib dilaporkan sebagai gratifikasi?",
+["Hadiah pernikahan dalam batas wajar dari sepupu Anda yang tidak berurusan dengan jabatan Anda",
+"Honor resmi sebagai narasumber seminar sesuai ketentuan instansi dan disetujui atasan",
+"Uang hari raya dari penyedia barang yang sedang berkontrak dengan unit tempat Anda bekerja",
+"Tunjangan kinerja yang diterima sesuai peraturan",
+"Hadiah ulang tahun dari orang tua kandung Anda"],
+2,
+"Gratifikasi wajib lapor bila berhubungan dengan jabatan dan berpotensi memengaruhi keputusan. Penyedia yang sedang berkontrak jelas punya kepentingan. Yang lain adalah penghasilan sah atau hubungan keluarga tanpa kaitan jabatan."],
+["int",
+"Seorang petugas layanan tidak memproses berkas selama pemohon belum menyerahkan \"uang administrasi\" di luar tarif resmi. Pemohon terpaksa membayar agar urusannya selesai. Perbuatan petugas itu paling tepat digolongkan sebagai ....",
+["Gratifikasi, karena uang diberikan tanpa diminta",
+"Suap atas kesepakatan setara antara kedua pihak",
+"Benturan kepentingan dalam pengadaan",
+"Pemerasan, karena petugas memaksa pemohon memberi sesuatu",
+"Perbuatan curang dalam pekerjaan pembangunan"],
+3,
+"Pemerasan: pejabat yang memaksa pihak lain memberi sesuatu. Ciri kuncinya adalah tekanan dari pihak pejabat, sedangkan pemohon bukan pihak yang bersepakat."],
+["int",
+"Anda bendahara dan menemukan selisih kas Rp200.000 akibat kesalahan pencatatan Anda sendiri. Belum ada yang tahu, audit masih tiga bulan lagi, dan Anda punya uang pribadi untuk menutupnya. Tindakan yang paling sesuai integritas adalah ....",
+["Mencatat kesalahan, melaporkannya kepada atasan, lalu memperbaiki pencatatan sesuai prosedur",
+"Menutup dengan uang pribadi tanpa catatan agar urusan selesai dengan tenang",
+"Menunggu audit karena nominalnya kecil",
+"Mengubah catatan agar saldo tampak seimbang",
+"Menyalahkan sistem pencatatan agar tidak terlihat sebagai kelalaian"],
+0,
+"Integritas menuntut transparansi. Menutup diam-diam terlihat baik, tetapi menyembunyikan kesalahan dan mencampur uang pribadi dengan kas."],
+["int",
+"Seorang wartawan meminta dokumen draf anggaran yang belum disahkan dan masih bersifat internal, dengan dalih hak publik atas informasi. Sikap ASN yang paling tepat adalah ....",
+["Memberikan seluruhnya demi transparansi",
+"Memberikan secara tidak resmi dengan syarat namanya tidak dikutip",
+"Menolak memberikan draf internal dan mengarahkan wartawan ke juru bicara atau pengelola informasi resmi untuk data yang boleh dibuka",
+"Tidak merespons sama sekali agar tidak menimbulkan masalah",
+"Memberikan sebagian lewat pesan pribadi agar tidak tercatat"],
+2,
+"ASN wajib menjaga rahasia jabatan. Keterbukaan informasi berjalan lewat kanal resmi, bukan lewat pemberian dokumen internal secara pribadi atau tidak tercatat."],
+["int",
+"Saat bekerja dari rumah, pekerjaan harian Anda selesai dalam empat jam dari tujuh jam kerja. Atasan hanya memeriksa keluaran, bukan jam kerja. Tindakan yang paling sesuai integritas adalah ....",
+["Melaporkan seluruh tujuh jam sebagai jam produktif karena target tercapai",
+"Melaporkan capaian dan jam kerja apa adanya, lalu meminta tambahan tugas atau memanfaatkan sisa waktu untuk pekerjaan dinas lain",
+"Meminta rekan mengisi laporan agar tampak sibuk",
+"Mengerjakan urusan pribadi dan menuliskannya sebagai pekerjaan dinas",
+"Tidak melapor apa pun karena tidak ada yang memeriksa"],
+1,
+"Integritas berarti konsisten jujur walau tidak diawasi."],
+["int",
+"Atasan meminta Anda menyampaikan klarifikasi kepada publik dengan sebagian data yang tidak akurat \"agar citra instansi aman\". Penilaian yang paling tepat adalah ....",
+["Menuruti, karena menjaga nama baik instansi adalah bentuk loyalitas",
+"Menuruti, karena yang menanggung akibat hukum adalah atasan",
+"Menuruti sebagian dan menghilangkan data yang paling merugikan",
+"Menolak berbicara dan membiarkan kabar simpang siur",
+"Citra instansi tidak boleh dijaga dengan data tidak akurat; klarifikasi harus jujur, transparan, dan dapat dipertanggungjawabkan"],
+4,
+"Nilai Akuntabel menuntut jujur dan transparan. Menghilangkan data yang merugikan tetap menyesatkan publik, dan tanggung jawab tidak berpindah ke atasan."],
+["int",
+"Seorang wali murid menitipkan amplop kepada staf TU sebelum pengumuman hasil seleksi penerimaan murid baru, sebagai \"terima kasih dini\" dan berharap anaknya diperhatikan. Tindakan yang paling tepat adalah ....",
+["Menerima, lalu mengembalikannya setelah pengumuman agar tidak memengaruhi hasil",
+"Menolak, mencatat kejadian, dan melaporkannya kepada atasan atau kanal pengaduan resmi",
+"Menerima, lalu menyumbangkannya ke sekolah agar bermanfaat",
+"Menolak, tetapi tidak melaporkan agar wali murid tidak malu",
+"Menerima karena belum ada keputusan dan tidak ada janji"],
+1,
+"Pemberian ini berupaya memengaruhi keputusan jabatan. Menerima dengan alasan apa pun menempatkan ASN pada benturan kepentingan. Tolak dan laporkan agar pola serupa dapat dicegah."],
+["int",
+"Sebagai pengelola aset, Anda tahu sebuah laptop sekolah yang rusak ringan masuk daftar barang yang akan dihapus. Rekan menawarkan membelinya murah tanpa melalui mekanisme penghapusan, dengan alasan \"barang jelek, tidak ada yang peduli\". Tindakan yang paling tepat adalah ....",
+["Menyetujui asalkan harganya wajar dan uangnya masuk kas sekolah",
+"Menyetujui lalu mencatat pelepasannya setelah transaksi selesai",
+"Menyetujui karena nilai barangnya sudah sangat kecil",
+"Menolak dan memproses penghapusan serta pelepasan aset sesuai ketentuan, lengkap dengan pencatatan dan persetujuan pihak berwenang",
+"Membiarkan rekan mengambil laptop tanpa mencatatnya agar tidak repot"],
+3,
+"Barang milik negara hanya boleh dilepas lewat mekanisme resmi. Nilai kecil atau harga wajar tidak menggantikan prosedur dan persetujuan."],
+["int",
+"Manakah situasi berikut yang paling tepat digolongkan sebagai suap, bukan sekadar gratifikasi?",
+["Pemohon menjanjikan uang bila izinnya dipercepat, petugas menyanggupi, lalu menerimanya setelah izin terbit",
+"Rekanan mengirim parsel hari raya tanpa pesan apa pun kepada pejabat pengadaan",
+"Peserta seminar memberi suvenir kecil kepada panitia sesuai kebiasaan umum",
+"Orang tua memberi uang saku kepada anaknya yang menjadi ASN",
+"Instansi menerima hibah resmi yang dicatat dan disetujui pimpinan"],
+0,
+"Suap ditandai kesepakatan atau timbal balik antara pemberi dan penerima. Gratifikasi adalah pemberian tanpa kesepakatan tetapi berkaitan dengan jabatan."],
+["int",
+"Sahabat dekat Anda di bagian kepegawaian mengajukan kenaikan pangkat, tetapi satu dokumen wajibnya belum ada. Ia berkata, \"Kita kan sahabat, masa tidak bisa bantu?\" Sikap yang paling tepat adalah ....",
+["Meloloskan berkas lebih dulu dan meminta dokumennya menyusul",
+"Menolak berbicara dengannya selama urusan ini belum selesai",
+"Meminta atasan meloloskan agar bukan Anda yang bertanggung jawab",
+"Memproses berkas dengan catatan dokumen akan dilengkapi nanti",
+"Menjelaskan persyaratannya, membantu menunjukkan cara melengkapi dokumen, dan memproses sesuai aturan setelah lengkap"],
+4,
+"Melayani tidak sama dengan melanggar aturan. Hubungan pribadi tidak boleh mengubah persyaratan, tetapi ASN tetap ramah dan membantu menempuh jalur yang benar."],
+["int",
+"Seluruh rekan satu tim sepakat membuat daftar hadir kegiatan fiktif agar anggaran terserap sebelum akhir tahun. Anda satu-satunya yang menolak dan rekan-rekan mengancam mengucilkan Anda. Langkah yang paling tepat adalah ....",
+["Ikut membuat daftar hadir agar tidak dikucilkan, lalu mengembalikan anggarannya bila ketahuan",
+"Menolak tetapi diam saja agar suasana tim tetap harmonis",
+"Tetap menolak, menyampaikan persoalan secara berjenjang lewat jalur resmi, dan mengusulkan cara penyerapan anggaran yang sah",
+"Mengundurkan diri dari tim tanpa melapor apa pun",
+"Mengumumkan kecurangan tim di media sosial"],
+2,
+"Integritas diuji saat ada tekanan kelompok. Harmoni tidak boleh dibeli dengan kecurangan, dan penyelesaiannya lewat jalur resmi."],
+["int",
+"Manakah pasangan kasus dan nilai antikorupsi yang TEPAT?",
+["Menolak titipan berkas dari kerabat pejabat: Peduli",
+"Menyelesaikan tugas dengan kemampuan sendiri tanpa menyalin hasil rekan: Adil",
+"Hidup sesuai penghasilan resmi meski rekan hidup mewah: Disiplin",
+"Melaporkan penyimpangan atasan walau berisiko dimutasi: Berani",
+"Menyelesaikan laporan sebelum tenggat: Peduli"],
+3,
+"Menolak titipan = Adil. Mengerjakan sendiri = Mandiri. Hidup sesuai penghasilan = Sederhana. Menyelesaikan sebelum tenggat = Disiplin."],
+["int",
+"Sebagai panitia seleksi jabatan, Anda ditekan atasan untuk meloloskan satu kandidat dengan alasan \"ini arahan pimpinan\", padahal nilainya di bawah kandidat lain. Langkah yang paling tepat adalah ....",
+["Menilai berdasarkan kriteria objektif, mencatat tekanan tersebut, dan melapor lewat jalur pengawasan resmi bila tekanan berlanjut",
+"Meloloskan kandidat itu karena arahan pimpinan harus ditaati",
+"Meloloskan kandidat itu dengan menaikkan nilainya sedikit agar terlihat wajar",
+"Mengundurkan diri tanpa menjelaskan alasan",
+"Menyebarkan nama kandidat titipan ke grup pesan kantor"],
+0,
+"Sistem merit menuntut penilaian objektif. Menaikkan nilai agar wajar adalah manipulasi, dan menyebar nama ke grup kantor bukan jalur pelaporan."],
+["int",
+"Rekanan pengadaan memberi Anda jam tangan mahal pada hari Anda dimutasi ke unit lain. Rekanan berkata, \"Ini bukan soal proyek, hanya kenang-kenangan karena kita sudah lama bekerja sama.\" Penilaian yang paling tepat adalah ....",
+["Boleh diterima karena Anda sudah tidak menangani proyeknya",
+"Boleh diterima karena tidak ada janji apa pun",
+"Tetap berpotensi gratifikasi karena berasal dari pihak yang berhubungan dengan jabatan; sebaiknya ditolak, atau dilaporkan ke KPK bila sudah diterima",
+"Boleh diterima asalkan dipakai di luar jam kerja",
+"Boleh diterima dan disimpan tanpa laporan karena bentuknya kenang-kenangan"],
+2,
+"Pemberian dari pihak yang berhubungan dengan jabatan tetap berpotensi gratifikasi walau diberikan saat mutasi dan dibungkus sebagai kenang-kenangan."],
+["int",
+"Seorang ASN yang bertugas membeli perlengkapan kantor menerima komisi dari toko yang ia rekomendasikan. Ia berkata, \"Tidak ada aturan yang secara eksplisit melarangnya.\" Penilaian yang paling tepat adalah ....",
+["Tidak melanggar, karena yang tidak dilarang berarti boleh",
+"Tetap melanggar integritas karena menimbulkan benturan kepentingan, walau tidak ada larangan tertulis yang menyebutnya langsung",
+"Tidak melanggar, karena komisi bukan uang negara",
+"Melanggar hanya jika nilainya besar",
+"Melanggar hanya jika diketahui atasan"],
+1,
+"Integritas tidak berhenti pada ada atau tidaknya larangan tertulis. Komisi dari pihak yang direkomendasikan memengaruhi objektivitas jabatan."],
+["int",
+"Atasan meminta Anda menurunkan nilai kinerja seorang bawahan yang sering mengkritik kebijakan unit, padahal capaian bawahan itu memenuhi target. Tindakan yang paling tepat adalah ....",
+["Menuruti agar hubungan kerja dengan atasan tetap baik",
+"Menurunkan sedikit sebagai jalan tengah",
+"Membiarkan atasan mengubah nilai sendiri tanpa sepengetahuan Anda",
+"Menyampaikan keluhan bawahan itu kepada seluruh pegawai",
+"Menilai berdasarkan capaian dan data objektif, serta menyampaikan alasan penolakan kepada atasan secara santun"],
+4,
+"Penilaian kinerja harus objektif dan adil. Jalan tengah yang tidak berdasar tetap tidak adil."],
+["int",
+"Untuk memenuhi laporan kinerja, seorang ASN menyalin analisis rekan dari instansi lain dan mengakuinya sebagai hasil kerjanya sendiri. Penilaian yang paling tepat adalah ....",
+["Wajar karena tujuannya menyelesaikan laporan tepat waktu",
+"Tidak jujur dan melanggar integritas; seharusnya menyebut sumber atau menyusun analisis sendiri",
+"Wajar karena instansi lain tidak akan mengetahuinya",
+"Tidak masalah selama hasilnya benar",
+"Tidak masalah karena rekan tersebut tidak keberatan"],
+1,
+"Mengaku karya orang lain sebagai karya sendiri adalah ketidakjujuran, walau hasilnya benar atau pemilik tidak keberatan."],
+["int",
+"Anda menemukan indikasi penyimpangan dana kegiatan siswa oleh atasan. Seorang rekan menyarankan menunda laporan sampai dana kegiatan penting bulan depan cair, agar kegiatan siswa tidak terganggu. Tanggapan yang paling tepat adalah ....",
+["Menunda sampai dana cair karena kepentingan siswa lebih penting",
+"Menunda sampai atasan dimutasi agar tidak ada konflik",
+"Menghapus bukti agar kegiatan tidak terganggu",
+"Tidak menunda: melapor lewat jalur resmi sambil tetap menjaga kelancaran kegiatan siswa melalui mekanisme yang sah",
+"Meminta atasan mengembalikan dana tanpa melapor"],
+3,
+"Alasan yang tampak baik tidak membenarkan penundaan. Penyimpangan bisa meluas bila dibiarkan, dan kegiatan siswa dapat dijaga lewat jalur yang sah."],
+["int",
+"Anda mendengar desas-desus bahwa seorang rekan menerima suap, tetapi tidak ada bukti dan Anda belum melihat sendiri kejadiannya. Sikap yang paling tepat adalah ....",
+["Tidak menyebarkan tuduhan, mengumpulkan informasi yang sah, dan melapor lewat kanal resmi hanya bila ada dasar yang cukup",
+"Menyebarkan desas-desus agar rekan tersebut segera ditindak",
+"Mengonfrontasi rekan di depan umum",
+"Menganggap desas-desus pasti benar dan langsung melapor tanpa informasi apa pun",
+"Mengabaikan sama sekali dan menutup kemungkinan melapor di kemudian hari"],
+0,
+"Keberanian harus disertai akurasi. Tuduhan tanpa dasar dapat menjadi fitnah, tetapi jangan abai bila ada dasar yang cukup."],
+["int",
+"Vendor langganan menyerahkan barang yang spesifikasinya tidak sesuai kontrak dan berjanji menggantinya bulan depan, sambil meminta pembayaran penuh sekarang. Sebagai pejabat yang memeriksa hasil pekerjaan, tindakan yang paling tepat adalah ....",
+["Membayar penuh karena vendor sudah lama menjadi langganan yang baik",
+"Membayar penuh lalu menagih penggantian bulan depan",
+"Membayar separuh tanpa mencatat ketidaksesuaian",
+"Menerima barang dan menyesuaikan berita acara agar tampak sesuai kontrak",
+"Menahan pembayaran, mencatat ketidaksesuaian dalam berita acara, dan meminta perbaikan sesuai kontrak sebelum membayar"],
+4,
+"Pembayaran harus sesuai prestasi pekerjaan. Membayar barang yang tidak sesuai dapat merugikan keuangan negara dan memalsukan berita acara adalah kecurangan."],
+["bela",
+"Sebuah kampanye daring terorganisir menyebarkan disinformasi untuk melemahkan kepercayaan pada lembaga negara, sementara pihak lain melakukan sabotase pada fasilitas vital. Gabungan keduanya paling tepat disebut ancaman ....",
+["militer, karena ada sabotase terhadap fasilitas",
+"nonmiliter, karena sebagian besar dilakukan lewat media sosial",
+"alamiah, karena terjadi tanpa pengerahan pasukan",
+"hibrida, karena menggabungkan disinformasi (nonmiliter) dengan sabotase (bersifat militer)",
+"keselamatan umum, karena dapat mengganggu aktivitas warga"],
+3,
+"Ancaman hibrida adalah gabungan unsur militer dan nonmiliter, termasuk disinformasi."],
+["bela",
+"Indonesia sangat bergantung pada impor satu komoditas pangan pokok sehingga harga dalam negeri mudah terguncang oleh gejolak pasar dunia. Jenis ancaman yang paling tepat adalah ....",
+["nonmiliter di bidang ekonomi (ketahanan pangan)",
+"militer, karena menyangkut ketahanan nasional",
+"nonmiliter di bidang ideologi",
+"nonmiliter di bidang sosial budaya",
+"militer dalam bentuk spionase"],
+0,
+"Ketergantungan pangan dan gejolak harga termasuk ancaman nonmiliter bidang ekonomi."],
+["bela",
+"Seorang pemuda berkata, \"Bela negara itu urusan tentara. Saya pengrajin, jadi tidak ada kewajiban apa pun.\" Tanggapan yang paling tepat adalah ....",
+["Benar, karena pertahanan negara sepenuhnya tugas TNI",
+"Benar, karena warga sipil hanya wajib membayar pajak",
+"Keliru: bela negara adalah hak dan kewajiban setiap warga, wujudnya dapat disesuaikan dengan profesi, misalnya bekerja jujur dan menaati hukum",
+"Keliru, karena setiap warga wajib mengikuti pelatihan militer tanpa kecuali",
+"Keliru, karena bela negara hanya berlaku saat perang"],
+2,
+"Pasal 27 ayat 3 UUD 1945: setiap warga berhak dan wajib ikut serta dalam pembelaan negara. Bela negara tidak identik dengan wajib militer dan tidak hanya saat perang."],
+["bela",
+"Sekelompok warga di perbatasan membawa senjata tajam dan menghadang setiap orang asing yang lewat dengan alasan \"mengamankan wilayah\", tanpa berkoordinasi dengan aparat. Penilaian yang paling tepat adalah ....",
+["Tepat, karena warga berhak mempertahankan wilayah dengan cara apa pun",
+"Tepat, karena aparat tidak mungkin selalu hadir di perbatasan",
+"Keliru, karena warga tidak boleh berperan sama sekali dalam menjaga wilayah",
+"Keliru, karena bela negara hanya berlaku bagi anggota TNI",
+"Semangatnya baik tetapi caranya keliru; bela negara harus sesuai hukum dan dikoordinasikan dengan aparat berwenang"],
+4,
+"Warga dapat berperan, misalnya melapor dan menjaga lingkungan, tetapi tindakan main hakim sendiri melanggar hukum."],
+["bela",
+"Manakah pasangan kasus dan nilai dasar bela negara yang TEPAT?",
+["Siswa hafal lagu kebangsaan dan bangga pada negerinya: sadar berbangsa dan bernegara",
+"Warga menyumbang tenaga dan sebagian hartanya untuk korban bencana meski hidup pas-pasan: rela berkorban untuk bangsa dan negara",
+"Warga memahami hak dan kewajibannya sebagai warga negara: cinta tanah air",
+"Peserta pelatihan kedisiplinan dan kesiapsiagaan bencana: yakin Pancasila sebagai ideologi negara",
+"Siswa menolak paham yang bertentangan dengan Pancasila: kemampuan awal bela negara"],
+1,
+"Bangga pada negeri = cinta tanah air. Memahami hak dan kewajiban = sadar berbangsa dan bernegara. Pelatihan dasar = kemampuan awal bela negara. Menolak paham yang bertentangan = yakin Pancasila."],
+["bela",
+"Seorang rekan menyimpan data kependudukan warga di flashdisk pribadi agar bisa bekerja di rumah. Langkah yang paling mencerminkan bela negara di bidang keamanan informasi adalah ....",
+["Mengingatkannya akan risiko kebocoran data dan mendorong penggunaan sistem resmi, serta melapor sesuai prosedur bila tetap dilakukan",
+"Membiarkan karena yang penting pekerjaannya selesai",
+"Meminjam flashdisk itu untuk ikut bekerja di rumah",
+"Menyebarkan kebiasaan rekan itu ke grup pesan kantor",
+"Menyalin data tersebut sebagai cadangan pribadi"],
+0,
+"Menjaga data warga adalah bagian dari ketahanan siber. Mengingatkan dan melapor sesuai prosedur menutup celah tanpa mempermalukan."],
+["bela",
+"Seorang insinyur sipil membangun jembatan darurat pascabencana bersama relawan tanpa menjadi anggota militer. Dalam konsep pertahanan semesta, kontribusinya paling tepat dipahami sebagai ....",
+["bukan bela negara karena hanya anggota TNI yang berperan",
+"kontribusi tambahan di luar sistem pertahanan negara",
+"peran warga dengan keahliannya sebagai dukungan terhadap pertahanan dan bela negara nonmiliter",
+"tindakan yang harus dihentikan karena menyalahi tugas TNI",
+"bentuk bela negara fisik dalam arti militer"],
+2,
+"Dalam Sishankamrata, TNI adalah komponen utama dan seluruh warga serta sumber daya nasional mendukung sesuai kemampuan."],
+["bela",
+"Dalam pembinaan karakter siswa baru, panitia memakai hukuman fisik dan bentakan dengan dalih \"menanamkan jiwa bela negara\". Penilaian yang paling tepat adalah ....",
+["Tepat, karena disiplin hanya terbentuk lewat hukuman fisik",
+"Tepat, karena bela negara identik dengan kekerasan",
+"Tepat asalkan siswa tidak melapor",
+"Tidak berkaitan dengan bela negara, hanya soal selera panitia",
+"Bertentangan dengan bela negara dan perlindungan anak; pembinaan karakter harus bebas kekerasan dan berbasis keteladanan"],
+4,
+"Bela negara bertumpu pada cinta tanah air dan taat hukum. Kekerasan terhadap siswa melanggar hukum dan merusak tujuannya."],
+["bela",
+"Seorang pengusaha kuliner menerima tawaran investor asing untuk membeli seluruh produksinya, dengan syarat resep warisan keluarga dilepas selamanya tanpa perlindungan hak kekayaan intelektual. Sikap yang paling bijak adalah ....",
+["Menolak semua investasi asing karena bela negara berarti menjauhi pihak asing",
+"Menegosiasikan kerja sama yang adil dan melindungi kekayaan intelektual, bukan menerima atau menolak mentah-mentah",
+"Menerima karena keuntungan ekonomi lebih penting daripada warisan budaya",
+"Menerima lalu menyembunyikan sebagian resep agar tetap unggul",
+"Menjual resep kepada pihak lain yang menawar lebih tinggi"],
+1,
+"Bela negara bidang ekonomi bukan anti asing, tetapi menjaga kepentingan nasional dan kekayaan budaya lewat kerja sama yang adil."],
+["bela",
+"Pemerintah daerah memasukkan pelatihan kesiapsiagaan bencana dan pendidikan wawasan kebangsaan ke seluruh sekolah sejak dini, serta melibatkan komunitas warga. Kebijakan ini paling sesuai dengan ciri pertahanan negara yang bersifat ....",
+["terbatas: hanya dilakukan oleh unsur militer",
+"reaktif: baru dipersiapkan setelah ancaman terjadi",
+"eksklusif: hanya untuk warga dengan latar belakang tertentu",
+"semesta: melibatkan seluruh warga dan sumber daya, dipersiapkan sejak dini",
+"ofensif: ditujukan untuk menyerang negara lain"],
+3,
+"Pertahanan semesta melibatkan seluruh warga, wilayah, dan sumber daya nasional serta dipersiapkan sejak dini."],
+["bela",
+"Seorang warga berpendapat, \"Karena merasa belum diperlakukan adil oleh negara, saya berhak mengabaikan bela negara.\" Penilaian yang paling tepat adalah ....",
+["Benar, karena kewajiban baru berlaku bila hak terpenuhi sepenuhnya",
+"Benar, karena bela negara bersifat sukarela tanpa dasar hukum",
+"Keliru, karena warga tidak boleh menyampaikan kritik apa pun kepada negara",
+"Keliru; Pasal 27 ayat 3 menegaskan hak sekaligus kewajiban, dan ketidakadilan disalurkan lewat jalur konstitusional, bukan dengan mengabaikan bela negara",
+"Keliru, karena bela negara hanya kewajiban tanpa hak"],
+3,
+"Pasal 27 ayat 3 UUD 1945 memuat hak dan kewajiban. Kekecewaan disalurkan lewat jalur konstitusional."],
+["bela",
+"Seorang guru ASN di daerah terpencil mendapat peluang pindah ke kota dengan fasilitas jauh lebih baik, padahal belum ada pengganti dan layanan pendidikan terancam terhenti. Pertimbangan yang paling sesuai dengan nilai bela negara adalah ....",
+["Mengajukan mutasi lewat prosedur sambil memastikan layanan tetap berjalan sampai pengganti siap",
+"Pindah segera karena kepentingan pribadi dan keluarga adalah prioritas",
+"Tinggal selamanya tanpa boleh mengajukan mutasi apa pun",
+"Menghentikan kegiatan mengajar sebagai protes agar pengganti segera dikirim",
+"Menitipkan kelas kepada siswa senior lalu pergi tanpa memberi tahu dinas"],
+0,
+"Rela berkorban tidak berarti mengabaikan hak. Yang tepat adalah menempuh prosedur sambil menjaga keberlangsungan layanan."],
+["bela",
+"Pak Anto sering memuji TNI dan rajin mengibarkan bendera, tetapi menghindari pajak dan menyuap petugas agar usahanya lancar. Penilaian yang paling tepat adalah ....",
+["Sudah memenuhi bela negara karena mencintai TNI dan bendera",
+"Sudah memenuhi bela negara karena usahanya membuka lapangan kerja",
+"Perilakunya tidak konsisten; bela negara tidak cukup dengan simbol, ketaatan hukum dan kejujuran juga bentuk bela negara",
+"Tidak berkaitan dengan bela negara karena itu urusan hukum pribadi",
+"Memenuhi bela negara selama pajak yang dihindari nilainya kecil"],
+2,
+"Bela negara nonfisik mencakup menaati hukum dan membayar pajak. Menghindari pajak dan menyuap bertentangan dengannya."],
+["bela",
+"Seluruh data strategis sebuah kementerian disimpan pada satu penyedia layanan asing tanpa cadangan dan tanpa pengawasan akses yang memadai. Risiko ini paling tepat dikategorikan sebagai ancaman ....",
+["militer, karena data tersebut menyangkut kedaulatan",
+"nonmiliter di bidang sosial budaya",
+"nonmiliter di bidang ideologi",
+"keselamatan umum akibat bencana alam",
+"nonmiliter di bidang teknologi dan informasi (siber)"],
+4,
+"Risiko pada penyimpanan dan akses data strategis termasuk ancaman teknologi dan informasi."],
+["bela",
+"Manakah pasangan contoh dan jenis ancaman yang TEPAT?",
+["Pengerahan pasukan asing ke perairan Indonesia: ancaman nonmiliter ekonomi",
+"Penyebaran paham yang ingin mengganti dasar negara lewat kajian daring: ancaman ideologi",
+"Wabah penyakit menular yang meluas: ancaman militer",
+"Pencurian data warga oleh peretas: ancaman sosial budaya",
+"Gejolak harga pangan karena impor: ancaman ideologi"],
+1,
+"Pasukan asing = militer. Wabah = keselamatan umum. Pencurian data = teknologi dan informasi. Gejolak harga pangan = ekonomi."],
+["bela",
+"Server layanan publik instansi diretas dan data warga diduga bocor. Pimpinan ingin merahasiakannya agar warga tidak panik. Sebagai ASN yang mengetahui hal itu, langkah yang paling tepat adalah ....",
+["Segera melaporkan insiden kepada pimpinan dan tim keamanan siber atau pihak berwenang, membantu pemulihan, dan mendukung penyampaian informasi publik yang akurat dan terukur",
+"Merahasiakan insiden sampai audit tahunan berikutnya",
+"Menyalahkan vendor sistem lewat media sosial agar publik waspada",
+"Menghapus catatan akses agar jejak insiden tidak terbaca pihak luar",
+"Menunggu pihak lain melapor lebih dulu"],
+0,
+"Penanganan insiden siber menuntut pelaporan cepat, pemulihan, dan komunikasi publik yang transparan, bukan menutup-nutupi."],
+["bela",
+"Seorang tokoh masyarakat mengajak warga menyumbang untuk membangun pos keamanan lingkungan, lalu menekan warga kurang mampu agar tetap menyumbang jumlah tertentu. Penilaian yang paling tepat adalah ....",
+["Tepat, karena bela negara menuntut pengorbanan yang sama dari semua warga",
+"Tepat, karena warga yang tidak menyumbang berarti tidak cinta tanah air",
+"Tujuannya baik tetapi pemaksaan keliru; peran serta warga seharusnya sukarela, sesuai kemampuan, dan diputuskan lewat musyawarah",
+"Keliru, karena warga tidak boleh membangun pos keamanan sama sekali",
+"Keliru, karena keamanan lingkungan sepenuhnya urusan kepolisian"],
+2,
+"Bela negara tumbuh dari kesadaran dan kerelaan, bukan paksaan, dan setiap warga berkontribusi sesuai kemampuan."],
+["bela",
+"Seorang peneliti mengkritik sebuah kebijakan pertahanan lewat kajian ilmiah dan forum resmi. Seorang warga menuduhnya \"tidak membela negara\". Penilaian yang paling tepat adalah ....",
+["Tuduhan itu benar karena bela negara berarti selalu menyetujui kebijakan pemerintah",
+"Tuduhan itu benar karena hanya TNI yang berhak menilai kebijakan pertahanan",
+"Kritik itu salah karena kebijakan pertahanan tidak boleh diketahui publik",
+"Kritik itu tidak berguna karena kebijakan tidak dapat berubah",
+"Kritik berbasis data lewat jalur resmi justru bentuk partisipasi yang dapat memperkuat bela negara"],
+4,
+"Bela negara tidak berarti membungkam kritik. Kritik yang santun dan berbasis data adalah kepedulian pada kemajuan bangsa."],
+["bela",
+"Kepala sekolah mengusulkan program bela negara berupa baris-berbaris saja. Seorang guru mengusulkan tambahan literasi digital, kepedulian lingkungan, dan antikorupsi. Penilaian yang paling tepat adalah ....",
+["Usulan kepala sekolah lebih tepat karena bela negara identik dengan kegiatan fisik",
+"Usulan guru lebih komprehensif karena bela negara mencakup bentuk nonfisik yang relevan dengan tantangan saat ini, tanpa meniadakan latihan kedisiplinan",
+"Keduanya salah karena bela negara hanya urusan TNI",
+"Usulan guru salah karena literasi digital tidak berkaitan dengan bela negara",
+"Usulan guru salah karena program bela negara tidak boleh ditambah"],
+1,
+"Bela negara mencakup bentuk fisik dan nonfisik. Tantangan masa kini juga datang dari hoaks, korupsi, dan kerusakan lingkungan."],
+["bela",
+"Seorang ASN humas mengusulkan agar setiap kabar ancaman keamanan langsung diumumkan ke publik sebelum diverifikasi, supaya warga waspada. Penilaian yang paling tepat adalah ....",
+["Tepat, karena publik berhak tahu setiap kabar tanpa diverifikasi",
+"Tepat, karena kecepatan lebih penting daripada ketepatan",
+"Kurang tepat, karena informasi ancaman tidak boleh diberikan kepada publik dalam keadaan apa pun",
+"Kurang tepat; informasi harus diverifikasi dan disampaikan lewat kanal resmi agar tidak memicu kepanikan atau dimanfaatkan penyebar disinformasi",
+"Kurang tepat, karena yang berwenang menyampaikan hanya presiden"],
+3,
+"Transparansi harus diimbangi akurasi. Informasi yang belum terverifikasi dapat menimbulkan kepanikan dan memperkuat disinformasi."],
+["bela",
+"Seorang penata barang memastikan aset sekolah tercatat, diverifikasi, dan dirawat dengan baik, walau tidak ada pihak yang mengawasi. Hubungan perilaku ini dengan bela negara paling tepat dijelaskan sebagai ....",
+["bukan bela negara karena tidak berhubungan dengan pertahanan militer",
+"bela negara fisik karena menjaga benda milik negara",
+"hanya kewajiban administratif tanpa kaitan dengan sikap kebangsaan",
+"bela negara nonfisik: bekerja jujur dan bertanggung jawab menjaga kekayaan negara sesuai tugas",
+"bela negara hanya bila dilakukan di wilayah perbatasan"],
+3,
+"Untuk ASN, bela negara nonfisik berwujud bekerja jujur, disiplin, dan bertanggung jawab, termasuk menjaga aset negara."],
+["bela",
+"Sebuah kabar belum jelas kebenarannya menyudutkan kelompok yang tidak Anda sukai. Kabar itu sangat viral dan Anda tergoda membagikannya. Sikap yang paling mencerminkan bela negara adalah ....",
+["Memeriksa kebenarannya lebih dulu dan tidak membagikan bila tidak terverifikasi, meski kabar itu menguntungkan kelompok Anda",
+"Membagikannya dengan tambahan peringatan \"belum tentu benar\"",
+"Membagikannya karena sudah banyak orang melakukannya",
+"Membagikannya hanya ke kelompok tertutup",
+"Menghapus kabar itu lalu membagikan kabar tandingan yang belum terverifikasi"],
+0,
+"Bias kelompok sering membuat orang meneruskan kabar tanpa memeriksa. Bela negara menuntut tidak ikut menyebarkan disinformasi."]];
+  R.forEach(r => { (QZ[r[0]] = QZ[r[0]] || []).push(Q(r[1], r[2], r[3], r[4])); });
+})();
+</script>
 <script id="tricks-js">
 (function(){
   const add=(g,lid,t,b,m,c)=>{LIB[g].push([t,b,m,c]);const l=lessonById(lid);if(l)l.m.push(t)};
@@ -6555,6 +7673,12 @@ var sp=POS[h2],tl=document.documentElement.scrollHeight-innerHeight;
   add('twk','nas','⚡ Soal kasus TWK: 4 langkah',`Menghafal definisi lalu mencocokkan.`,`(1) Baca pertanyaan di akhir dulu: yang diminta sikap, nilai, atau pelanggaran? (2) Tentukan nilainya: nasionalisme, integritas, bela negara, atau pilar negara. (3) Coret opsi ekstrem: menyerang, membiarkan, menutup-nutupi, memaksa, menyalahkan. (4) Pilih opsi yang menjaga persatuan, mengikuti aturan, dan memakai jalur resmi.`,`Kasus hoaks pemecah belah: pilih "tidak menyebarkan, verifikasi, laporkan".`);
   add('twk','int','⚡ Jebakan opsi integritas dan bela negara',`Memilih jawaban yang terdengar baik.`,`Opsi benar umumnya: jujur apa adanya, menolak lalu melapor, memperbaiki kesalahan, melibatkan pihak berwenang. Jebakan: "terima dulu lapor nanti", "asal tidak merugikan siapa pun", "main hakim sendiri", dan "diam demi kerukunan".`,`Ditawari parsel dari rekanan: menolak dan mencatat, bukan menerima lalu menyumbang.`);
   add('twk','pancasila','⚡ Pilar negara: cari nilai di balik kasus',`Menghafal sila beserta butirnya.`,`Ubah kasus jadi satu kata kunci: ibadah/toleransi = sila 1; martabat/anti diskriminasi = sila 2; persatuan = sila 3; musyawarah = sila 4; keadilan merata = sila 5. Untuk UUD: hak warga, kewenangan lembaga, dan hierarki aturan lebih sering muncul sebagai kasus, bukan angka pasal.`,`Bantuan hanya untuk kerabat: yang dilanggar keadilan sosial (sila 5).`);
+  add('twk','pancasila','⚡ Flexing dan gaya hidup: butir sila kelima',`Memilih opsi yang terdengar baik (peduli, berbagi, kerja keras).`,`Kasus pamer harta atau flexing dijawab butir tentang pemborosan dan gaya hidup mewah. Kasus memeras dijawab butir pemerasan. Kasus limbah atau merugikan warga dijawab butir kepentingan umum. Samakan kata kunci kasus dengan kata kunci butir; opsi baik tapi tidak menyentuh perilaku adalah pengecoh.`,`Keluarga pejabat pamer harta: tidak menggunakan hak milik untuk pemborosan dan gaya hidup mewah.`);
+  add('twk','uud','⚡ Hak DPR dan imunitas',`Menganggap imunitas berarti kebal hukum.`,`Hak DPR sebagai lembaga: interpelasi, angket, menyatakan pendapat. Hak anggota: bertanya, usul, pendapat, usul RUU, imunitas. Imunitas = tidak dapat dituntut atas pernyataan dalam rapat DPR, selama sesuai tata tertib. Di luar rapat atau membuka rahasia negara: tidak dilindungi.`,`Kritik di rapat komisi: imunitas. Tuduhan di media sosial pribadi: bukan.`);
+  add('twk','uud','⚡ Pembentuk, pelaksana, penguji',`Menukar tugas legislatif, eksekutif, dan yudikatif.`,`DPR membentuk UU, Presiden melaksanakan lewat PP (Pasal 5 ayat 2), yudikatif mengadili dan menguji. UU diuji ke UUD: MK. Peraturan di bawah UU diuji ke UU: MA. Yudikatif tidak membuat norma baru dan tidak mengendalikan eksekutif. RUU disetujui bersama tapi 30 hari tidak disahkan: sah otomatis (Pasal 20 ayat 5).`,`Presiden menetapkan PP: legislatif membentuk UU, eksekutif melaksanakannya.`);
+  add('twk','uud','⚡ Pasal 33: asas kekeluargaan',`Memilih opsi tentang persaingan atau keuntungan individu.`,`Ayat 1 usaha bersama atas asas kekeluargaan (koperasi). Ayat 2 cabang produksi penting dikuasai negara. Ayat 3 bumi, air, kekayaan alam dikuasai negara untuk kemakmuran rakyat. Jawaban soal kekeluargaan: kepentingan bersama, kerja sama, pemerataan. Gugurkan opsi individualistik dan opsi serba pemerintah.`,`Prinsip utama saat persaingan ekonomi modern: kepentingan bersama lewat kerja sama dan pemerataan.`);
+  add('twk','nas','⚡ Semangat pengorbanan: kesadaran nasional',`Memilih opsi yang terdengar heroik atau memihak rakyat.`,`Pendorong pengorbanan pendiri bangsa: kesadaran nasional untuk merdeka dan berdaulat. Gugurkan opsi menguasai wilayah, simpati semata, dan perjuangan satu daerah.`,`Pemuda 1928 bersatu: kesadaran nasional, bukan kepentingan daerah.`);
+  add('twk','bela','⚡ Kerja sama internasional dan bebas aktif',`Menerima atau menolak tawaran kerja sama secara langsung.`,`Alasan dasar kerja sama: saling memenuhi kebutuhan karena keterbatasan sumber daya dan teknologi. Menyikapi tawaran kerja sama, termasuk pertahanan: kaji dulu berdasarkan kepentingan nasional dan prinsip bebas aktif. Gugurkan: menerima langsung, menolak total, ukuran kekuatan ekonomi, menyerahkan ke organisasi regional.`,`Tawaran kerja sama pertahanan yang berisiko: mengkaji berdasarkan kepentingan nasional dan bebas aktif.`);
   try{renderLib()}catch(e){}
 })();
 </script>
@@ -6610,6 +7734,27 @@ var sp=POS[h2],tl=document.documentElement.scrollHeight-innerHeight;
 #ar .pass{background:#DDF5E4!important}#ar .fail{background:#FFE1E1!important}
 #ar .ar-rev{border-top:1.5px dashed #999;padding-top:12px;margin-top:12px}
 #ar .ar-exp{font-size:14px;line-height:1.6;padding:10px 12px;background:#FFF7E0;border-radius:12px;margin-top:6px}
+</style>
+<style id="tabs-polish">
+/* ===== Rapihin tab: Materi/Latihan (utama) + Contoh/Latihan (turunan) ===== */
+body .tabs2 { grid-template-columns: 1fr 1fr; gap: 6px; padding: 5px; margin: 16px 0 12px; }
+body .tabs2 button { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 10px 8px; font-size: 14.5px; font-weight: 700; line-height: 1.2; border: 2px solid transparent; border-radius: 99px; background: transparent; color: var(--ink-soft, #5F6678); cursor: pointer; transition: background .2s, color .2s, box-shadow .2s, transform .12s; }
+body .tabs2 button:hover:not(.is-active) { background: rgba(36, 123, 125, .08); color: var(--brand-strong, #1F7274); }
+body .tabs2 button:active { transform: scale(.97); }
+body .tabs2 button.is-active { background: var(--brand-soft, #DDF0EF); color: var(--brand-strong, #1F7274); border-color: #14161C; box-shadow: 0 2px 0 #14161C; font-weight: 800; }
+body .tabs2 button:focus-visible, .lt-seg button:focus-visible { outline: 3px solid var(--brand, #247B7D); outline-offset: 2px; }
+.tb-n { display: inline-block; min-width: 24px; padding: 2px 8px; border-radius: 99px; background: rgba(20, 22, 28, .08); font-size: 11.5px; font-weight: 800; text-align: center; letter-spacing: .01em; }
+.is-active > .tb-n { background: var(--brand, #247B7D); color: #fff; }
+
+/* tab turunan: lebih ringan supaya kelihatan levelnya di bawah tab utama */
+.lt-seg { gap: 4px; padding: 4px; margin: 0 0 14px; background: #EEF1F6; border-radius: 16px; box-shadow: inset 0 1px 3px rgba(20, 22, 28, .07); }
+.lt-seg button { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 9px 10px; border-radius: 12px; font-size: 13.5px; font-weight: 700; }
+.lt-seg button.is-active { background: #fff; color: #1B6466; box-shadow: 0 2px 8px rgba(20, 22, 28, .13); }
+.lt-seg button:hover:not(.is-active) { background: rgba(255, 255, 255, .6); }
+.lt-seg .tb-n { background: rgba(20, 22, 28, .07); }
+.lt-seg .is-active > .tb-n { background: #DDF4E8; color: #147B54; }
+@media (max-width: 380px) { body .tabs2 button { font-size: 13px; gap: 6px; padding: 10px 4px; } .tb-n { padding: 2px 6px; } }
+@media (prefers-reduced-motion: reduce) { body .tabs2 button, .lt-seg button { transition: none; } }
 </style>
 <script id="arena-js">
 (function(){
