@@ -966,6 +966,30 @@
     @media (min-width: 900px) { .kn { left: auto; right: 104px; bottom: 32px; margin: 0; } }
     @media (prefers-reduced-motion: reduce) { .kn { transition: none; } }
 
+    /* ===== Dinding traktiran + form nama ===== */
+    .kp-fm { display: grid; gap: 10px; padding-top: 16px; }
+    .kp-fm h3 { margin: 0; font-size: 19px; line-height: 1.25; }
+    .kp-fm p { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--ink-soft); }
+    .kp-fm label { display: grid; gap: 5px; font-size: 12.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-soft); }
+    .kp-fm input[type=text], .kp-fm textarea, .kp-fm input[type=file] { width: 100%; box-sizing: border-box; padding: 11px 13px; border: var(--out, 1px solid var(--line)); border-radius: 14px; background: #fff; color: var(--ink); font: 500 15px var(--font); text-transform: none; letter-spacing: 0; }
+    .kp-fm textarea { min-height: 76px; resize: vertical; }
+    .kp-fm input:focus-visible, .kp-fm textarea:focus-visible { outline: 3px solid var(--ora, #F8B461); outline-offset: 1px; }
+    .kp-fm .kp-priv { padding: 9px 12px; border-radius: 12px; background: var(--brand-soft, #EEF1FF); font-size: 12.5px; line-height: 1.45; color: var(--ink); }
+    .kp-fm .kp-err { color: #B3261E; font-weight: 700; min-height: 0; }
+    .kp-fm .kp-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+    .kp-send:disabled { opacity: .6; cursor: progress; }
+    .kp-skip { display: block; margin: 2px auto 0; padding: 8px; border: 0; background: none; color: var(--ink-soft); font: 600 13px var(--font); text-decoration: underline; cursor: pointer; }
+    .kw { margin: 6px 0 18px; padding: 16px 16px 12px; border: var(--out, 2px solid #14161C); border-radius: 18px; background: #fff; box-shadow: 0 4px 0 #14161C; }
+    .kw[hidden] { display: none; }
+    .kw h4 { margin: 0 0 2px; font-size: 16px; }
+    .kw > small { display: block; margin-bottom: 10px; font-size: 12.5px; color: var(--ink-soft); }
+    .kw ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+    .kw li { display: flex; gap: 10px; align-items: flex-start; padding: 9px 11px; border-radius: 14px; background: #FFF7E0; }
+    .kw .kw-av { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border: 2px solid #14161C; border-radius: 50%; background: var(--ora, #F8B461); font-weight: 800; font-size: 14px; }
+    .kw .kw-nm { font-weight: 800; font-size: 14.5px; line-height: 1.3; word-break: break-word; }
+    .kw .kw-ms { margin-top: 2px; font-size: 13.5px; line-height: 1.45; color: #5B4A33; word-break: break-word; }
+    .kw .kw-tg { font-size: 11.5px; color: var(--ink-soft); }
+    .kw .kw-more { display: block; margin: 10px auto 0; padding: 8px 16px; border: var(--out, 1px solid var(--line)); border-radius: 999px; background: #fff; color: var(--ink); font: 700 13px var(--font); cursor: pointer; }
     /* ===== Upgrade kotak traktir: bottom sheet di HP, nominal pilihan, tab pembayaran ===== */
     .kp-ov { align-items: flex-end; }
     @media (min-width: 560px) { .kp-ov { align-items: center; } }
@@ -5104,7 +5128,7 @@
     const NAMA = 'Muhammad Yudha Pratama';
     // Opsional: isi dengan URL web app Apps Script (doPost) untuk mengumpulkan angka dari semua pengunjung.
     // Kosong = angka hanya tersimpan di perangkat ini (lihat lewat ?kopi=stat atau #kopi-stat).
-    const ENDPOINT = '';
+    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbx5aAozMTliGmcWZ3VnTduB-_duyWxtoJVyP4BLG2AM3WW-LNAxaah-iICejSSB4q_9/exec';
     const KEY_STAT = 'kopi-stat', KEY_DONE = 'kopi-done';
 
     const ls = {
@@ -5179,7 +5203,7 @@
       ).join('') +
       '<div class="kp-trust">Tanpa paksaan. Kalau belum bisa traktir, belajar dengan rajin sudah cukup. 💙</div>' +
       '<button type="button" class="kp-done">Udah traktir \u2713</button>' +
-      '<p class="kp-hint">Pencet kalau sudah traktir lewat Saweria atau transfer. Ini hanya penanda, nominal dan nama lo tidak tercatat.</p>';
+      '<p class="kp-hint">Pencet kalau sudah traktir. Mau nama lo muncul di Dinding Traktiran? Lo cukup isi nama dan unggah bukti transfer (bukti tidak pernah ditampilkan ke publik).</p>';
 
     const TERIMA =
       '<div class="kp-thx">' +
@@ -5188,6 +5212,113 @@
         '<p>Makasih, kopinya udah nyampe. Ini bakal bantu gue nambah materi dan soal baru. Semangat belajarnya, semoga NIP lo cepet keluar!</p>' +
         '<button type="button" class="kp-done kp-ok">Lanjut belajar</button>' +
       '</div>';
+
+    // ---------- Form nama + bukti transfer, dan Dinding Traktiran ----------
+    const FORM_NAMA =
+      '<div class="kp-fm">' +
+        '<h3 id="kp-jdl">Mau nama lo muncul di Dinding Traktiran? \u2615</h3>' +
+        '<p>Isi nama dan (kalau mau) kata-kata buat gue. Nama baru tampil setelah gue cocokkan dengan bukti transfer lo.</p>' +
+        '<label>Nama (wajib, maks. 30 huruf)<input type="text" id="kp-nm" maxlength="30" autocomplete="nickname" placeholder="Contoh: Rani, calon CPNS 2026"></label>' +
+        '<label>Kata-kata (opsional)<textarea id="kp-ms" maxlength="140" placeholder="Semangat terus, makasih materinya!"></textarea></label>' +
+        '<label>Bukti transfer (wajib)<input type="file" id="kp-bk" accept="image/*"></label>' +
+        '<div class="kp-priv">\ud83d\udd12 Bukti transfer cuma gue yang lihat, buat verifikasi. Tidak ditampilkan ke siapa pun.</div>' +
+        '<input type="text" class="kp-hp" id="kp-hp" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+        '<p class="kp-err" id="kp-err" role="alert"></p>' +
+        '<button type="button" class="kp-done kp-send">Kirim</button>' +
+        '<button type="button" class="kp-skip">Lewati, nggak usah tampil nama</button>' +
+      '</div>';
+    const TERIMA_NAMA =
+      '<div class="kp-thx">' +
+        '<span class="kp-thx-ic" aria-hidden="true">\u2615</span>' +
+        '<h3 id="kp-jdl">Makasih banyak!</h3>' +
+        '<p>Data lo udah masuk. Begitu gue cocokkan dengan bukti transfernya, nama lo muncul di Dinding Traktiran (biasanya maksimal 1 sampai 2 hari).</p>' +
+        '<button type="button" class="kp-done kp-ok">Lanjut belajar</button>' +
+      '</div>';
+
+    // Kecilkan foto bukti (maks. 1280 px, JPEG) supaya kirimnya ringan.
+    const kecilkan = async (file) => {
+      const gambar = async () => {
+        if (window.createImageBitmap) {
+          try { return await createImageBitmap(file, { imageOrientation: 'from-image' }); } catch (_) {}
+          try { return await createImageBitmap(file); } catch (_) {}
+        }
+        const url = await new Promise((ok, gagal) => { const r = new FileReader(); r.onload = () => ok(r.result); r.onerror = () => gagal(new Error('baca')); r.readAsDataURL(file); });
+        return await new Promise((ok, gagal) => { const im = new Image(); im.onload = () => ok(im); im.onerror = () => gagal(new Error('decode')); im.src = url; });
+      };
+      let im;
+      try { im = await gambar(); }
+      catch (_) { throw new Error('Format foto ini tidak bisa dibaca browser (misalnya HEIC). Pakai screenshot bukti transfernya, atau simpan fotonya sebagai JPG/PNG'); }
+      const w = im.width || im.naturalWidth, h = im.height || im.naturalHeight;
+      const k = Math.min(1, 1280 / Math.max(w, h));
+      const c = document.createElement('canvas');
+      c.width = Math.max(1, Math.round(w * k)); c.height = Math.max(1, Math.round(h * k));
+      const g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height); g.drawImage(im, 0, 0, c.width, c.height);
+      if (im.close) im.close();
+      return c.toDataURL('image/jpeg', 0.72).split(',')[1];
+    };
+
+    const bukaForm = () => {
+      if (!ENDPOINT || ENDPOINT.indexOf('GANTI_DENGAN') > -1) return sudah(); // belum disambung ke backend: pakai penanda biasa
+      isi.innerHTML = FORM_NAMA;
+      window.kopiLog('form');
+      const n = q('#kp-nm'); if (n) n.focus();
+    };
+
+    const kirimTraktir = async (btn) => {
+      const err = q('#kp-err'), nama = q('#kp-nm').value.trim(), pesan = q('#kp-ms').value.trim(), f = q('#kp-bk').files[0];
+      err.textContent = '';
+      if (!nama) { err.textContent = 'Nama wajib diisi.'; return q('#kp-nm').focus(); }
+      if (!f || !/^image\//.test(f.type)) { err.textContent = 'Bukti transfer wajib diunggah (foto atau screenshot).'; return; }
+      btn.disabled = true; btn.textContent = 'Mengirim...';
+      try {
+        const data = await kecilkan(f);
+        const r = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ a: 'traktir', nama: nama, pesan: pesan, web: q('#kp-hp').value, bukti: { mime: 'image/jpeg', data: data } }) });
+        const j = await r.json();
+        if (!j.ok) throw new Error(j.err || 'Gagal mengirim');
+        window.kopiLog('kirim');
+        terima = true; ls.set(KEY_DONE, '1');
+        isi.innerHTML = TERIMA_NAMA;
+        const ok = q('.kp-ok'); if (ok) ok.focus();
+        document.dispatchEvent(new Event('kopi:sudah'));
+      } catch (x) {
+        err.textContent = (x && x.message ? x.message : 'Gagal mengirim') + '. Coba lagi ya.';
+        btn.disabled = false; btn.textContent = 'Kirim';
+      }
+    };
+
+    // Dinding Traktiran di beranda (hanya yang sudah disetujui; diisi lewat Apps Script)
+    (function dinding() {
+      if (!ENDPOINT || ENDPOINT.indexOf('GANTI_DENGAN') > -1) return;
+      const home = document.getElementById('kopiHome'); if (!home) return;
+      const w = document.createElement('section');
+      w.className = 'kw'; w.hidden = true; w.setAttribute('aria-label', 'Dinding Traktiran');
+      home.insertAdjacentElement('afterend', w);
+      const tgl = (t) => { try { return new Date(t).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }); } catch (_) { return ''; } };
+      const gambar = (list, semua) => {
+        w.textContent = '';
+        const h = document.createElement('h4'); h.textContent = 'Dinding Traktiran \u2615'; w.appendChild(h);
+        const s = document.createElement('small'); s.textContent = 'Terima kasih buat yang sudah traktir kopi. Kalian bikin app ini terus hidup.'; w.appendChild(s);
+        const ol = document.createElement('ol');
+        (semua ? list : list.slice(0, 8)).forEach((o) => {
+          const li = document.createElement('li');
+          const av = document.createElement('span'); av.className = 'kw-av'; av.textContent = (o.n || '?').trim().charAt(0).toUpperCase();
+          const bx = document.createElement('div');
+          const nm = document.createElement('div'); nm.className = 'kw-nm'; nm.textContent = o.n;
+          bx.appendChild(nm);
+          if (o.p) { const ms = document.createElement('div'); ms.className = 'kw-ms'; ms.textContent = o.p; bx.appendChild(ms); }
+          const tg = document.createElement('div'); tg.className = 'kw-tg'; tg.textContent = tgl(o.t); bx.appendChild(tg);
+          li.appendChild(av); li.appendChild(bx); ol.appendChild(li);
+        });
+        w.appendChild(ol);
+        if (!semua && list.length > 8) {
+          const m = document.createElement('button'); m.type = 'button'; m.className = 'kw-more'; m.textContent = 'Lihat semua (' + list.length + ')';
+          m.addEventListener('click', () => gambar(list, true)); w.appendChild(m);
+        }
+        w.hidden = false;
+      };
+      fetch(ENDPOINT + '?a=wall').then((r) => r.json()).then((j) => { if (j && j.ok && j.list && j.list.length) gambar(j.list, false); }).catch(() => {});
+    })();
 
     const ov = document.createElement('div');
     ov.className = 'kp-ov';
@@ -5259,7 +5390,9 @@
       const a = e.target.closest('.kp-app a');
       if (a) return window.kopiLog('app', a.dataset.b);
       if (e.target.closest('.kp-ok')) return tutup();
-      if (e.target.closest('.kp-done')) sudah();
+      if (e.target.closest('.kp-send')) return kirimTraktir(e.target.closest('.kp-send'));
+      if (e.target.closest('.kp-skip')) return sudah();
+      if (e.target.closest('.kp-done')) bukaForm();
     });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && ov.classList.contains('is-open')) tutup(); });
     document.addEventListener('keydown', (e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target && (e.target.id === 'kopiHome' || (e.target.classList && e.target.classList.contains('kopi-inline')))) { e.preventDefault(); e.target.click(); } });
