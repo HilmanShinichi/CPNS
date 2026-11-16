@@ -982,6 +982,32 @@
     .kp-prev img { flex: none; width: 44px; height: 44px; object-fit: cover; border-radius: 10px; border: 2px solid #14161C; }
     .kp-prev span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .kp-note { margin-top: -4px !important; font-size: 12px !important; }
+    .kp-cnt { text-align: right; font-size: 12px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--ink-soft); }
+    .kp-ctrlv { font-size: 12px !important; margin-top: -4px !important; }
+    @media (hover: none) { .kp-ctrlv { display: none; } }
+    .kp-ov.is-busy .kp-x { visibility: hidden; }
+    .kp-prog { padding-top: 18px; text-align: center; }
+    .kp-prog h3 { margin: 0 0 14px; font-size: 19px; }
+    .kp-prog p { margin: 0; font-size: 13px; color: var(--ink-soft); }
+    .kp-steps { list-style: none; margin: 0 auto 14px; padding: 0; display: grid; gap: 10px; max-width: 260px; text-align: left; }
+    .kp-steps li { position: relative; padding-left: 34px; font-weight: 700; font-size: 14.5px; line-height: 24px; color: var(--ink-soft); }
+    .kp-steps li::before { content: ""; position: absolute; left: 0; top: 1px; width: 22px; height: 22px; box-sizing: border-box; border: 2px solid #14161C; border-radius: 50%; background: #fff; }
+    .kp-steps li.now { color: var(--ink); }
+    .kp-steps li.now::before { border-color: #E58A00; border-top-color: transparent; animation: kpSpin .8s linear infinite; }
+    .kp-steps li.ok { color: #14532D; }
+    .kp-steps li.ok::before { content: "\2713"; background: #34C27A; border-color: #14161C; color: #fff; font-size: 13px; font-weight: 800; line-height: 18px; text-align: center; }
+    @keyframes kpSpin { to { transform: rotate(360deg); } }
+    .kp-me-l { display: block; margin: 14px 0 6px; font-size: 12.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-soft); text-align: left; }
+    .kw.kp-me { display: flex; gap: 10px; align-items: flex-start; margin: 0 0 4px; background: #FFF7E0; border-width: 2px; text-align: left; animation: kpPop .5s cubic-bezier(.2, 1.4, .4, 1) both, kpGlow 1.5s ease-out .3s 2; }
+    @keyframes kpPop { from { transform: scale(.88) translateY(8px); opacity: 0; } to { transform: none; opacity: 1; } }
+    @keyframes kpGlow { 0% { box-shadow: 0 0 0 0 rgba(248, 165, 58, .75); } 100% { box-shadow: 0 0 0 16px rgba(248, 165, 58, 0); } }
+    @media (prefers-reduced-motion: reduce) { .kw.kp-me, .kp-steps li.now::before { animation: none; } }
+    .kp-share { display: block; margin: 8px auto 0; padding: 8px; border: 0; background: none; color: var(--ink-soft); font: 700 13.5px var(--font); text-decoration: underline; cursor: pointer; }
+    #kopiHome.kopi-ok { cursor: default; animation: none; border: 2px solid #14161C; background: #E8F7EE; box-shadow: none; padding: 10px 14px; }
+    #kopiHome.kopi-ok:hover, #kopiHome.kopi-ok:active { transform: none; }
+    #kopiHome.kopi-ok::before, #kopiHome.kopi-ok::after, #kopiHome.kopi-ok .kopi-ic, #kopiHome.kopi-ok .kopi-btn { display: none; }
+    #kopiHome.kopi-ok .kopi-tx strong { font-size: 14.5px; }
+    #kopiHome.kopi-ok .kopi-tx span { color: #14532D; }
     .kp-send:disabled { opacity: .6; cursor: progress; }
     .kp-skip { display: block; margin: 2px auto 0; padding: 8px; border: 0; background: none; color: var(--ink-soft); font: 600 13px var(--font); text-decoration: underline; cursor: pointer; }
     .kw { margin: 14px 0 0; padding: 12px 12px 10px; border: var(--out, 1px solid var(--line)); border-radius: 16px; background: #fff; }
@@ -5226,8 +5252,9 @@
         '<p>Isi nama dan (kalau mau) kata-kata buat gue. Bukti transfer dibaca otomatis. Kalau cocok, nama lo langsung tampil di daftar.</p>' +
         '<label>Nama (wajib, maks. 30 huruf)<input type="text" id="kp-nm" maxlength="30" autocomplete="nickname" placeholder="Contoh: Rani, calon CPNS 2026"></label>' +
         '<p class="kp-note">Nama ini tampil ke publik. Boleh pakai nama panggilan atau inisial.</p>' +
-        '<label>Kata-kata (opsional)<textarea id="kp-ms" maxlength="140" placeholder="Semangat terus, makasih materinya!"></textarea></label>' +
+        '<label>Kata-kata (opsional)<textarea id="kp-ms" maxlength="140" placeholder="Semangat terus, makasih materinya!"></textarea><span class="kp-cnt" id="kp-cnt">0/140</span></label>' +
         '<label>Bukti transfer (wajib)<input type="file" id="kp-bk" accept="image/*"></label>' +
+        '<p class="kp-note kp-ctrlv">Di komputer, lo juga bisa tempel screenshot langsung (Ctrl+V).</p>' +
         '<div class="kp-prev" id="kp-prev" hidden><img alt="" id="kp-pimg"><span id="kp-pnm"></span></div>' +
         '<div class="kp-priv">\ud83d\udd12 Bukti transfer cuma gue yang lihat, buat verifikasi. Tidak ditampilkan ke siapa pun.</div>' +
         '<input type="text" class="kp-hp" id="kp-hp" tabindex="-1" autocomplete="off" aria-hidden="true">' +
@@ -5241,6 +5268,7 @@
         '<h3 id="kp-jdl">Makasih banyak!</h3>' +
         '<p>Nama lo udah masuk ke daftar traktir. Makasih banyak udah bantu gue terus update isinya!</p>' +
         '<button type="button" class="kp-done kp-ok">Lanjut belajar</button>' +
+        '<button type="button" class="kp-share">Ajak teman belajar bareng</button>' +
       '</div>';
 
     const TERIMA_CEK =
@@ -5251,7 +5279,7 @@
         '<button type="button" class="kp-done kp-ok">Lanjut belajar</button>' +
       '</div>';
 
-    // Kecilkan foto bukti // Kecilkan foto bukti supaya kirimnya ringan.
+    // Kecilkan foto bukti supaya kirimnya ringan.
     const kecilkan = async (file) => {
       const gambar = async () => {
         if (window.createImageBitmap) {
@@ -5280,28 +5308,77 @@
       const n = q('#kp-nm'); if (n) n.focus();
     };
 
+    let mengirim = false;
+    const LANGKAH = '<div class="kp-prog" role="status" aria-live="polite"><h3>Lagi diproses...</h3>' +
+      '<ol class="kp-steps"><li data-s="0">Mengunggah bukti</li><li data-s="1">Membaca bukti transfer</li><li data-s="2">Selesai</li></ol>' +
+      '<p>Jangan ditutup dulu ya, cuma sebentar.</p></div>';
+    const setLangkah = (n) => {
+      isi.querySelectorAll('.kp-steps li').forEach((li) => { const i = +li.dataset.s; li.className = i < n ? 'ok' : (i === n ? 'now' : ''); });
+    };
+    const lepas = (e) => { e.preventDefault(); e.returnValue = ''; };
+
     const kirimTraktir = async (btn) => {
       const err = q('#kp-err'), nama = q('#kp-nm').value.trim(), pesan = q('#kp-ms').value.trim(), f = q('#kp-bk').files[0];
       err.textContent = '';
       if (!nama) { err.textContent = 'Nama wajib diisi.'; return q('#kp-nm').focus(); }
       if (!f || !/^image\//.test(f.type)) { err.textContent = 'Bukti transfer wajib diunggah (foto atau screenshot).'; return; }
-      btn.disabled = true; btn.textContent = 'Memeriksa bukti...';
+      const fm = isi.querySelector('.kp-fm');
+      mengirim = true; ov.classList.add('is-busy'); fm.hidden = true;
+      isi.insertAdjacentHTML('beforeend', LANGKAH); setLangkah(0);
+      window.addEventListener('beforeunload', lepas);
+      const ctl = new AbortController(), tAbort = setTimeout(() => ctl.abort(), 60000);
+      let tBaca = null;
       try {
         const data = await kecilkan(f);
-        const r = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        tBaca = setTimeout(() => setLangkah(1), 1800);
+        const r = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, signal: ctl.signal,
           body: JSON.stringify({ a: 'traktir', nama: nama, pesan: pesan, web: q('#kp-hp').value, bukti: { mime: 'image/jpeg', data: data } }) });
         const j = await r.json();
         if (!j.ok) throw new Error(j.err || 'Gagal mengirim');
+        clearTimeout(tBaca); setLangkah(3);
+        await new Promise((res) => setTimeout(res, 550));
         window.kopiLog('kirim');
-        setTimeout(muatDinding, 1500);
         terima = true; ls.set(KEY_DONE, '1');
-        isi.innerHTML = (j.status === 'pending' ? TERIMA_CEK : TERIMA_NAMA);
+        const lolos = j.status !== 'pending';
+        isi.innerHTML = lolos ? TERIMA_NAMA : TERIMA_CEK;
+        if (lolos) {
+          WALL = [{ n: nama, p: pesan, t: Date.now() }].concat(WALL || []);
+          const kartu = document.createElement('div'); kartu.className = 'kw kp-me';
+          const av = document.createElement('span'); av.className = 'kw-av'; av.textContent = nama.charAt(0).toUpperCase();
+          const bx = document.createElement('div');
+          const nm = document.createElement('div'); nm.className = 'kw-nm'; nm.textContent = nama; bx.appendChild(nm);
+          if (pesan) { const ms = document.createElement('div'); ms.className = 'kw-ms'; ms.textContent = pesan; bx.appendChild(ms); }
+          kartu.appendChild(av); kartu.appendChild(bx);
+          const lb = document.createElement('span'); lb.className = 'kp-me-l'; lb.textContent = 'Nama lo sekarang tampil';
+          const ok0 = isi.querySelector('.kp-ok'); ok0.insertAdjacentElement('beforebegin', lb); ok0.insertAdjacentElement('beforebegin', kartu);
+        }
+        setTimeout(muatDinding, 1500);
         const ok = q('.kp-ok'); if (ok) ok.focus();
         document.dispatchEvent(new Event('kopi:sudah'));
       } catch (x) {
-        err.textContent = (x && x.message ? x.message : 'Gagal mengirim') + '. Coba lagi ya.';
-        btn.disabled = false; btn.textContent = 'Kirim';
+        clearTimeout(tBaca);
+        const pg = isi.querySelector('.kp-prog'); if (pg) pg.remove();
+        const fm2 = isi.querySelector('.kp-fm');
+        if (fm2) {
+          fm2.hidden = false;
+          const e2 = q('#kp-err');
+          e2.textContent = (x && x.name === 'AbortError')
+            ? 'Server kelamaan merespons. Kalau sempat terkirim, nama lo bisa muncul sebentar lagi. Coba lagi kalau belum.'
+            : ((x && x.message ? x.message : 'Gagal mengirim') + '. Coba lagi ya.');
+        }
+      } finally {
+        clearTimeout(tAbort);
+        mengirim = false; ov.classList.remove('is-busy');
+        window.removeEventListener('beforeunload', lepas);
       }
+    };
+
+    const ajak = async (btn) => {
+      const url = location.origin + location.pathname;
+      const data = { title: 'Pejuang NIP', text: 'Belajar dan tryout SKD CPNS gratis di sini:', url: url };
+      try { if (navigator.share) { await navigator.share(data); return; } } catch (_) { return; }
+      try { await navigator.clipboard.writeText(url); btn.textContent = 'Link tersalin \u2713'; }
+      catch (_) { btn.textContent = url; }
     };
 
     // Dinding Traktiran: tampil di dalam kotak traktir + satu baris ringkas di kartu beranda
@@ -5333,17 +5410,33 @@
       isiDinding(w, false);
       isi.querySelector('.kp-trust').insertAdjacentElement('afterend', w);
     };
+    const barisBeranda = () => {
+      if (!WALL || !WALL.length) return;
+      const tx = document.querySelector('#kopiHome .kopi-tx');
+      if (!tx) return;
+      let l = tx.querySelector('.kw-line');
+      if (!l) { l = document.createElement('span'); l.className = 'kw-line'; tx.appendChild(l); }
+      l.textContent = '\u2615 ' + WALL.length + ' orang sudah traktir, terakhir ' + WALL[0].n;
+    };
+    const kartuTerima = () => {
+      const h = document.getElementById('kopiHome');
+      if (!h || h.classList.contains('kopi-ok')) return;
+      h.classList.add('kopi-ok');
+      ['data-kopi', 'role', 'tabindex'].forEach((k) => h.removeAttribute(k));
+      h.setAttribute('aria-label', 'Makasih udah traktir');
+      const b = h.querySelector('.kopi-btn'); if (b) b.removeAttribute('data-kopi');
+      const tx = h.querySelector('.kopi-tx');
+      if (tx) tx.innerHTML = '<strong>Makasih udah traktir \u2615</strong><span>Semangat belajarnya, semoga NIP lo cepet keluar!</span>';
+      barisBeranda();
+    };
+    document.addEventListener('kopi:sudah', kartuTerima);
+    if (window.kopiSudah && window.kopiSudah()) kartuTerima();
     const muatDinding = () => {
       if (!ENDPOINT || ENDPOINT.indexOf('GANTI_DENGAN') > -1) return;
       fetch(ENDPOINT + '?a=wall&t=' + Date.now()).then((r) => r.json()).then((j) => {
         if (!j || !j.ok || !j.list || !j.list.length) return;
         WALL = j.list;
-        const tx = document.querySelector('#kopiHome .kopi-tx');
-        if (tx) {
-          let l = tx.querySelector('.kw-line');
-          if (!l) { l = document.createElement('span'); l.className = 'kw-line'; tx.appendChild(l); }
-          l.textContent = '\u2615 ' + WALL.length + ' orang sudah traktir, terakhir ' + WALL[0].n;
-        }
+        barisBeranda();
         const lama = isi.querySelector('.kw'); if (lama) lama.remove();
         pasangDinding();
       }).catch(() => {});
@@ -5376,6 +5469,7 @@
       ov.classList.add('is-open'); document.body.style.overflow = 'hidden'; q('.kp-x').focus();
     };
     const tutup = () => {
+      if (mengirim) return;
       if (!terima && ov.classList.contains('is-open')) window.kopiLog('tutup', 'kotak');
       ov.classList.remove('is-open'); document.body.style.overflow = '';
       if (pemicu && pemicu.focus) pemicu.focus();
@@ -5407,6 +5501,20 @@
     };
 
     q('.kp-x').addEventListener('click', tutup);
+    ov.addEventListener('input', (e) => {
+      if (e.target && e.target.id === 'kp-ms') { const c = q('#kp-cnt'); if (c) c.textContent = e.target.value.length + '/140'; }
+    });
+    document.addEventListener('paste', (e) => {
+      if (!ov.classList.contains('is-open') || mengirim) return;
+      const inp = q('#kp-bk'); if (!inp || !e.clipboardData) return;
+      const f = Array.prototype.find.call(e.clipboardData.files || [], (x) => /^image\//.test(x.type));
+      if (!f) return;
+      e.preventDefault();
+      try {
+        const dt = new DataTransfer(); dt.items.add(new File([f], f.name || 'tempel.png', { type: f.type }));
+        inp.files = dt.files; inp.dispatchEvent(new Event('change', { bubbles: true }));
+      } catch (_) {}
+    });
     ov.addEventListener('change', (e) => {
       if (!e.target || e.target.id !== 'kp-bk') return;
       const f = e.target.files[0], pv = q('#kp-prev');
@@ -5428,6 +5536,7 @@
       if (b) return salin(b);
       const a = e.target.closest('.kp-app a');
       if (a) return window.kopiLog('app', a.dataset.b);
+      if (e.target.closest('.kp-share')) return ajak(e.target.closest('.kp-share'));
       if (e.target.closest('.kp-ok')) return tutup();
       if (e.target.closest('.kp-send')) return kirimTraktir(e.target.closest('.kp-send'));
       if (e.target.closest('.kp-skip')) return sudah();
