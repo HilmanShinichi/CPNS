@@ -6695,7 +6695,7 @@ button, a, summary, [role="button"] { touch-action: manipulation; }
     lastTip = i; say(TIPS[i][0], TIPS[i][1] || 'normal', 3000);
   }
   function sleep() {
-    if (sleeping || !visible()) return;
+    if (sleeping || !visible() || window.__mkHold) return;
     sleeping = true; setMood('sleep');
     say("Zzz... gue ngantuk. Tap gue kalau udah siap belajar lagi!");
   }
@@ -6743,7 +6743,8 @@ button, a, summary, [role="button"] { touch-action: manipulation; }
   }
 
   setTimeout(function () { say(greet(), 'happy', 2800); }, 600);
-  setInterval(function () { if (!sleeping && visible()) nextTip(); }, 10000);
+  setInterval(function () { if (!sleeping && visible() && !window.__mkHold) nextTip(); }, 10000);
+  window.__mkSay = say;
   touchIdle();
 })();
 </script>
@@ -8399,6 +8400,292 @@ tkp:[]};
 .sx .tx-ct{flex:none;white-space:nowrap;line-height:1.2}
 .hs-dots{display:grid;grid-template-columns:repeat(auto-fill,36px);gap:8px;justify-content:start}
 .hs-dots button{width:36px;height:36px;padding:0;display:grid;place-items:center;font-size:13px;line-height:1}
+</style>
+<style id="mkm-dodge-css">
+/* maskot mini minggir otomatis kalau nutupin kartu teks */
+.mkm{transition:translate .28s ease,opacity .22s ease}
+.mkm.mk-dodge{translate:calc(100% + 28px) 0;opacity:0;pointer-events:none}
+.mkm.mk-dodge .mkm-body{pointer-events:none}
+@media(prefers-reduced-motion:reduce){.mkm{transition:none}}
+</style>
+<script id="mkm-dodge-js">
+(function(){
+  var SEL='#lesson .hs-cap, #lesson .lc-body';
+  function check(){
+    var el=document.querySelector('.mkm');
+    if(!el||!el.classList.contains('on'))return;
+    var bub=el.querySelector('.mkm-b');
+    if(bub&&bub.classList.contains('show')){el.classList.remove('mk-dodge');return;}
+    var cs=getComputedStyle(el),w=el.offsetWidth,r=parseFloat(cs.right)||0;
+    var left=innerWidth-r-w-4, r0=el.getBoundingClientRect(), top=r0.top, bot=r0.bottom;
+    var hit=false,list=document.querySelectorAll(SEL);
+    for(var i=0;i<list.length&&!hit;i++){
+      var b=list[i].getBoundingClientRect();
+      if(!b.width||!b.height)continue;
+      if(b.right>left&&b.left<innerWidth&&b.bottom>top&&b.top<bot)hit=true;
+    }
+    el.classList.toggle('mk-dodge',hit);
+  }
+  setInterval(check,150);
+  addEventListener('scroll',check,{passive:true});
+  addEventListener('resize',check,{passive:true});
+})();
+</script>
+<style id="tg2-css">
+.tg-bar{height:10px;border:2px solid #14161C;border-radius:99px;overflow:hidden;margin:10px 0;background:#EEF0F6}
+.tg-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#35A7A9,#E0A02B,#C0433A);transition:width .9s cubic-bezier(.4,0,.2,1)}
+.tg-kasus{border:2px solid #14161C;border-radius:12px;padding:8px 12px;margin:8px 0;background:#fff}
+.tg-kasus summary{cursor:pointer;font-weight:700;line-height:1.6}
+.tg-kasus[open]{animation:tgIn .4s both}
+.tg-kasus p{margin:6px 0 0;color:#147B54;line-height:1.65}
+</style>
+<script id="tg2-js">
+(function(){
+ // ===== kasus tambahan TWK (tap untuk lihat jawaban) =====
+ const K={
+  nas:['Siswa dari berbagai daerah menggelar festival budaya bersama untuk merayakan Hari Sumpah Pemuda. Sikap apa ini?','Nasionalisme: bersatu dalam keberagaman, bukan chauvinisme karena tidak merendahkan pihak lain.'],
+  int:['Atasan menyuruh menaikkan nilai di laporan agar anggaran cair. Apa sikap ASN berintegritas?','Menolak dengan sopan dan melaporkan lewat jalur resmi. Integritas = selaras antara pikiran, ucapan, tindakan yang jujur.'],
+  bela:['Mahasiswa mengabdi mengajar anak di daerah terpencil. Termasuk apa?','Bela negara nonmiliter lewat bidang pendidikan. Ingat: bela negara hak dan kewajiban semua warga (Pasal 27 ayat 3).'],
+  pancasila:['Warga bermusyawarah menyelesaikan sengketa batas lahan tanpa kekerasan. Sila berapa?','Sila ke-4: musyawarah mufakat, mengutamakan kepentingan bersama.'],
+  uud:['Presiden membuat aturan setingkat UU saat keadaan genting memaksa. Namanya apa?','Perppu (Pasal 22 UUD 1945). Setelah itu harus mendapat persetujuan DPR pada persidangan berikutnya.'],
+  nkri:['Hak mengelola sumber daya di laut sejauh 200 mil laut dari garis pangkal disebut?','Zona Ekonomi Eksklusif (ZEE). Wilayah dan kedaulatan ini bagian dari kesatuan NKRI.'],
+  bti:['Semboyan di pita yang dicengkeram kaki Garuda Pancasila adalah?','Bhinneka Tunggal Ika: berbeda-beda tetapi tetap satu (Pasal 36A UUD 1945).'],
+  bhs:['Mana yang efektif: "Para hadirin-hadirin dipersilakan duduk" atau "Para hadirin dipersilakan duduk"?','Yang kedua. "Para" dan pengulangan "hadirin-hadirin" sama-sama menandakan jamak, jadi berlebihan (pleonasme).']
+ };
+ Object.entries(K).forEach(([id,k])=>{try{ if(MATERI[id]) MATERI[id]+='<h4>Kasus latihan: terapkan hafalanmu</h4><details class="tg-kasus"><summary>'+k[0]+'</summary><p>'+k[1]+'</p></details>';}catch(e){}});
+ // ===== tangga hafalan untuk TIU dan TKP =====
+ const T=[
+  ['hitung','TIU Berhitung','Hafal: 25% = 1/4, 12,5% = 1/8, 33 1/3% = 1/3.','Paham: persen adalah pecahan per 100. Pecahan sederhana mengubah hitungan panjang jadi sekali bagi.','Terapkan: 25% dari 480? Langsung 480 : 4 = 120.'],
+  ['deret','TIU Deret','Hafal: bilangan kuadrat 1 sampai 15 (1, 4, 9, ... 225).','Paham: banyak deret tersembunyi sebagai kuadrat atau selisih bertingkat. Hafalan membuat pola cepat terlihat.','Terapkan: 1, 4, 9, 16, ... berikutnya 25.'],
+  ['silo','TIU Silogisme','Hafal: Semua A adalah B, Semua B adalah C, maka Semua A adalah C.','Paham: itu rantai himpunan, A di dalam B di dalam C.','Terapkan: Semua pegawai disiplin, Budi pegawai, maka Budi disiplin.'],
+  ['analogi','TIU Analogi','Hafal: jenis relasi: sinonim, antonim, fungsi, bagian-keseluruhan.','Paham: tentukan dulu relasi pasangan pertama, lalu cari pasangan lain dengan relasi sama.','Terapkan: Pisau : memotong = Pena : menulis (relasi fungsi).'],
+  ['pel','TKP Pelayanan','Hafal: skor 5 = proaktif, ramah, tuntas, sesuai aturan.','Paham: pelayanan publik diukur dari kepuasan masyarakat dan kepatuhan prosedur sekaligus.','Terapkan: pemohon marah karena antre lama. Jawab sopan, bantu, tetap sesuai prosedur (5), bukan menyuruh pulang (1).'],
+  ['prof','TKP Profesional','Hafal: nilai BerAKHLAK (Berorientasi pelayanan, Akuntabel, Kompeten, ...).','Paham: profesional berarti tanggung jawab, kompeten, dan transparan pada atasan.','Terapkan: tugas belum selesai, tenggat dekat. Atur prioritas, lapor atasan, kerjakan sampai tuntas.'],
+  ['anti','TKP Anti Radikalisme','Hafal: radikalisme = ingin perubahan drastis dengan cara ekstrem atau kekerasan.','Paham: yang ditolak adalah cara memaksa dan kekerasan, bukan perbedaan pendapat.','Terapkan: teman membagikan ajakan intoleran. Ingatkan baik-baik dan laporkan jika terus menyebar.'],
+  ['argumen','TIU Argumen','Hafal: penguat = bukti searah; pelemah = bukti berlawanan atau yang memutus hubungan sebab-akibat.','Paham: argumen itu alasan menuju kesimpulan. Yang diuji adalah hubungan di antara keduanya.','Terapkan: ‘Kopi bikin fokus’ dilemahkan oleh studi yang menunjukkan fokus sama saja dengan atau tanpa kopi.'],
+  ['analitis','TIU Analitis','Hafal: kata kunci syarat: jika-maka, pasti, tidak mungkin.','Paham: ubah syarat jadi tabel atau urutan, lalu coret kemungkinan yang mustahil.','Terapkan: A di kiri B, B di kiri C, maka urutannya A, B, C.'],
+  ['poltab','TIU Pola Tabel','Hafal: pola dasar: selisih tetap, kelipatan, jumlah baris atau kolom.','Paham: periksa baris, kolom, dan diagonal sampai ketemu satu hubungan yang konsisten.','Terapkan: baris 2, 4, 8 dan 3, 6, ? maka ? = 12 (tiap kali dikali 2).'],
+  ['banding','TIU Perbandingan','Hafal: tanda >, <, = dan nilai pecahan umum (1/3 = 0,333...).','Paham: samakan bentuk kedua sisi dulu (semua desimal atau semua pecahan), baru bandingkan.','Terapkan: x = 1/3 dan y = 0,3 maka x > y.'],
+  ['cerita','TIU Soal Cerita','Hafal: jarak = kecepatan x waktu.','Paham: rumus itu mengikat tiga besaran. Tulis dulu yang diketahui, cari yang ditanya.','Terapkan: 60 km/jam selama 2,5 jam menempuh 150 km.'],
+  ['ctabel','TIU Cerita Tabel','Hafal: rata-rata = jumlah : banyak data; persen = bagian : total x 100.','Paham: tabel hanya penyedia angka, rumusnya tetap sama.','Terapkan: nilai 70, 80, 90 maka rata-rata 80.'],
+  ['kecdata','TIU Kecukupan Data','Hafal: lima pilihan baku: (1) cukup, (2) cukup, keduanya perlu, masing-masing cukup, tidak cukup.','Paham: yang ditanya bukan berapa jawabannya, tetapi apakah data cukup untuk satu jawaban pasti.','Terapkan: umur Ani? (1) Ani 5 tahun lebih tua dari Budi, (2) Budi 20 tahun. Keduanya diperlukan.'],
+  ['figanalogi','TIU Figural Analogi','Hafal: perubahan dasar gambar: rotasi, cermin, warna, jumlah.','Paham: cari satu aturan A ke B, lalu terapkan persis ke C.','Terapkan: segitiga diputar 90 derajat, maka persegi pada pasangan kedua juga diputar 90 derajat.'],
+  ['figbeda','TIU Ketidaksamaan','Hafal: ciri yang dicek: jumlah sisi, arah, warna, posisi.','Paham: empat gambar punya satu sifat sama, satu menyimpang. Cari sifat itu.','Terapkan: empat bintang menghadap atas, satu menghadap bawah, maka yang bawah berbeda.'],
+  ['figserial','TIU Serial','Hafal: pola umum: bergeser, bertambah, berputar tiap langkah.','Paham: bandingkan langkah 1 ke 2 dan 2 ke 3 untuk menemukan aturan tetap.','Terapkan: titik pindah satu sudut tiap langkah, maka langkah berikutnya pindah satu sudut lagi.'],
+  ['jej','TKP Jejaring','Hafal: skor 5 = kolaboratif, komunikasi terbuka, hormat lintas unit.','Paham: jejaring dibangun dari saling percaya dan saling membantu.','Terapkan: butuh data unit lain. Hubungi dengan sopan, jelaskan keperluan, ucapkan terima kasih (5), bukan mengabaikan (1).'],
+  ['sos','TKP Sosial Budaya','Hafal: skor 5 = menghargai budaya setempat sambil tetap bekerja baik.','Paham: yang dinilai adalah adaptasi tanpa meninggalkan tugas.','Terapkan: ditugaskan ke daerah dengan adat berbeda. Pelajari adat, ikut kegiatan warga, tugas jalan terus.'],
+  ['tik','TKP TIK','Hafal: skor 5 = memanfaatkan teknologi untuk efisiensi dan menjaga keamanan data.','Paham: teknologi hanya alat. Yang dinilai sikap terbuka belajar dan menjaga keamanan.','Terapkan: ada aplikasi kerja baru. Ikut pelatihan, coba, tanya bila ragu, jaga kata sandi.']
+ ];
+ T.forEach(t=>{try{const l=lessonById(t[0]); if(l&&!l.sims.includes('sim-tangga2')) l.sims.unshift('sim-tangga2');}catch(e){}});
+ const pool=document.getElementById('simpool'); if(!pool) return;
+ const box=document.createElement('div'); box.className='card sim'; box.id='sim-tangga2'; box.style.padding='16px'; pool.appendChild(box);
+ const RM=matchMedia('(prefers-reduced-motion: reduce)').matches, COL=['#35A7A9','#E0A02B','#C0433A'], NM=['Hafal','Paham','Terapkan'];
+ const S=`stroke='#14161C' stroke-width='2'`;
+ const tri=(x,y,r,f)=>`<polygon points='${x},${y-16} ${x-15},${y+13} ${x+15},${y+13}' fill='${f||'#35A7A9'}' ${S} transform='rotate(${r} ${x} ${y})'/>`;
+ const P=[[-12,-12],[12,-12],[12,12],[-12,12]];
+ const bx=(x,y,p,hl,anim)=>`<g>${anim?`<animateTransform attributeName='transform' type='rotate' values='0 ${x} ${y};0 ${x} ${y};90 ${x} ${y};90 ${x} ${y}' keyTimes='0;.3;.6;1' dur='2.6s' repeatCount='indefinite'/>`:''}<rect x='${x-20}' y='${y-20}' width='40' height='40' rx='4' fill='#fff' ${S}/><circle cx='${x+P[p][0]}' cy='${y+P[p][1]}' r='5' fill='${hl?'#C0433A':'#E0A02B'}' ${S}>${hl?`<animate attributeName='r' values='5;8;5' dur='1s' repeatCount='indefinite'/>`:''}</circle></g>`;
+ const ar=x=>`<path d='M${x} 40h18m-6 -6l6 6l-6 6' fill='none' ${S}/>`;
+ const tx=(x,y,s)=>`<text x='${x}' y='${y}' text-anchor='middle' font-size='11' font-weight='700' fill='#14161C'>${s}</text>`;
+ const pulse=`<animate attributeName='opacity' values='1;.3;1' dur='1s' repeatCount='indefinite'/>`;
+ function FIG(id,st){
+  let g='';
+  if(id==='figanalogi'){
+   if(st===0) g=tri(40,34,0)+tx(40,76,'putar')+tri(110,34,180)+tx(110,76,'cermin')+tri(180,34,0,'#E0A02B')+tx(180,76,'warna')+tri(244,34,0)+tri(262,34,0)+tx(253,76,'jumlah');
+   else if(st===1) g=bx(60,40,0)+ar(95)+bx(150,40,1)+tx(105,82,'aturan: putar 90 derajat');
+   else g=bx(30,40,0)+ar(52)+bx(95,40,1)+bx(180,40,0)+ar(202)+bx(260,40,0,1,1)+tx(150,84,'A ke B sama dengan C ke ?');
+  } else if(id==='figbeda'){
+   if(st===0) g=tri(40,34,0)+tx(40,76,'sisi')+tri(110,34,90)+tx(110,76,'arah')+tri(180,34,0,'#E0A02B')+tx(180,76,'warna')+tri(250,24,0)+tx(250,76,'posisi');
+   else g=[0,1,2,3,4].map(i=>(st===2&&i===3)?`<g>${tri(40+55*i,40,180,'#C0433A').replace('/>','>'+pulse+'</polygon>')}</g>`:tri(40+55*i,40,0)).join('')+tx(150,82,st===2?'yang menghadap bawah berbeda':'empat segitiga menghadap atas');
+  } else if(id==='figserial'){
+   if(st===0) g=bx(50,36,0)+tx(50,80,'pindah')+`<circle cx='150' cy='36' r='8' fill='#35A7A9' ${S}/><circle cx='150' cy='36' r='16' fill='none' ${S}/>`+tx(150,80,'membesar')+bx(250,36,1)+tx(250,80,'berputar');
+   else if(st===1) g=bx(40,40,0)+ar(63)+bx(110,40,1)+ar(133)+bx(180,40,2)+tx(150,84,'aturan: titik geser satu sudut searah jarum jam');
+   else g=bx(40,40,0)+ar(62)+bx(110,40,1)+ar(132)+bx(180,40,2)+ar(202)+bx(250,40,3,1)+tx(150,84,'langkah berikut: titik di sudut kiri bawah');
+  } else if(id==='poltab'){
+   if(st===0) g=tx(150,45,'selisih tetap  |  kelipatan  |  jumlah baris');
+   else { const R=[[2,4,8],[3,6,12],[4,8,st===2?'16':'?']]; g=R.map((r,i)=>r.map((v,j)=>`<text x='${100+55*j}' y='${24+24*i}' text-anchor='middle' font-size='16' font-weight='800' fill='${(i===2&&j===2)?'#C0433A':'#14161C'}'>${v}${(i===2&&j===2&&st===2)?pulse:''}</text>`).join('')).join('')+tx(150,86,'tiap kolom dikali 2'); g=g.replace(/(<text[^>]*fill='#C0433A'[^>]*>)(16)(<animate[^>]*\/>)/,'$1$2$3</text>').replace(/<\/text><\/text>/,'</text>'); }
+  }
+  return g?`<svg viewBox='0 0 300 92' style='width:100%;max-width:340px;display:block;margin:8px auto 0' role='img' aria-label='Ilustrasi bentuk pola'>${g}</svg>`:'';
+ }
+ let ti=0,st=0,tm;
+ function draw(){
+  const t=T[ti];
+  box.innerHTML='<h4>Dari hafalan ke soal: TIU dan TKP</h4><p class="hint">Rumus dan nilai yang dihafal baru berguna kalau dipahami lalu dipakai. Pilih topik dan Putar.</p><div class="tg-chips">'+T.map((x,i)=>'<button data-i="'+i+'" class="'+(i===ti?'on':'')+'">'+x[1]+'</button>').join('')+'</div><div class="tg-bar"><i style="width:'+((st+1)/3*100)+'%"></i></div><div class="tg-box" style="border-color:'+COL[st]+'"><b style="color:'+COL[st]+'">'+(st+1)+'. '+NM[st].toUpperCase()+'</b>'+t[2+st]+'</div>'+FIG(t[0],st)+'<div class="tg-ctl"><button class="btn" data-a="p">Putar</button><button class="btn ghost" data-a="n">Berikut</button></div>';
+  box.querySelectorAll('.tg-chips button').forEach(b=>b.onclick=()=>{clearInterval(tm);ti=+b.dataset.i;st=0;draw();});
+  box.querySelector('[data-a=n]').onclick=()=>{clearInterval(tm);st=(st+1)%3;draw();};
+  box.querySelector('[data-a=p]').onclick=()=>{clearInterval(tm);st=0;draw();tm=setInterval(()=>{st++;draw();if(st>=2)clearInterval(tm);},RM?1200:1900);};
+ }
+ draw();
+})();
+</script>
+<script id="tg3-js">
+(function(){
+ const K={
+  nas:[['Merendahkan produk bangsa lain sambil memuja produk sendiri. Sikap apa?','Chauvinisme, bukan nasionalisme.'],['Pemuda Surabaya melawan sekutu 10 November 1945. Bentuknya?','Patriotisme: rela berkorban demi bangsa.']],
+  int:[['Pegawai menerima uang terima kasih dari warga yang urusannya selesai. Tindakan?','Gratifikasi: lapor KPK paling lambat 30 hari kerja.'],['Jam kerja dipakai untuk urusan pribadi. Nilai yang dilanggar?','Disiplin dan akuntabilitas.']],
+  bela:[['Warga menolak dan melaporkan hoaks yang memecah belah. Termasuk?','Bela negara nonmiliter di ruang siber.'],['Dasar hukum upaya pertahanan dan keamanan oleh rakyat?','Pasal 30 UUD 1945.']],
+  pancasila:[['Beribadah tanpa memaksa penganut agama lain. Sila berapa?','Sila ke-1, Ketuhanan Yang Maha Esa.'],['Membantu korban bencana lintas suku. Sila berapa?','Sila ke-2, kemanusiaan yang adil dan beradab.']],
+  uud:[['Lembaga yang memutus sengketa kewenangan antarlembaga negara?','Mahkamah Konstitusi.'],['Siapa yang mengubah UUD 1945?','MPR, empat kali pada 1999 sampai 2002.']],
+  nkri:[['Penyerahan kewenangan dari pusat ke daerah disebut?','Desentralisasi (otonomi daerah, Pasal 18).'],['Pernyataan 13 Desember 1957 bahwa laut antarpulau bagian wilayah?','Deklarasi Djuanda.']],
+  bti:[['Siapa pengarang Kakawin Sutasoma?','Mpu Tantular.'],['Warga membantu tetangga beda suku saat hajatan. Nilai?','Toleransi dan gotong royong dalam semangat Bhinneka Tunggal Ika.']],
+  bhs:[['Dalam ‘Dia berdiri di sebelah kiri’, di- ditulis apa?','Dipisah, karena kata depan penunjuk tempat.'],['Apakah ‘naik ke atas’ efektif?','Tidak, pleonasme. Cukup ‘naik’.']]
+ };
+ Object.entries(K).forEach(([id,a])=>{try{ if(MATERI[id]) a.forEach(k=>{MATERI[id]+='<details class="tg-kasus"><summary>'+k[0]+'</summary><p>'+k[1]+'</p></details>';}); }catch(e){}});
+})();
+</script>
+<script id="tg5-js">
+(function(){
+ var bubble=document.querySelector('.mk-bubble'), txt=document.getElementById('mkBubbleText');
+ if(!bubble||!txt||!window.__mkSay) return;
+ var L=[
+  ['Info dasar dulu nih, Pejuang! Materi dan soal di sini mengacu ke Kepmen PANRB Nomor 406 Tahun 2026. SKD-nya: TWK 30 soal, TIU 35, TKP 45. Ambang batasnya 65, 80, dan 156.','wow'],
+  ['Lima materi TWK-nya: nasionalisme, integritas, bela negara, pilar negara, dan bahasa negara. Semuanya udah gue susun di peta belajar.','happy'],
+  ['Tapi inget ya, Kepmen 406/2026 itu buat SKD sekolah kedinasan 2026. Kalau lo ngejar CPNS formasi umum, ikutin pengumuman resmi BKN dan KemenPANRB. Cek dulu sebelum daftar!','wow'],
+  ['Soal pembaruan: materi ini ditinjau berkala, dan admin berkomitmen ngecek minimal seminggu sekali. Terakhir ditinjau 17 November 2026. Kalau ada yang beda sama pengumuman resmi, pegangan lo tetap pengumuman resmi.','happy']
+ ];
+ var run=0, tm;
+ bubble.style.flexWrap='wrap'; var p=txt.closest('p')||txt; p.style.flex='1 1 100%';
+ var b=document.createElement('button'); b.type='button'; b.className='btn ghost'; b.style.cssText='margin:8px 0 0 auto;flex:none;font-size:13px;padding:6px 14px';
+ bubble.appendChild(b);
+ function stop(){ run++; clearTimeout(tm); window.__mkHold=false; b.textContent='Ulangi info dasar'; }
+ function play(k,id){
+  if(id!==run) return;
+  if(k>=L.length){ stop(); return; }
+  window.__mkHold=true; b.textContent='Lewati info ('+(k+1)+'/'+L.length+')';
+  window.__mkSay(L[k][0],L[k][1],3000);
+  tm=setTimeout(function(){ play(k+1,id); }, L[k][0].length*60+1800);
+ }
+ function start(){ run++; clearTimeout(tm); play(0,run); }
+ b.onclick=function(e){ e.stopPropagation(); if(window.__mkHold) stop(); else start(); };
+ b.textContent='Ulangi info dasar';
+ setTimeout(start,4500);
+})();
+</script>
+<style id="tgh-css">
+.tgh{padding:14px 16px;line-height:1.7}
+.tgh .tr{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:6px 0}
+.tgh .tr i{font-style:normal;font-weight:800;font-size:12px;color:#fff;border-radius:99px;padding:2px 9px;height:fit-content;white-space:nowrap}
+.tgh .t1 i{background:#35A7A9}.tgh .t2 i{background:#8A5A00}.tgh .t3 i{background:#C0433A}
+.tgh .why{margin-top:8px;font-size:13px;color:var(--ink-faint)}
+#sim-tangga{padding:16px}
+#sim-tangga h4{margin:0 0 4px}
+.tg-chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.tg-chips button{border:2px solid #14161C;background:#fff;border-radius:99px;padding:5px 12px;font-weight:700;font-size:13px;cursor:pointer;transition:transform .15s,background .2s}
+.tg-chips button:active{transform:scale(.94)}
+.tg-chips button.on{background:#35A7A9;color:#fff}
+.tg-svg{width:100%;max-width:420px;display:block;margin:0 auto}
+.tg-st rect{fill:#EEF0F6;stroke:#14161C;stroke-width:2;transition:fill .5s}
+.tg-st.on rect{fill:var(--c)}
+.tg-st text{font:700 11px system-ui,sans-serif;fill:#14161C}
+.tg-man{transition:transform .9s cubic-bezier(.5,-.3,.3,1.3)}
+.tg-man .arm{transform-origin:0 -20px;animation:tgWave 1s ease-in-out infinite}
+.tg-box{border:2px solid #14161C;border-radius:14px;padding:10px 12px;margin-top:8px;min-height:84px;line-height:1.65;animation:tgIn .45s both}
+.tg-box b{display:block;font-size:12px;letter-spacing:.3px}
+.tg-ctl{display:flex;gap:8px;margin-top:8px}
+@keyframes tgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes tgPulse{0%,100%{box-shadow:0 0 0 0 rgba(53,167,169,.55)}50%{box-shadow:0 0 0 7px rgba(53,167,169,0)}}
+@keyframes tgWave{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(18deg)}}
+.flow li.on{animation:tgIn .5s both}
+.flow li.cur .fl-dot{animation:tgPulse 1.2s infinite}
+.tg-rv{opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
+.tg-rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.tg-man,.tg-man .arm,.tg-box,.flow li.on,.flow li.cur .fl-dot,.tg-rv{animation:none!important;transition:none!important;opacity:1;transform:none}}
+</style>
+<script id="tgh-js">
+(function(){
+ // [id, label, hafal, paham, terap]
+ const T=[
+  ['nas','Nasionalisme','Sumpah Pemuda: 28 Oktober 1928. Budi Utomo: 20 Mei 1908.','Tiap tonggak punya fungsi: 1908 mulai sadar berbangsa, 1928 berikrar bersatu, 1945 merdeka. Tanggal itu bukan angka acak, tapi urutan cerita.','Soal: "Peristiwa yang menandai ikrar satu tanah air, bangsa, bahasa?" Kamu tidak mencari tanggal, kamu mencari fungsi ikrar bersatu: Sumpah Pemuda.'],
+  ['int','Integritas','Gratifikasi wajib dilaporkan ke KPK paling lambat 30 hari kerja.','Dilaporkan karena pemberian terkait jabatan bisa mengikat budi dan memicu benturan kepentingan, walau niatnya tampak baik.','Soal kasus: ASN menerima parsel dari rekanan proyek. Jawaban yang tepat adalah melapor, bukan menolak diam-diam atau menyimpan.'],
+  ['bela','Bela Negara','Dasarnya Pasal 27 ayat (3) dan Pasal 30 UUD 1945.','Pasal itu berbunyi hak dan kewajiban setiap warga, jadi bela negara tidak hanya milik tentara.','Soal: warga ikut ronda, cek hoaks, jaga lingkungan. Kamu langsung tahu itu bela negara nonmiliter.'],
+  ['pancasila','Pancasila','Sila ke-5 memuat butir: tidak boros, tidak bergaya hidup mewah.','Sila ke-5 soal keadilan dan kesederhanaan: yang berlebih tidak dipamerkan di depan yang kekurangan.','Soal kasus: pejabat pamer mobil mewah di media sosial (flexing). Butir yang dilanggar langsung ketemu: sila ke-5.'],
+  ['uud','UUD 1945','MK menguji UU terhadap UUD. MA menguji aturan di bawah UU terhadap UU.','Pengujian mengikuti hierarki: aturan di bawah tidak boleh bertentangan dengan aturan di atasnya.','Soal: "Perda bertentangan dengan UU, siapa yang menguji?" Hierarkinya kamu pahami, jawabannya MA.'],
+  ['nkri','NKRI','Pasal 1 ayat (1): negara kesatuan. Pasal 18: otonomi daerah.','Kesatuan berarti kedaulatan satu, tapi daerah diberi hak mengurus urusan sendiri. Itu bukan federal.','Soal: daerah mengatur pelayanan publiknya sendiri. Kamu tahu itu otonomi dalam negara kesatuan, bukan memisahkan diri.'],
+  ['bti','Bhinneka Tunggal Ika','Dari Kakawin Sutasoma, dimuat di Pasal 36A.','Maknanya berbeda-beda tetapi tetap satu: perbedaan dijaga, persatuan tidak dikorbankan.','Soal kasus: warga beda agama saling menjaga saat hari raya. Kamu langsung kaitkan ke toleransi dalam Bhinneka Tunggal Ika.'],
+  ['bhs','Bahasa Negara','"di-" sebagai awalan ditulis serangkai, sebagai kata depan dipisah.','Awalan menempel pada kata kerja (dibaca). Kata depan menunjuk tempat (di rumah).','Soal ejaan: "Buku itu di baca di rumah." Kamu langsung tahu yang salah adalah "di baca".']
+ ];
+ const why='<div class="why">Urutannya tidak bisa dibalik: tanpa hafalan tidak ada bahan untuk dipahami, tanpa pemahaman hafalan buyar saat soal dibungkus kasus. Soal TWK model terbaru hampir selalu berbentuk kasus, jadi hafalan yang sudah dipahami adalah kunci yang pas.</div>';
+ const card=t=>'<h4>Hafalan mengantar ke penerapan</h4><div class="tgh"><div class="tr t1"><i>1 Hafal</i><span>'+t[2]+'</span></div><div class="tr t2"><i>2 Paham</i><span>'+t[3]+'</span></div><div class="tr t3"><i>3 Terapkan</i><span>'+t[4]+'</span></div>'+why+'</div>';
+ T.forEach(t=>{ try{ if(MATERI[t[0]]) MATERI[t[0]]=card(t)+MATERI[t[0]]; }catch(e){} });
+ ['nas','int','bela','pancasila','bhs'].forEach(id=>{ try{ const l=lessonById(id); if(l&&!l.sims.includes('sim-tangga')) l.sims.unshift('sim-tangga'); }catch(e){} });
+
+ const pool=document.getElementById('simpool'); if(!pool) return;
+ const box=document.createElement('div'); box.className='card sim'; box.id='sim-tangga'; pool.appendChild(box);
+ const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const COL=['#35A7A9','#E0A02B','#C0433A'], LAB=['1 Hafal','2 Paham','3 Terapkan'], KEY=['Hafalan','Pemahaman','Penerapan (soal)'];
+ let ti=0, st=0, timer;
+ function draw(){
+  const t=T[ti], txt=[t[2],t[3],t[4]];
+  box.innerHTML='<h4>Tangga hafalan ke soal</h4><p class="hint">Pilih topik, lalu tekan Putar. Lihat bagaimana satu hafalan naik jadi jawaban soal kasus. Tap anak tangga untuk loncat.</p>'+
+  '<div class="tg-chips">'+T.map((x,i)=>'<button data-i="'+i+'" class="'+(i===ti?'on':'')+'">'+x[1]+'</button>').join('')+'</div>'+
+  '<svg class="tg-svg" viewBox="0 0 420 190" role="img" aria-label="Tangga tiga anak tangga: hafal, paham, terapkan">'+
+  [0,1,2].map(i=>'<g class="tg-st'+(i<=st?' on':'')+'" data-s="'+i+'" style="--c:'+COL[i]+';cursor:pointer"><rect x="'+(40+i*115)+'" y="'+(130-i*40)+'" width="115" height="'+(50+i*40)+'" rx="6"/><text x="'+(97+i*115)+'" y="'+(152-i*40)+'" text-anchor="middle">'+LAB[i]+'</text></g>').join('')+
+  '<g class="tg-man" style="transform:translate('+(97+st*115)+'px,'+(128-st*40)+'px)"><ellipse cx="0" cy="0" rx="12" ry="3" fill="#14161C" opacity=".2"/><g stroke="#14161C" stroke-width="3" stroke-linecap="round" fill="none"><path d="M0 -22V-8M0 -8L-6 0M0 -8L6 0"/><path class="arm" d="M0 -19L10 -28"/><path d="M0 -19L-9 -12"/></g><circle cx="0" cy="-30" r="7" fill="#F2C9A0" stroke="#14161C" stroke-width="2.5"/></g></svg>'+
+  '<div class="tg-box" style="border-color:'+COL[st]+'"><b style="color:'+COL[st]+'">'+KEY[st].toUpperCase()+'</b>'+txt[st]+'</div>'+
+  '<div class="tg-ctl"><button class="btn" data-a="play">Putar</button><button class="btn ghost" data-a="next">Anak tangga berikut</button></div>';
+  box.querySelectorAll('.tg-chips button').forEach(b=>b.onclick=()=>{clearInterval(timer);ti=+b.dataset.i;st=0;draw();});
+  box.querySelectorAll('.tg-st').forEach(g=>g.onclick=()=>{clearInterval(timer);st=+g.dataset.s;draw();});
+  box.querySelector('[data-a=next]').onclick=()=>{clearInterval(timer);st=(st+1)%3;draw();};
+  box.querySelector('[data-a=play]').onclick=()=>{clearInterval(timer);st=0;draw();timer=setInterval(()=>{st++;draw();if(st>=2)clearInterval(timer);},RM?1200:1900);};
+ }
+ draw();
+
+ // muncul halus saat di-scroll
+ try{
+  const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.08}):null;
+  const old=renderLesson;
+  renderLesson=function(){ old.apply(this,arguments);
+   document.querySelectorAll('#lesson .lc .anx, #lesson .lc .tgh, #lesson .sim').forEach(el=>{ if(io){el.classList.add('tg-rv');io.observe(el);} });
+  };
+ }catch(e){}
+})();
+</script>
+<style id="polish-css">
+/* ===== Rapihin UI/UX: lapisan polesan, sengaja konservatif ===== */
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{-webkit-tap-highlight-color:transparent;text-rendering:optimizeLegibility;overflow-wrap:break-word}
+/* area sentuh nyaman (min 44px) */
+.btn,.tabs2 button,.chips button,.tg-chips button,.obtn,.back{min-height:44px}
+.btn,.tabs2 button,.chips button,.tg-chips button{display:inline-flex;align-items:center;justify-content:center;gap:6px}
+/* umpan balik tekan yang konsisten */
+.btn,.tabs2 button,.chips button,.opt,.tile,.tg-chips button{transition:transform .12s ease,box-shadow .12s ease,background-color .2s}
+.btn:active,.tabs2 button:active,.chips button:active,.opt:active,.tile:active{transform:translateY(2px)}
+/* fokus keyboard jelas */
+:focus-visible{outline:3px solid #6C5CE7;outline-offset:3px;border-radius:10px}
+/* bacaan materi: baris tidak terlalu panjang di layar lebar */
+.lc.materi p,.lc.materi li,.lc.materi .anx,.tgh{max-width:68ch}
+.lc.materi p,.lc.materi li{line-height:1.75}
+.lc.materi h4{margin:20px 0 6px;line-height:1.35}
+.lc.materi ul,.lc.materi ol{padding-left:1.25em}
+/* kartu: jarak dan napas seragam */
+.card,.lc,.analogi,.tgh{margin-bottom:12px}
+.anx{border-radius:12px;padding:10px 12px;margin:8px 0}
+/* tombol kembali menempel di atas biar mudah dijangkau */
+#lesson .back{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--bg,#F6F6FA);padding-top:8px;padding-bottom:8px;margin-bottom:4px}
+/* tab materi / latihan */
+.tabs2{gap:8px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 52px);z-index:5;background:var(--bg,#F6F6FA);padding:6px 0}
+/* tabel dan gambar tidak bikin halaman geser ke samping */
+.lc table{display:block;max-width:100%;overflow-x:auto}
+img,svg{max-width:100%}
+/* gelembung maskot lebih rapi dan terbaca */
+.mk-bubble{line-height:1.5}
+.mk-row{margin-bottom:22px}
+.mk-row + *{margin-top:0}
+.mk-bubble .btn{font-weight:700}
+/* simulasi tangga */
+#sim-tangga h4,#sim-tangga2 h4{font-size:16px;line-height:1.3}
+#sim-tangga .hint,#sim-tangga2 .hint{margin:2px 0 6px;line-height:1.55}
+.tg-box{line-height:1.7}
+.tg-kasus summary{padding:2px 0;list-style:none}
+.tg-kasus summary::before{content:'\25B6';display:inline-block;margin-right:8px;font-size:11px;transition:transform .2s}
+.tg-kasus[open] summary::before{transform:rotate(90deg)}
+/* layar kecil */
+@media (max-width:480px){
+ .lc.materi p,.lc.materi li{font-size:15px}
+ .tg-chips{gap:5px}.tg-chips button{padding:6px 10px;font-size:12.5px}
+ .tg-ctl{flex-wrap:wrap}.tg-ctl .btn{flex:1 1 140px}
+}
+/* hormati preferensi kurangi gerakan */
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </body>
 </html>
