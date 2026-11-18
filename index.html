@@ -2185,6 +2185,71 @@ img,svg{max-width:100%}
   body.nav-away .lf { bottom: calc(18px + env(safe-area-inset-bottom, 0px)); }
 }
 @media (prefers-reduced-motion: reduce) { #nav, .fab, .lf { transition: none !important; } }
+
+/* Kartu akhir materi (menggantikan bubble maskot yang menutup bacaan) */
+.lc-act.endcard { display: grid; gap: 10px; margin-top: 28px; padding: 18px 16px; border: 2px solid #14161C; border-radius: 22px; background: var(--brand-soft, #DDF0EF); box-shadow: 0 3px 0 #14161C; }
+.endcard .ec-t b { display: block; margin-bottom: 3px; font-size: 17px; }
+.endcard .ec-t span { font-size: 14px; line-height: 1.5; color: var(--ink-soft, #4B5160); }
+.endcard .btn { width: 100%; justify-content: center; }
+.endcard .btn[data-t] { background: var(--brand, #247B7D); color: #fff; }
+.endcard .ec-sec { background: #fff; color: var(--ink, #14161C); }
+@media (min-width: 700px) { .lc-act.endcard { grid-template-columns: 1fr auto auto; align-items: center; padding: 18px 20px; } .endcard .btn { width: auto; } }
+
+/* ===== Polesan UI/UX ===== */
+/* Filter Semua/TWK/TIU/TKP: garis bawah jelas, bukan blok pucat */
+.chips button.is-active::after { left: 0; right: 0; bottom: -1.5px; height: 3px; border-radius: 3px; z-index: 0; background: var(--brand, #247B7D); }
+/* Kartu traktir kopi lebih ringkas supaya Subtes naik ke layar pertama */
+.kopi { margin: 18px 0 4px; padding: 12px 14px; gap: 10px 12px; align-items: center; }
+.kopi-ic { width: 44px; height: 44px; }
+.kopi-ic svg { width: 28px; height: 28px; }
+.kopi-tx { flex: 1 1 160px; }
+.kopi-tx strong { font-size: 15px; }
+.kopi-tx span { font-size: 13px; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.kopi-btn { padding: 9px 16px; font-size: 14px; min-height: 40px; display: inline-flex; align-items: center; }
+/* Tombol Kembali lebih ringan */
+#lesson .back { min-height: 40px; box-shadow: 0 2px 0 #14161C; }
+/* Aksesibilitas: fokus keyboard terlihat, tanpa kilatan biru saat ketuk di HP */
+:where(button, a, input, [tabindex]):focus-visible { outline: 3px solid var(--brand, #247B7D); outline-offset: 2px; }
+button, a, .tile, .lcard { -webkit-tap-highlight-color: transparent; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+/* ===== Tampilan isi materi ===== */
+/* Langkah Hafal/Paham/Terapkan: label di atas, teks selebar kartu (sebelumnya teks sempit dan tidak sejajar) */
+.tgh { padding: 6px 2px 4px; line-height: 1.7; }
+.tgh .tr { grid-template-columns: 1fr; gap: 6px; margin: 0; padding: 12px 0 12px 12px; border-left: 3px solid var(--tc, #35A7A9); }
+.tgh .tr + .tr { border-top: 1px dashed rgba(20, 22, 28, .14); }
+.tgh .t1 { --tc: #35A7A9; } .tgh .t2 { --tc: #B7791F; } .tgh .t3 { --tc: #C0433A; }
+.tgh .tr i { justify-self: start; font-size: 12px; letter-spacing: .02em; }
+.tgh .why { margin-top: 10px; padding: 10px 12px; border-radius: 12px; background: rgba(36, 123, 125, .08); font-size: 13.5px; line-height: 1.6; color: var(--ink-soft, #4B5160); }
+/* Isi kartu materi: ruang baca lebih lebar */
+.mc[open] .mb { padding-left: 18px; padding-right: 16px; }
+.mc[open] > summary { padding-left: 16px; }
+@media (max-width: 420px) { .mc[open] .mb { padding-left: 14px; padding-right: 12px; } .mc[open] > summary { padding-left: 12px; } }
+
+/* Teks bacaan lebih kontras dan sedikit lebih rapat */
+.lc.materi p, .lc.materi li, .mc .mb p, .mc .mb li { color: #2A2E3B; line-height: 1.72; }
+
+/* Kartu subtes aktif (sebagai filter) */
+.tile.is-on { outline: 3px solid #14161C; outline-offset: 3px; }
+
+.f-reset { margin: -4px 0 10px; padding: 6px 0; border: 0; background: none; color: var(--brand-strong, #1F7274); font: 700 14px/1.2 var(--font, inherit); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+/* ===== Hero beranda ===== */
+header.home { position: relative; isolation: isolate; }
+header.home::before { content: ""; position: absolute; z-index: -1; top: -8px; right: 0; width: min(300px, 72%); height: 190px; pointer-events: none; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(248, 180, 97, .2), rgba(248, 180, 97, 0)), radial-gradient(closest-side at 70% 60%, rgba(43, 143, 145, .12), rgba(43, 143, 145, 0)); }
+.home .hello { margin-top: 2px; font-size: clamp(30px, 7.4vw, 44px); line-height: 1.08; letter-spacing: -.035em; }
+.home .hello .hl { background: linear-gradient(transparent 60%, rgba(248, 180, 97, .65) 60%); padding: 0 .12em; margin: 0 -.12em; border-radius: 4px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.home .subhello { margin: 10px 0 18px; font-size: 15.5px; line-height: 1.5; }
+.home .subhello b { color: var(--brand-strong, #1F7274); font-weight: 800; }
+@media (min-width: 900px) { header.home::before { width: 300px; height: 170px; top: 0; right: 40px; } .home .subhello { font-size: 16px; } }
+
+/* Penanda kelompok kartu materi: pendalaman dan latihan penerapan */
+.mc.dig { background: #F8FAFB; }
+.mc.dig .mb::before, .mc.prac .mb::before { display: block; margin: 0 0 10px; font: 800 11px/1 var(--font, inherit); letter-spacing: .09em; text-transform: uppercase; color: var(--brand-strong, #1F7274); }
+.mc.dig .mb::before { content: "Pendalaman"; }
+.mc.prac { background: var(--brand-soft, #DDF0EF); }
+.mc.prac .mb::before { content: "Latihan penerapan"; }
 </style>
 
 
@@ -2308,10 +2373,9 @@ img,svg{max-width:100%}
               <div class="kopi-tx"><strong>Terbantu belajar di sini?</strong><span>Kalau materi dan soalnya kepake, lo bisa traktir kopi buat bantu gue terus update isinya. Nominal bebas.</span></div>
               <a class="kopi-btn" href="#traktir" data-kopi tabindex="-1">☕ Traktir kopi</a>
             </div>
-              <div class="chips" id="chips"><button class="is-active" data-f="all">Semua</button><button data-f="twk">TWK</button><button data-f="tiu">TIU</button><button data-f="tkp">TKP</button></div>
             </header>
             <h3 class="sec">Subtes</h3><div class="tiles" id="tiles"></div>
-            <h3 class="sec">Semua materi</h3>
+            <h3 class="sec" id="secMateri">Semua materi</h3><button type="button" class="f-reset" id="fReset" hidden>Tampilkan semua materi</button>
             <button class="fab" id="fab" aria-label="Lanjutkan belajar"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#fff"/></svg></button>
             <div id="groups"></div>
             <div class="card" style="margin-top:32px">
@@ -2437,6 +2501,7 @@ img,svg{max-width:100%}
     }
     $$('.nav-btn').forEach(b => b.addEventListener('click', () => showView(b.dataset.view)));
     window.addEventListener('popstate', e => {
+      if (window.__sgBack && window.__sgBack(e)) return;
       const st = e.state || {};
       _popping = true;
       try {
@@ -3332,17 +3397,94 @@ img,svg{max-width:100%}
       pel: `<h4>Pendalaman: lingkup dan standar pelayanan</h4><ul><li><b>Lingkup (UU 25/2009):</b> pelayanan barang publik, jasa publik, dan pelayanan administratif.</li><li><b>Standar pelayanan</b> antara lain memuat persyaratan, prosedur, jangka waktu penyelesaian, biaya atau tarif, produk pelayanan, serta penanganan pengaduan dan masukan.</li></ul><h4>Pendalaman: asas yang sering menjadi kunci</h4><div class="kv "><div><b>Tidak diskriminatif</b><span>Semua warga dilayani sama, tanpa membedakan suku, agama, atau status.</span></div><div><b>Keterbukaan</b><span>Persyaratan, biaya, dan jangka waktu disampaikan jelas.</span></div><div><b>Ketepatan waktu</b><span>Layanan selesai sesuai jangka waktu yang dijanjikan.</span></div><div><b>Kelompok rentan</b><span>Lansia, penyandang disabilitas, dan ibu hamil mendapat fasilitas dan perlakuan khusus.</span></div></div><h4>Pendalaman: keluhan dan pungutan liar</h4><ul><li>Terima keluhan dengan tenang, catat, dan tindak lanjuti. Jangan defensif atau melempar tanggung jawab.</li><li>Warga bisa mengadu lewat penyelenggara, kanal SP4N-LAPOR!, dan Ombudsman RI sebagai pengawas eksternal.</li><li>Pungutan di luar tarif resmi: tolak dengan sopan, jelaskan biaya resmi, dan laporkan kalau terjadi.</li></ul>`,
       jej: `<h4>Pendalaman: jenis jejaring dan keterampilan</h4><ul><li><b>Jejaring internal:</b> antarrekan dan antarunit. <b>Eksternal:</b> antarinstansi, mitra, dan masyarakat.</li><li>Keterampilan kunci: mendengarkan aktif, komunikasi asertif (tegas tapi sopan), memberi dan menerima umpan balik, serta empati.</li></ul><h4>Pendalaman: pola situasi yang sering keluar</h4><div class="kv "><div><b>Rekan tidak kooperatif</b><span>Ajak bicara, tanyakan kendalanya, bagi peran dengan jelas, tawarkan bantuan.</span></div><div><b>Beda pendapat</b><span>Cari titik temu dan putuskan berdasarkan tujuan organisasi, bukan ego.</span></div><div><b>Butuh data unit lain</b><span>Minta langsung dengan sopan, jelaskan tujuan dan tenggat.</span></div><div><b>Tim lintas unit</b><span>Sepakati tujuan, tenggat, dan penanggung jawab sejak awal.</span></div></div><h4>Pendalaman: jawaban rendah</h4><p>Bergosip, menyindir di grup, menyalahkan di depan umum, melapor ke atasan tanpa mencoba bicara dulu, atau bekerja sendiri-sendiri.</p>`,
       sos: `<h4>Pendalaman: peran ASN dalam masyarakat majemuk</h4><ul><li>ASN berfungsi sebagai perekat dan pemersatu bangsa, sejalan dengan Bhinneka Tunggal Ika dan sila ketiga Pancasila.</li><li>Pelayanan tidak boleh membedakan ras dan etnis (UU 40/2008 tentang Penghapusan Diskriminasi Ras dan Etnis).</li></ul><h4>Pendalaman: langkah beradaptasi di daerah baru</h4><ul><li>Amati, bertanya, dan belajar adat serta bahasa setempat.</li><li>Ikut kegiatan warga kayak kerja bakti dan acara adat yang tidak melanggar aturan.</li><li>Hormati kearifan lokal, tapi tetap taat aturan negara.</li></ul><h4>Pendalaman: kalau terjadi gesekan antarkelompok</h4><ul><li>Bersikap netral, jangan memihak satu kelompok.</li><li>Ajak pihak yang berselisih berdialog, libatkan tokoh masyarakat sebagai penengah.</li><li>Utamakan persatuan dan kepentingan bersama.</li></ul>`,
-      tik: `<h4>Pendalaman: literasi digital dan cek fakta</h4><ul><li>Periksa sumber, tanggal, dan penulisnya. Bandingkan dengan media atau situs resmi.</li><li>Waspadai judul provokatif dan pesan berantai. Jangan membagikan sebelum jelas kebenarannya.</li></ul><h4>Pendalaman: keamanan data</h4><ul><li>Gunakan kata sandi panjang dan berbeda-beda, aktifkan autentikasi dua langkah.</li><li>Kode OTP tidak boleh dibagikan kepada siapa pun.</li><li>Waspadai tautan atau lampiran asing (phishing). Laporkan, jangan diklik.</li><li>Data dinas disimpan dan dikirim lewat sistem atau kanal resmi, bukan akun pribadi.</li></ul><h4>Pendalaman: dasar hukum dan etika</h4><ul><li>UU ITE (UU 11/2008 dan perubahannya), UU 27/2022 tentang Pelindungan Data Pribadi, dan Perpres 95/2018 tentang SPBE.</li><li>ASN di media sosial: tidak memuat ujaran kebencian, SARA, atau hoaks, dan menjaga rahasia jabatan.</li></ul>`,
+      tik: `<h4>Pendalaman: literasi digital dan cek fakta</h4><ul><li>Periksa sumber, tanggal, dan penulisnya (tabayun). Bandingkan dengan media atau situs resmi.</li><li>Waspadai judul provokatif dan pesan berantai. Jangan membagikan sebelum jelas kebenarannya.</li></ul><h4>Pendalaman: keamanan data</h4><ul><li>Gunakan kata sandi panjang dan berbeda-beda, aktifkan autentikasi dua langkah.</li><li>Kode OTP tidak boleh dibagikan kepada siapa pun.</li><li>Waspadai tautan atau lampiran asing (phishing). Laporkan, jangan diklik.</li><li>Data dinas disimpan dan dikirim lewat sistem atau kanal resmi, bukan akun pribadi.</li></ul><h4>Pendalaman: dasar hukum dan etika</h4><ul><li>UU ITE (UU 11/2008 dan perubahannya), UU 27/2022 tentang Pelindungan Data Pribadi, dan Perpres 95/2018 tentang SPBE.</li><li>ASN di media sosial: tidak memuat ujaran kebencian, SARA, atau hoaks, dan menjaga rahasia jabatan.</li></ul>`,
       prof: `<h4>Pendalaman: disiplin dan netralitas</h4><ul><li>PP 94/2021 mengatur kewajiban, larangan, dan hukuman disiplin PNS dalam tiga tingkat: ringan, sedang, dan berat.</li><li>ASN wajib netral: tidak berpihak pada kepentingan politik, tidak berkampanye, dan tidak memakai fasilitas negara untuk politik.</li></ul><h4>Pendalaman: menyikapi perintah atasan</h4><ul><li>Patuhi selama sesuai aturan.</li><li>Kalau melanggar aturan: tolak dengan sopan, jelaskan dasar aturannya, dan tawarkan alternatif yang benar.</li><li>Kalau tetap dipaksa, gunakan jalur resmi, bukan membangkang atau diam-diam menuruti.</li></ul><h4>Pendalaman: mengelola tugas dan kesalahan</h4><ul><li>Susun prioritas: kerjakan yang mendesak dan penting lebih dulu, koordinasikan sisanya.</li><li>Kalau tenggat terancam, laporkan lebih awal dan ajukan solusi.</li><li>Kalau salah, akui, perbaiki, dan cegah terulang. Menutupi kesalahan selalu jawaban rendah.</li></ul>`,
       anti: `<h4>Pendalaman: moderasi beragama</h4><p>Empat indikator moderasi beragama: komitmen kebangsaan, toleransi, anti kekerasan, dan akomodatif terhadap budaya lokal.</p><h4>Pendalaman: pencegahan dan penindakan</h4><ul><li>Radikalisme tidak melekat pada agama, suku, atau kelompok tertentu. Hindari stereotip.</li><li>BNPT berperan dalam penanggulangan terorisme. Dasar hukumnya UU 5/2018 tentang Pemberantasan Tindak Pidana Terorisme.</li><li>Pencegahan dilakukan lewat kontra radikalisasi dan deradikalisasi.</li><li>Paham radikal kerap menyebar lewat media sosial, jadi literasi digital penting.</li></ul><h4>Pendalaman: urutan menyikapi rekan atau lingkungan</h4><ul><li>Ingatkan dan rangkul dengan dialog santun serta penguatan nilai Pancasila.</li><li>Kalau berulang atau membahayakan, laporkan lewat jalur resmi (atasan, unit pengawasan, atau aparat).</li><li>Jangan membiarkan, ikut menyebarkan, atau menanggapi dengan kekerasan.</li></ul>`
     };
     Object.keys(EXTRA_TKP).forEach(k => { MATERI[k] += EXTRA_TKP[k]; });
 
+    // ---------- Pendalaman TKP: konsep lebih lengkap, kata kunci, contoh berpembahasan, tangga nilai, dan jebakan ----------
+    (function () {
+      const tbl = (head, rows) => '<div class="tbw"><table class="tb"><thead><tr>' + head.map(h => '<th>' + h + '</th>').join('') + '</tr></thead><tbody>' + rows.map(r => '<tr>' + r.map(c => '<td>' + c + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>';
+      const contoh = (situasi, rows) => '<h4>Contoh berpembahasan</h4><p><b>Situasi:</b> ' + situasi + '</p>' + tbl(['Pilihan sikap', 'Nilai', 'Alasan'], rows);
+      const tangga = (aspek, rows) => '<h4>Tangga nilai: ' + aspek + '</h4>' + tbl(['Nilai', 'Ciri jawaban'], rows);
+      const kunci = t => '<h4>Kata kunci jawaban 5</h4><p>' + t + '</p>';
+      const KONSEP = {
+        pel: '<p>Pelayanan publik adalah kegiatan memenuhi kebutuhan warga atas barang, jasa, dan layanan administratif sesuai peraturan (UU 25/2009).</p><p>Soal TKP menguji sikap petugas saat berhadapan dengan warga. Pegangannya: warga dilayani, aturan dijaga, dan solusi ditawarkan.</p>',
+        jej: '<p>Jejaring kerja adalah kemampuan membangun hubungan, bekerja sama, dan berbagi informasi dengan rekan, atasan, antarunit, dan pihak luar demi tujuan organisasi.</p><p>Soal TKP biasanya berupa konflik kecil, kerja tim, atau permintaan bantuan. Jawaban terbaik: komunikasi langsung, kolaboratif, dan mengutamakan hasil bersama.</p>',
+        sos: '<p>Sosial budaya adalah kemampuan bekerja dan melayani di masyarakat majemuk dengan menghargai perbedaan agama, suku, budaya, dan golongan.</p><p>Soal TKP biasanya menaruh Anda di lingkungan baru atau di tengah gesekan antarkelompok. Pegangannya: hormati perbedaan, layani tanpa membedakan, dan tetap taat aturan negara.</p>',
+        tik: '<p>TIK adalah kemampuan memanfaatkan teknologi informasi dan komunikasi agar kerja lebih cepat, akurat, dan aman.</p><p>Soal TKP biasanya soal aplikasi baru, keamanan data, atau informasi di media sosial. Pegangannya: mau belajar, jaga data, dan cek kebenaran sebelum membagikan.</p>',
+        prof: '<p>Profesionalisme adalah melaksanakan tugas sesuai tuntutan jabatan dengan tanggung jawab, disiplin, kompetensi, dan etika.</p><p>Soal TKP biasanya berupa tenggat yang mepet, perintah atasan yang bermasalah, atau kesalahan sendiri. Pegangannya: taat aturan, jujur, dan laporkan kendala sejak dini.</p>',
+        anti: '<p>Anti radikalisme adalah sikap setia pada Pancasila, UUD 1945, NKRI, dan pemerintah yang sah, serta menolak paham yang memaksakan kehendak dengan kekerasan.</p><p>Soal TKP biasanya berupa rekan, unggahan, atau kelompok yang menyebarkan intoleransi. Pegangannya: rangkul dengan dialog santun, tegas pada aturan, dan lapor lewat jalur resmi bila perlu.</p>'
+      };
+      const PLUS = {
+        pel: contoh('Menjelang jam tutup, seorang warga membawa berkas yang kurang satu lampiran. Antrean masih panjang.', [
+          ['Menjelaskan kekurangannya, menunjukkan tempat fotokopi terdekat, dan melayani berkas begitu lengkap.', '5', 'Solutif, proaktif, dan sesuai prosedur.'],
+          ['Menjelaskan kekurangan dan menunjukkan tempat fotokopi, tetapi warga mengantre dari belakang lagi.', '4', 'Solutif, tetapi kurang peduli pada waktu warga.'],
+          ['Menjelaskan kekurangannya, lalu meminta warga datang lagi besok.', '3', 'Prosedur benar, tetapi tidak membantu.'],
+          ['Meminta warga bertanya ke petugas lain.', '2', 'Melempar tanggung jawab.'],
+          ['Menerima berkas yang kurang tanpa dicatat supaya cepat selesai.', '1', 'Melanggar persyaratan layanan.']
+        ]) +
+        '<h4>Pola menanggapi keluhan warga</h4><ul><li><b>Dengarkan:</b> biarkan warga selesai bicara, tunjukkan empati, dan minta maaf atas ketidaknyamanan tanpa menyalahkan siapa pun.</li><li><b>Selesaikan:</b> beri solusi yang sesuai aturan. Kalau di luar wewenang, antarkan ke petugas yang berwenang, bukan sekadar menunjuk arah.</li><li><b>Tindak lanjuti:</b> catat keluhan, sampaikan perkembangan, dan pastikan warga tahu kanal pengaduan resmi.</li></ul>' +
+        '<h4>Jebakan: pelayanan yang terdengar baik</h4><ul><li><b>Ramah tapi melanggar aturan:</b> melewati prosedur demi kasihan atau menerima uang terima kasih tetap bernilai rendah.</li><li><b>Taat aturan tapi tanpa solusi:</b> menolak dan berhenti di situ biasanya bernilai 3, bukan 5.</li><li><b>Melempar ke petugas lain:</b> bernilai rendah walau sopan.</li><li>Jawaban 5 selalu menggabungkan sikap ramah, aturan, dan solusi.</li></ul>',
+        jej: kunci('Komunikasi langsung, bertanya kendala, menawarkan bantuan, menyepakati bersama, dan mengutamakan tujuan tim.') +
+          contoh('Rekan satu tim sering terlambat menyerahkan bagiannya sehingga laporan tim ikut terlambat.', [
+            ['Menemui rekan secara pribadi, menanyakan kendalanya, menawarkan bantuan, dan menyepakati tenggat bersama.', '5', 'Komunikasi langsung dan solusi bersama.'],
+            ['Mengingatkan lewat pesan singkat dan menawarkan bantuan bila ada kesulitan.', '4', 'Baik, tetapi belum menggali penyebab dan menyepakati tenggat.'],
+            ['Mengerjakan bagian rekan itu sendiri agar laporan selesai.', '3', 'Laporan selesai, masalah tetap ada.'],
+            ['Melaporkan ke atasan tanpa bicara dengan rekan itu dulu.', '2', 'Melompati komunikasi langsung.'],
+            ['Menyindir rekan itu di grup tim agar malu.', '1', 'Merusak hubungan dan suasana tim.']
+          ]) +
+          tangga('jejaring kerja', [['5', 'Berinisiatif bicara, membantu, dan menyepakati solusi bersama.'], ['4', 'Komunikasi baik, tetapi belum tuntas atau kurang inisiatif.'], ['3', 'Menghindari konflik atau mengerjakan sendiri.'], ['2', 'Melapor atau mengadu tanpa mencoba bicara dulu.'], ['1', 'Bergosip, menyindir, atau menyalahkan di depan umum.']]) +
+          '<h4>Jebakan: jejaring kerja</h4><ul><li><b>Mengalah demi damai:</b> menahan masalah tanpa menyelesaikannya bukan nilai 5.</li><li><b>Mengerjakan semuanya sendiri:</b> terlihat rajin, tetapi bukan kolaborasi.</li><li><b>Lapor dulu ke atasan:</b> baru pilihan kedua setelah bicara langsung buntu.</li></ul>',
+        sos: kunci('Menghargai, belajar adat setempat, melayani tanpa membeda-bedakan, menengahi dengan dialog, dan mengutamakan persatuan.') +
+          contoh('Seorang rekan baru dari suku lain diejek logat bicaranya oleh beberapa rekan saat rapat.', [
+            ['Menegur dengan sopan di waktu yang tepat bahwa ejekan itu tidak pantas, lalu menemani rekan baru dan mengajaknya ikut kegiatan bersama.', '5', 'Menghargai perbedaan dan aktif merangkul.'],
+            ['Menghibur rekan baru setelah rapat dan menyarankannya mengabaikan ejekan.', '4', 'Peduli, tetapi pelaku tidak diingatkan.'],
+            ['Diam saja karena bukan urusan sendiri.', '3', 'Pasif.'],
+            ['Ikut tertawa agar tidak dikucilkan.', '2', 'Ikut arus dan membiarkan diskriminasi.'],
+            ['Ikut mengejek.', '1', 'Merendahkan perbedaan.']
+          ]) +
+          tangga('sosial budaya', [['5', 'Menghargai dan aktif merangkul, menegur dengan sopan bila perlu.'], ['4', 'Menghargai, tetapi kurang aktif.'], ['3', 'Netral atau diam.'], ['2', 'Menghindar atau ikut arus kelompok.'], ['1', 'Diskriminatif atau memaksakan kebiasaan sendiri.']]) +
+          '<h4>Jebakan: sosial budaya</h4><ul><li><b>Netral pasif:</b> diam saat ada perlakuan tidak adil bernilai 3.</li><li><b>Ikut kelompok mayoritas:</b> terlihat aman, tetapi bernilai rendah.</li><li><b>Terlalu menuruti adat:</b> kalau bertentangan dengan aturan negara, aturan negara yang menang.</li></ul>',
+        tik: kunci('Mau belajar, cek sumber resmi, jaga data dan kata sandi, laporkan yang mencurigakan, dan tidak menyebarkan sebelum jelas.') +
+          contoh('Di grup kantor beredar pesan tentang kebijakan baru yang belum diumumkan resmi, disertai tautan verifikasi data pegawai dari nomor tak dikenal.', [
+            ['Tidak mengklik tautan, memastikan ke bagian kepegawaian, melaporkan ke admin, dan mengingatkan grup agar tidak menyebarkan.', '5', 'Aman, mengecek sumber resmi, dan melindungi rekan.'],
+            ['Tidak mengklik tautan dan menanyakan kebenarannya ke atasan.', '4', 'Aman, tetapi tidak melapor dan tidak mengingatkan grup.'],
+            ['Mengabaikan pesan tanpa berbuat apa-apa.', '3', 'Aman untuk diri sendiri, tidak membantu orang lain.'],
+            ['Meneruskan ke grup lain dengan tambahan mohon dicek.', '2', 'Menyebarkan sebelum diperiksa.'],
+            ['Mengklik tautan dan mengisi data pribadi agar tidak ketinggalan.', '1', 'Membahayakan data dan membuka peluang phishing.']
+          ]) +
+          tangga('TIK', [['5', 'Belajar, mengecek sumber resmi, dan melaporkan.'], ['4', 'Aman, tetapi kurang proaktif.'], ['3', 'Mengabaikan.'], ['2', 'Ragu pada teknologi atau menyebarkan tanpa cek.'], ['1', 'Membocorkan data atau menyebarkan hoaks.']]) +
+          '<h4>Jebakan: TIK</h4><ul><li><b>Membagikan agar membantu:</b> menyebar info yang belum jelas bernilai rendah walau niatnya baik.</li><li><b>Memakai akun pribadi biar praktis:</b> data dinas harus lewat kanal resmi.</li><li><b>Menolak aplikasi baru:</b> ASN diharapkan mau belajar.</li></ul>',
+        prof: kunci('Sesuai aturan dan SOP, tuntas, lapor sejak dini, tolak yang melanggar dengan sopan, tawarkan solusi, serta akui dan perbaiki kesalahan.') +
+          contoh('Atasan meminta Anda menandatangani laporan yang memuat kegiatan yang belum terlaksana agar anggaran tampak terserap.', [
+            ['Menolak dengan sopan, menjelaskan laporan harus sesuai kenyataan, dan mengusulkan laporan sesuai capaian beserta rencana percepatan.', '5', 'Taat aturan, jujur, dan menawarkan solusi.'],
+            ['Menolak menandatangani dan menyampaikan keberatan secara sopan.', '4', 'Benar, tetapi tanpa solusi.'],
+            ['Menyarankan atasan bertanya dulu ke bagian keuangan.', '3', 'Menyerahkan keputusan tanpa sikap jelas.'],
+            ['Menandatangani sambil mencatat pribadi bahwa itu perintah atasan.', '2', 'Tahu melanggar, tetapi tetap menuruti.'],
+            ['Menandatangani dan ikut merapikan laporan.', '1', 'Ikut memanipulasi laporan.']
+          ]) +
+          tangga('profesionalisme', [['5', 'Sesuai aturan, tuntas, menolak yang melanggar dengan sopan, dan memberi solusi.'], ['4', 'Benar, tetapi tanpa solusi atau komunikasi yang cukup.'], ['3', 'Menyerahkan keputusan ke orang lain.'], ['2', 'Menurut walau sadar melanggar.'], ['1', 'Memanipulasi, menutupi kesalahan, atau lalai.']]) +
+          '<h4>Jebakan: profesionalisme</h4><ul><li><b>Patuh buta:</b> menuruti atasan tanpa menimbang aturan bernilai rendah.</li><li><b>Lapor terlalu cepat:</b> mengadu tanpa menyampaikan keberatan secara langsung dulu.</li><li><b>Menutupi kesalahan:</b> selalu jawaban rendah, walau niatnya menjaga nama baik.</li></ul>',
+        anti: kunci('Dialog santun, nilai Pancasila, merangkul, lapor lewat jalur resmi, tidak menyebarkan, dan tidak membalas dengan kekerasan.') +
+          contoh('Seorang rekan sering mengunggah ajakan yang menyebut Pancasila tidak layak jadi dasar negara dan mengajak rekan lain masuk ke kelompok tertutup.', [
+            ['Mengajaknya berdialog santun, menjelaskan nilai Pancasila dengan contoh, dan melapor lewat jalur resmi bila terus berlanjut.', '5', 'Merangkul, tegas, dan memakai jalur resmi.'],
+            ['Menegurnya dengan santun, tetapi tidak menindaklanjuti bila berulang.', '4', 'Baik, tetapi tidak tuntas.'],
+            ['Menghindar dan tidak ikut bergabung.', '3', 'Menjaga diri, tetapi membiarkan.'],
+            ['Membiarkan karena dianggap urusan pribadi.', '2', 'Mengabaikan paham yang membahayakan.'],
+            ['Mempermalukan dan menyerang rekan itu di grup.', '1', 'Menanggapi dengan permusuhan.']
+          ]) +
+          tangga('anti radikalisme', [['5', 'Dialog santun, penguatan nilai Pancasila, dan lapor bila perlu.'], ['4', 'Menegur, tetapi tidak menindaklanjuti.'], ['3', 'Menghindar.'], ['2', 'Membiarkan.'], ['1', 'Ikut menyebarkan atau membalas dengan kekerasan.']]) +
+          '<h4>Jebakan: anti radikalisme</h4><ul><li><b>Menghukum sendiri:</b> bereaksi keras atau mempermalukan bernilai rendah.</li><li><b>Menyamaratakan kelompok:</b> radikalisme tidak melekat pada agama atau suku tertentu.</li><li><b>Membiarkan:</b> menganggap urusan pribadi bukan jawaban terbaik.</li></ul>'
+      };
+      Object.keys(PLUS).forEach(k => {
+        MATERI[k] = MATERI[k].replace(/<h4>Konsep<\/h4><p>[\s\S]*?<\/p>/, '<h4>Konsep</h4>' + KONSEP[k]) + PLUS[k];
+      });
+    })();
+
     Object.assign(MATERI, {
       analitis: MATERI.analitis + `<h4>Pendalaman: cara cepat</h4><ul><li>Gambar tabel atau denah untuk posisi dan jadwal, isi dulu informasi yang pasti.</li><li>Waspadai kata kunci: tepat di sebelah, tidak mungkin, paling sedikit, jika dan hanya jika.</li><li>Uji tiap pilihan: bila melanggar satu aturan saja, pilihan gugur.</li></ul>`,
-      pel: MATERI.pel + `<h4>Pendalaman: standar layanan</h4><ul><li>Standar pelayanan (UU 25/2009) memuat persyaratan, prosedur, jangka waktu, biaya, produk layanan, dan penanganan pengaduan.</li><li>Warga berhak mengadu. Ombudsman RI mengawasi penyelenggaraan pelayanan publik.</li></ul>`,
-      prof: MATERI.prof + `<h4>Pendalaman: pola jawaban 5</h4><ul><li>Tuntaskan tugas sesuai SOP dan tenggat. Bila ada kendala, laporkan lebih awal beserta usulan solusi.</li><li>Tolak perintah yang melanggar aturan dengan sopan dan tawarkan alternatif yang sesuai aturan.</li><li>Jangan menyalahgunakan wewenang atau berpihak pada kepentingan politik.</li></ul>`,
-      tik: MATERI.tik + `<h4>Pendalaman: etika digital ASN</h4><ul><li>Periksa sumber (tabayun) sebelum membagikan informasi.</li><li>Jaga kerahasiaan data jabatan, jangan mengunggah dokumen dinas ke akun pribadi.</li><li>Waspadai phishing, pakai kata sandi kuat dan verifikasi dua langkah.</li></ul>`
     });
     MATERI.analitis += `<h4>Trik per bentuk soal</h4><div class="tbw"><table class="tb "><thead><tr><th>Bentuk soal</th><th>Trik cepat</th></tr></thead><tbody><tr><td>Urutan dan jadwal</td><td>Buat garis lurus, isi dari posisi yang sudah pasti</td></tr><tr><td>Dua baris berhadapan</td><td>Gambar dua baris sejajar, pasangan seberang terkunci</td></tr><tr><td>Meja bundar 8 orang</td><td>Nomori kursi 1 sampai 8, yang berhadapan berjarak 4 kursi</td></tr><tr><td>Pencocokan peserta, kota, moda</td><td>Tabel centang dan silang, isi yang pasti dulu</td></tr><tr><td>Pengelompokan tim</td><td>Uji dengan pengandaian, buang yang melanggar aturan</td></tr><tr><td>Pertanyaan TIDAK MUNGKIN</td><td>Daftar semua susunan sah, cari yang tak pernah muncul</td></tr><tr><td>Kombinasi I, II, III</td><td>Periksa satu per satu, satu salah menggugurkan opsi</td></tr></tbody></table></div><h4>Tiga kata yang sering menjebak</h4><ul><li><b>Pasti benar</b>: benar di semua susunan yang sah.</li><li><b>Mungkin benar</b>: benar di sebagian susunan saja. Ini jebakan nomor satu karena terlihat meyakinkan.</li><li><b>Tidak mungkin benar</b>: salah di semua susunan, jadi cari yang tidak pernah muncul.</li></ul><h4>Meja bundar</h4><ul><li>Kunci satu orang di kursi 1, lalu nomori searah jarum jam.</li><li>Berhadapan = selisih 4 kursi. Bersebelahan = selisih 1 (bisa kiri atau kanan, kecuali soal menyebut arah).</li><li>Waspadai arah: setelah searah jarum jam berbeda dengan sebelum.</li></ul><h4>Pencocokan tiga atribut</h4><ul><li>Buat tabel orang × kota dan orang × moda. Centang yang pasti, silang yang gugur.</li><li>Petunjuk seperti Peserta dari Solo naik kereta menghubungkan kota dan moda, jadi simpan sebagai pasangan sambil menunggu orangnya.</li><li>Opsi jebakan biasanya benar di satu atribut tetapi salah di atribut lain. Cek ketiganya.</li></ul><h4>Dua baris berhadapan</h4><ul><li>Gambar dua baris sejajar dan tulis arah hadap tiap baris (mis. Baris 1 menghadap selatan, Baris 2 menghadap utara).</li><li>Kanan dan kiri mengikuti arah hadap orangnya. Baris yang menghadap selatan punya kanan di barat, baris yang menghadap utara punya kanan di timur.</li><li>Berhadapan = nomor kursi sama di baris seberang. Tarik garis putus-putus untuk tiap pasangan.</li></ul><h4>Pengelompokan tim</h4><ul><li>Ubah tiap aturan jadi simbol: satu tim, tidak satu tim, jika-maka.</li><li>Uji tiap opsi terhadap tiap aturan. Satu aturan yang dilanggar langsung menggugurkan opsi.</li><li>Soal bersyarat (jika X di Tim 1): tempatkan X dulu, isi yang terpaksa, lalu cari yang benar di semua susunan yang tersisa.</li></ul>`;
 
@@ -4327,16 +4469,20 @@ img,svg{max-width:100%}
 
     // ---------- Penyaji materi: kartu lipat, kotak kunci, kalimat panjang jadi poin ----------
     function cards(html, ctl = true, openN = 2) {
-      const parts = html.split('<h4>').filter(Boolean);
+      // Urutan baca: inti materi, lalu pegangan, jebakan, pendalaman, dan terakhir kasus latihan (urutan asli dijaga di tiap kelompok)
+      const rankOf = t => /^(Pegangan di soal|Jawaban 5|Kata kunci)/.test(t) ? 2 : /^Jebakan/.test(t) ? 3 : /^Pendalaman/.test(t) ? 4 : /^Kasus latihan/.test(t) ? 5 : 1;
+      const parts = html.split('<h4>').filter(Boolean).map((x, i) => ({ x, i, r: rankOf(x.split('</h4>')[0]) })).sort((a, b) => a.r - b.r || a.i - b.i).map(o => o.x);
       const key = /^(Pegangan di soal|Jawaban 5|Kata kunci|Jebakan)/;
+      let nn = 0;
       const out = parts.map((x, i) => {
         const [t, ...r] = x.split('</h4>');
         let body = r.join('</h4>').replace(/<p>([\s\S]*?)<\/p>/g, (m, tx) => {
           const ss = tx.split(/(?<=\.)\s+(?=[A-Z])/);
           return ss.length >= 3 ? '<ul>' + ss.map(y => `<li>${y}</li>`).join('') + '</ul>' : m;
         });
-        const k = key.test(t);
-        return `<details class="mc${k ? ' key' : ''}"${k || i < openN ? ' open' : ''}><summary><span class="mn">${k ? '!' : i + 1}</span>${t}</summary><div class="mb">${body}</div></details>`;
+        const k = key.test(t), cls = k ? ' key' : /^Pendalaman/.test(t) ? ' dig' : /^Kasus latihan/.test(t) ? ' prac' : '';
+        if (!k) nn++;
+        return `<details class="mc${cls}"${k || i < openN ? ' open' : ''}><summary><span class="mn">${k ? '!' : nn}</span>${t}</summary><div class="mb">${body}</div></details>`;
       }).join('');
       return `${ctl ? '<div class="mctl"><button class="obtn" id="mcAll">Tutup semua</button></div>' : ''}${out}`;
     }
@@ -4451,7 +4597,7 @@ img,svg{max-width:100%}
       }).join('');
       $('#tiles').innerHTML = GROUPS.map(g => { const ls = TOP().filter(l => l.g === g.k), st = ls.map(stat), dd = st.reduce((x, y) => x + y[0], 0), nn = st.reduce((x, y) => x + y[1], 0);
         return `<button class="tile" data-k="${g.k}" style="--c:var(${g.c})"><div class="tl-ic" data-a="${ICON[g.k][1]}">${icon(g.k)}</div><b>${g.n}</b><span>${g.s}</span><small>${ls.length} materi · ${nn ? Math.round(dd / nn * 100) : 0}% paham</small></button>`; }).join('');
-      $$('.tile').forEach(b => b.addEventListener('click', () => $('#grp-' + b.dataset.k).scrollIntoView({ behavior: 'smooth', block: 'start' })));
+      $$('.tile').forEach(b => b.addEventListener('click', () => { if (window.__setF) window.__setF(b.dataset.k, true); }));
       $$('.lcard').forEach(b => b.addEventListener('click', () => openLesson(b.dataset.id)));
     }
 
@@ -4514,18 +4660,19 @@ img,svg{max-width:100%}
             const tabs = `<div class="tabs2"><button class="${cur.t === 'materi' ? 'is-active' : ''}" data-t="materi">Materi lengkap</button><button class="${cur.t === 'latihan' ? 'is-active' : ''}" data-t="latihan">Latihan soal <span class="tb-n">${d}/${n}</span></button></div>`;
       const simT = sb => sb.sims.length ? `<h4 class="subh2">Alur dan simulasi</h4><div class="simslot" data-sub="${sb.id}"></div>` : '';
       const analogiBox = ANALOGI[l.id] ? `<div class="analogi"><b>Analogi biar nempel</b>${ANALOGI[l.id]}</div>` : '';
+      const endCard = `<div class="lc-act endcard"><div class="ec-t"><b>Selesai baca materi ini</b><span>${d}/${n} soal sudah lo pahami. Uji pemahaman lo lewat latihan soal.</span></div><button class="btn" data-t="latihan">Lanjut ke latihan soal</button><button class="btn ec-sec" id="ecBack" type="button">Kembali ke peta belajar</button></div>`;
       const main = cur.t === 'latihan' ? latihanHTML(l) : (subs
           ? `<div class="lc materi">${analogiBox}<div class="mctl"><button class="obtn" id="mcAll">Tutup semua</button></div></div>
              ${subs.map((sb, si) => `<section class="sub-sec"><div class="lc materi"><div class="subk">Submateri ${si + 1} dari ${subs.length}</div><h3 class="subh"><span class="subn">${si + 1}</span>${sb.t}</h3><p class="subg">${sb.goal}</p>${ANALOGI[sb.id] ? `<div class="analogi"><b>Analogi biar nempel</b>${ANALOGI[sb.id]}</div>` : ''}${cards(MATERI[sb.id] || '', false, si === 0 ? 1 : 0)}</div>${simT(sb)}</section>`).join('')}
-             <div class="lc-act" style="margin-top:20px"><button class="btn" data-t="latihan">Lanjut ke latihan soal</button></div>`
-          : `<div class="lc materi">${analogiBox}${cards(MATERI[l.id] || '')}<div class="lc-act"><button class="btn" data-t="latihan">Lanjut ke latihan soal</button></div></div>${l.sims.length ? '<h3 class="tricks-title">Alur dan simulasi</h3><div class="simslot" data-sub="' + l.id + '"></div>' : ''}`);
+             ${endCard}`
+          : `<div class="lc materi">${analogiBox}${cards(MATERI[l.id] || '')}</div>${l.sims.length ? '<h3 class="tricks-title">Alur dan simulasi</h3><div class="simslot" data-sub="' + l.id + '"></div>' : ''}${endCard}`);
       $('#lesson').innerHTML = `
         <button class="back" id="lBack" aria-label="Kembali ke peta belajar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span>Kembali</span></button>
         <h2>${l.t}</h2><p class="goal">${l.goal}</p>
         <div class="bar" style="--c:var(--brand)"><i style="width:${n ? d / n * 100 : 0}%"></i></div>
         ${tabs}${main}`;
       (subs || [l]).forEach(sb => { const slot = $('.simslot[data-sub="' + sb.id + '"]'); if (slot) sb.sims.forEach(id => slot.appendChild($('#' + id))); });
-      $('#lBack').onclick = closeLesson; bindLatihan(); bindCards(); tidyTables($('#lesson')); mcqify($('#lesson'));
+      $('#lBack').onclick = closeLesson; { const eb = $('#ecBack'); if (eb) eb.onclick = closeLesson; } bindLatihan(); bindCards(); tidyTables($('#lesson')); mcqify($('#lesson'));
       $$('[data-t]').forEach(b => b.onclick = () => { cur.t = b.dataset.t; renderLesson(); window.scrollTo({ top: 0 }); });
       $$('.ilist button').forEach(b => b.onclick = () => { cur.i = +b.dataset.j; cur.s = 0; renderLesson(); });
       $$('.steps button').forEach(b => b.onclick = () => { cur.s = +b.dataset.s; renderLesson(); });
@@ -6226,9 +6373,16 @@ img,svg{max-width:100%}
       let F = 'all';
       const apply = () => {
         $$('#groups .grp').forEach(g => g.hidden = F !== 'all' && g.id !== 'grp-' + F);
-        $$('#chips button').forEach(b => b.classList.toggle('is-active', b.dataset.f === F));
+        const fr = $('#fReset'), sm = $('#secMateri'); if (fr) fr.hidden = F === 'all'; if (sm) sm.textContent = F === 'all' ? 'Semua materi' : 'Materi ' + F.toUpperCase();
+        $$('.tile').forEach(t => { const on = F === t.dataset.k; t.classList.toggle('is-on', on); t.setAttribute('aria-pressed', on); });
       };
-      $$('#chips button').forEach(b => b.addEventListener('click', () => { F = b.dataset.f; apply(); }));
+      { const fr = $('#fReset'); if (fr) fr.addEventListener('click', () => { F = 'all'; apply(); }); }
+      // Kartu subtes di atas ikut jadi filter (ketuk lagi untuk kembali ke Semua), lalu daftar materinya digulir ke layar
+      window.__setF = (k, scroll) => {
+        F = (F === k) ? 'all' : k; apply();
+        const t = F === 'all' ? $('#groups') : $('#grp-' + F);
+        if (scroll && t) { const y = t.getBoundingClientRect().top + scrollY - 90; window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' }); }
+      };
       const rp = renderPeta; renderPeta = function () { rp(); apply(); };
       renderPeta();
       $('#fab').addEventListener('click', lanjutBelajar);
@@ -7025,7 +7179,7 @@ img,svg{max-width:100%}
   };
   const go = r => {
     const q = inp.value.trim(); if (q.length > 1) { REC = [q].concat(REC.filter(x => x !== q)).slice(0, 6); LSset('skd-cari', REC); }
-    close();
+    close('replace');
     const v = $('.nav-btn[data-view="belajar"]'); if (v && !v.classList.contains('is-active')) v.click();
     if (!r.lid || !window.__openLesson) return;
     window.__openLesson(r.lid, r.i || 0, r.k === 'trik' ? 'materi' : r.k === 'soal' ? 'latihan' : 'materi');
@@ -7035,8 +7189,26 @@ img,svg{max-width:100%}
       if (t) t.scrollIntoView({ block: h ? 'start' : 'center' });
     }, 300);
   };
-  const open = k => { last = document.activeElement; const m = k === 'glo' ? 'glo' : 'cari'; if (m !== M) { M = m; FC = null; inp.value = ''; } ov.classList.add('is-open'); document.body.style.overflow = 'hidden'; draw(); inp.focus(); inp.select(); };
-  const close = () => { ov.classList.remove('is-open'); document.body.style.overflow = ''; if (last && last.focus) last.focus(); };
+  // Tombol back HP/browser menutup overlay ini (bukan keluar dari aplikasi): overlay dicatat sebagai satu langkah riwayat.
+  let sgHist = false, sgClosing = false;
+  const show = k => { last = document.activeElement; const m = k === 'glo' ? 'glo' : 'cari'; if (m !== M) { M = m; FC = null; inp.value = ''; } ov.classList.add('is-open'); document.body.style.overflow = 'hidden'; draw(); inp.focus(); inp.select(); };
+  const hide = () => { ov.classList.remove('is-open'); document.body.style.overflow = ''; if (last && last.focus) last.focus(); };
+  const open = k => { if (!ov.classList.contains('is-open') && !sgHist) { try { history.pushState({ sg: 1 }, ''); sgHist = true; } catch (e) { } } show(k); };
+  const close = mode => {
+    hide();
+    if (!sgHist) return;
+    sgHist = false;
+    if (mode === 'replace') { try { history.replaceState({}, ''); } catch (e) { } return; }
+    sgClosing = true; setTimeout(() => { sgClosing = false; }, 600);
+    try { history.back(); } catch (e) { sgClosing = false; }
+  };
+  window.__sgBack = e => {
+    const st = (e && e.state) || {};
+    if (ov.classList.contains('is-open')) { sgHist = false; hide(); return true; }
+    if (sgClosing) { sgClosing = false; return true; }
+    if (st.sg) { sgHist = true; show('cari'); return true; }
+    return false;
+  };
   const nextF = () => { FC.i++; FC.show = false; if (FC.i >= FC.q.length) FC = null; draw(); };
 
   let tm = null; inp.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(() => { FC = null; draw(); }, 120); });
@@ -7459,7 +7631,7 @@ img,svg{max-width:100%}
   var POSK='skd-mkm-pos',POS={},posT;try{POS=JSON.parse(localStorage.getItem(POSK)||'{}')}catch(_){POS={}}
   function savePos(){if(!active()||!lesKey||tabKey==='teknik'||tabKey==='latihan')return;var p=prog();if(document.documentElement.scrollHeight-innerHeight<600)return;
     if(p>.97)delete POS[lesKey];else if(p<.03)return;else POS[lesKey]=+p.toFixed(3);try{localStorage.setItem(POSK,JSON.stringify(POS))}catch(_){}}
-  function endChips(){var a=[],bt=null,bl=L.querySelector('[data-t="latihan"]');
+  function endChips(){if(L.querySelector('.endcard'))return null;var a=[],bt=null,bl=L.querySelector('[data-t="latihan"]');
     if(tabKey==='latihan')return null;
     if(bl)a.push(['Latihan soal',function(){hide();bl.click()},1]);
     if(a.length)a.push(['Nanti',hide]);return a.length?a:null}
@@ -9460,6 +9632,15 @@ tkp:[]};
   addEventListener('scroll', onScroll, { passive: true });
   document.addEventListener('click', function (e) { if (e.target.closest('.tile, .nav-btn')) away(false); });
   mq.addEventListener && mq.addEventListener('change', function () { away(false); });
+})();
+</script>
+<script>
+/* Sapaan beranda sesuai waktu */
+(function () {
+  var h = document.querySelector('.home .hello'), sub = document.querySelector('.home .subhello');
+  if (h) { var j = new Date().getHours(), w = j >= 4 && j < 11 ? 'pagi' : j >= 11 && j < 15 ? 'siang' : j >= 15 && j < 18 ? 'sore' : 'malam';
+    h.innerHTML = 'Selamat ' + w + ',<br><span class="hl">Pejuang NIP</span>!'; }
+  if (sub) sub.innerHTML = 'Gas belajar, target <b>450+</b> dari maksimal 550';
 })();
 </script>
 </body>
