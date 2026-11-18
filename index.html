@@ -2160,6 +2160,33 @@ img,svg{max-width:100%}
 @media(max-width:420px){.coret{padding-left:46px;font-size:15px}.coret .tt{margin-left:-46px;padding-left:46px}.coret::before{left:34px}}
 </style>
 <style id="feat-css">#ar .ar-res,#ar .ar-bk{border-left:6px solid var(--brand,#247B7D)}#ar .ar-res h3,#ar .ar-bk h3{margin-bottom:6px}</style>
+<style id="ux-baca">
+/* Tombol Kembali dan tab Materi/Latihan ikut scroll: tidak lagi menempel di atas layar saat membaca */
+#lesson > .back, #lesson .back { position: static; top: auto; z-index: auto; background: none; padding-top: 8px; padding-bottom: 8px; margin-bottom: 8px; }
+.tabs2 { position: static; top: auto; z-index: auto; background: none; padding: 4px; margin-top: 16px; margin-bottom: 14px; }
+/* Bacaan materi lebih lega */
+.lc.materi p, .lc.materi li { font-size: 16.5px; line-height: 1.8; }
+.lc.materi h4 { margin: 26px 0 8px; }
+.lc.materi { padding-bottom: 20px; }
+#lesson > .goal { max-width: 62ch; }
+/* Tab aktif terbaca jelas, area tap cukup besar di HP */
+.tabs2 button { min-height: 46px; }
+.tabs2 button:not(.is-active):hover { background: rgba(36, 123, 125, .08); }
+/* Ruang bawah supaya konten terakhir tidak ketutup bar navigasi dan tombol melayang */
+#lesson { padding-bottom: calc(var(--bottombar-h, 64px) + 96px + env(safe-area-inset-bottom, 0px)); }
+
+/* Navigasi bawah: sembunyi saat scroll turun, muncul lagi saat scroll naik (HP, area belajar) */
+@media (max-width: 899px) {
+  #nav { transition: transform .28s cubic-bezier(.3, .8, .3, 1); will-change: transform; }
+  body.nav-away #nav { transform: translateY(calc(100% + 28px + env(safe-area-inset-bottom, 0px))); }
+  .fab { transition: transform .12s, box-shadow .12s, bottom .28s cubic-bezier(.3, .8, .3, 1); }
+  .lf { transition: bottom .28s cubic-bezier(.3, .8, .3, 1); }
+  body.nav-away .fab { bottom: calc(22px + env(safe-area-inset-bottom, 0px)); }
+  body.nav-away .lf { bottom: calc(18px + env(safe-area-inset-bottom, 0px)); }
+}
+@media (prefers-reduced-motion: reduce) { #nav, .fab, .lf { transition: none !important; } }
+</style>
+
 
 
 
@@ -9411,6 +9438,28 @@ tkp:[]};
     else box.querySelector('#grN').onclick=()=>{i++;pick=-1;draw()};
   }
   start();
+})();
+</script>
+<script>
+/* Auto-hide navigasi bawah saat membaca */
+(function () {
+  var mq = window.matchMedia('(max-width: 899px)'), last = window.scrollY, tick = false;
+  function away(on) { document.body.classList.toggle('nav-away', on); }
+  function onScroll() {
+    if (tick) return; tick = true;
+    requestAnimationFrame(function () {
+      tick = false;
+      var y = window.scrollY, d = y - last, nearEnd = y + innerHeight >= document.documentElement.scrollHeight - 40;
+      var aktif = mq.matches && document.querySelector('#view-belajar.is-active');
+      if (!aktif || y < 80 || nearEnd) away(false);
+      else if (d > 8) away(true);
+      else if (d < -8) away(false);
+      last = y;
+    });
+  }
+  addEventListener('scroll', onScroll, { passive: true });
+  document.addEventListener('click', function (e) { if (e.target.closest('.tile, .nav-btn')) away(false); });
+  mq.addEventListener && mq.addEventListener('change', function () { away(false); });
 })();
 </script>
 </body>
